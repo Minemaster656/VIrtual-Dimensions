@@ -47,11 +47,20 @@
         />
     <Button
         android:id="@+id/clickMe_vp"
-        android:layout_width="128dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         android:text="@string/VP_clickToGen"
-        android:backgroundTint="@color/dark_cyan0"
+        android:backgroundTint="@color/teal_200"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/centerView"
+        app:layout_constraintTop_toBottomOf="@id/VP_count" />
+    <Button
+        android:id="@+id/clickUpgrade"
+        android:layout_width="128dp"
+        android:layout_height="100dp"
+        android:text="@string/VPUpgrade_cp"
+        android:backgroundTint="@color/dark_cyan0"
+        app:layout_constraintLeft_toRightOf="@id/centerView"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/VP_count" />
     <Button
@@ -65,8 +74,21 @@
         app:layout_constraintTop_toBottomOf="@id/clickMe_vp"
         android:textSize="10dp"
         />
+    <Button
+        android:id="@+id/VP_dvnUpgrade"
+        android:layout_width="128dp"
+        android:layout_height="100dp"
+        android:text="@string/VPUpgrade_dvn"
+        android:backgroundTint="@color/dark_cyan0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/centerView"
+        app:layout_constraintTop_toBottomOf="@id/clickMe_vp"
+        android:textSize="10dp"
+        />
 
-<!--        app:layout_constraintBottom_toTopOf="@+id/dateTextView"-->
+
+
+    <!--        app:layout_constraintBottom_toTopOf="@+id/dateTextView"-->
 
 
 <!--    <TextView-->

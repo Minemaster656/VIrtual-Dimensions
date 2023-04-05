@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Virtual Dimensions</string>
-    <string name="VP_tabName">ВЧ</string>
-    <string name="VP_clickToGen">Нажать для создания частицы</string>
-    <string name="VPUpgrade_delay">Увеличить время существования частиц</string>
-    <string name="word_cost">стоимость</string>
+    <string name="VP_tabName">VP</string>
+    <string name="VP_clickToGen">Click to create particle</string>
+    <string name="VPUpgrade_delay">Increase particle lifetime</string>
+    <string name="word_cost">cost</string>
+    <string name="VPUpgrade_dvn">Decrease divider</string>
+    <string name="VPUpgrade_cp">Increase click power</string>
 </resources>
