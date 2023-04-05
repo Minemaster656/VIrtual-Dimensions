@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">VIrtual Dimensions</string>
+    <string name="app_name">Virtual Dimensions</string>
+    <string name="VP_tabName">ВЧ</string>
+    <string name="VP_clickToGen">Нажать для создания частицы</string>
+    <string name="VPUpgrade_delay">Увеличить время существования частиц</string>
+    <string name="word_cost">стоимость</string>
 </resources>
