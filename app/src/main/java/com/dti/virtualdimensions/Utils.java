@@ -8,4 +8,8 @@ public class Utils {
         BigDecimal formattedValue = value.setScale(scale, RoundingMode.HALF_UP); // определение количества знаков после запятой
         return formattedValue.toString(); // конвертирование BigDecimal в строку с тремя знаками после запятой
     }
+
+    public static void main(String[] args) {
+
+    }
 }
