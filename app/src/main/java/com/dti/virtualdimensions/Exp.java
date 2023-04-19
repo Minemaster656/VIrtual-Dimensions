@@ -1,7 +1,8 @@
 package com.dti.virtualdimensions;
+
 //
 public class Exp {
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        Exp a = st2ex("1e10");
 //        Exp b = st2ex("1e3");
 //        System.out.println(ex2st(mlt(a, b)));
@@ -16,7 +17,7 @@ public class Exp {
     }
     public static Exp st2ex(String a){
         String[] tmp = a.split("e");
-        return new Exp(Float.parseFloat(tmp[0]), Long.parseLong(tmp[1]));
+        return Exp.normalize(new Exp(Float.parseFloat(tmp[0]), Long.parseLong(tmp[1])));
     }
     public static Exp ex(String a){
         String[] tmp = a.split("e");
@@ -25,7 +26,15 @@ public class Exp {
     public static String ex2st(Exp a){
         return a.mantissa + "e" + a.exponent;
     }
-//    public static Exp db2ex(double db) {
+    public static String ex2lbst(Exp a){
+        float m = a.mantissa;
+        float e = a.exponent;
+        if (e<6){
+            return m*(Math.pow(10, e))+"";
+        }
+        else{return ex2st(a);}
+    }
+    //    public static Exp db2ex(double db) {
 //        String sdb = Double.toString(db);
 ////        System.out.println(sdb);
 //
@@ -123,87 +132,154 @@ public class Exp {
 //    }
 
     // Конвертация строки в правильной записи в объект класса
-    public static Exp parseString(String str) {
-        String[] parts = str.split("e");
-        float mantissa = Float.parseFloat(parts[0]);
-        long exponent = Long.parseLong(parts[1]);
-        return new Exp(mantissa, exponent);
-    }
+//    public static Exp parseString(String str) {
+//        String[] parts = str.split("e");
+//        float mantissa = Float.parseFloat(parts[0]);
+//        long exponent = Long.parseLong(parts[1]);
+//        return new Exp(mantissa, exponent);
+//    }
 
-    // Объект класса в строку с записью через e
-    public String toString() {
-        return mantissa + "e" + exponent;
-    }
-
-    // Сложение
-    public Exp add(Exp other) {
-        // Если экспоненты разные, делаем их одинаковыми
-        if (this.exponent != other.exponent) {
-            if (this.exponent > other.exponent) {
-                other = new Exp(other.mantissa * (float) Math.pow(10, this.exponent - other.exponent), this.exponent);
-            } else {
-                this.exponent = other.exponent;
-                this.mantissa = this.mantissa * (float) Math.pow(10, other.exponent - this.exponent);
-            }
-        }
-
-        return new Exp(this.mantissa + other.mantissa, this.exponent);
-    }
+//    // Объект класса в строку с записью через e
+//    public String toString() {
+//        return mantissa + "e" + exponent;
+//    }
+//
+//    // Сложение
+//    public Exp add(Exp other) {
+//        // Если экспоненты разные, делаем их одинаковыми
+//        if (this.exponent != other.exponent) {
+//            if (this.exponent > other.exponent) {
+//                other = new Exp(other.mantissa * (float) Math.pow(10, this.exponent - other.exponent), this.exponent);
+//            } else {
+//                this.exponent = other.exponent;
+//                this.mantissa = this.mantissa * (float) Math.pow(10, other.exponent - this.exponent);
+//            }
+//        }
+//
+//        return new Exp(this.mantissa + other.mantissa, this.exponent);
+//    }
 
     // Вычитание
-    public Exp subtract(Exp other) {
-        // Если экспоненты разные, делаем их одинаковыми
-        if (this.exponent != other.exponent) {
-            if (this.exponent > other.exponent) {
-                other = new Exp(other.mantissa * (float) Math.pow(10, this.exponent - other.exponent), this.exponent);
-            } else {
-                this.exponent = other.exponent;
-                this.mantissa = this.mantissa * (float) Math.pow(10, other.exponent - this.exponent);
-            }
-        }
+//    public Exp subtract(Exp other) {
+//        // Если экспоненты разные, делаем их одинаковыми
+//        if (this.exponent != other.exponent) {
+//            if (this.exponent > other.exponent) {
+//                other = new Exp(other.mantissa * (float) Math.pow(10, this.exponent - other.exponent), this.exponent);
+//            } else {
+//                this.exponent = other.exponent;
+//                this.mantissa = this.mantissa * (float) Math.pow(10, other.exponent - this.exponent);
+//            }
+//        }
+//
+//        return new Exp(this.mantissa - other.mantissa, this.exponent);
+//    }
 
-        return new Exp(this.mantissa - other.mantissa, this.exponent);
-    }
+//    // Деление
+//    public Exp divide(Exp other) {
+//        return new Exp(this.mantissa / other.mantissa, this.exponent - other.exponent);
+//    }
 
-    // Деление
-    public Exp divide(Exp other) {
-        return new Exp(this.mantissa / other.mantissa, this.exponent - other.exponent);
-    }
-
-    // Умножение
-    public Exp multiply(Exp other) {
-        return new Exp(this.mantissa * other.mantissa, this.exponent + other.exponent);
-    }
+//    // Умножение
+//    public Exp multiply(Exp other) {
+//        return new Exp(this.mantissa * other.mantissa, this.exponent + other.exponent);
+//    }
 
     // Возведение в степень
-    public Exp pow(long power) {
-        return new Exp((float) Math.pow(this.mantissa, power), this.exponent * power);
+    public static Exp pow(Exp a, long power) {
+        return Exp.normalize(new Exp((float) Math.pow(a.mantissa, power), a.exponent * power));
     }
 
     // Получение корня
-    public Exp sqrt() {
-        return new Exp((float) Math.sqrt(this.mantissa), this.exponent / 2);
+    public static Exp sqrt(Exp a) {
+        return Exp.normalize(new Exp((float) Math.sqrt(a.mantissa), a.exponent / 2));
     }
 
     // Логарифм с произвольным основанием
-    public double log(double base) {
-        return Math.log10(this.mantissa) / Math.log10(base) + exponent;
+    public static double log(Exp a, double base) {
+        return Math.log10(a.mantissa) / Math.log10(base) + a.exponent;
     }
 
     // Перевод из float в объект класса
-    public static Exp fromFloat(float f) {
+    public static Exp fl2ex(float f) {
         long exponent = (long) Math.floor(Math.log10(f));
         float mantissa = f / (float) Math.pow(10, exponent);
-        return new Exp(mantissa, exponent);
+        return Exp.normalize(new Exp(mantissa, exponent));
     }
 
     // Перевод из long в объект класса
-    public static Exp fromLong(long l) {
-        return new Exp(l, 0);
+    public static Exp lng2ex(long l) {
+        return Exp.normalize(new Exp(l, 0));
     }
 
-    // Логические операции
-    public boolean equals(Exp other) {
-        return this.mantissa == other.mantissa && this.exponent == other.exponent;
+    //    // Логические операции
+//    public boolean equals(Exp other) {
+//        return this.mantissa == other.mantissa && this.exponent == other.exponent;
+//    }
+    public static boolean cmp(Exp a, Exp b, String opr){
+        a = Exp.normalize(a);
+        b = Exp.normalize(b);
+        float ma = a.mantissa; float mb = b.mantissa;
+        long ea = a.exponent; long eb=b.exponent; //EA, если это ты, я врубаю AdBlock
+        switch (opr){
+            case "==":
+                if (ea==eb & ma==eb){
+                    return true;
+                }
+                return false;
+            case "<=":
+                if (ea<eb){
+                    return true;
+                }
+                if (ea==eb){
+                    if (ma<=mb){
+                        return true;
+                    }
+                }
+                return false;
+            case ">=":
+                if (ea>eb){
+                    return true;
+                }
+                if (ea==eb){
+                    if (ma>=mb){
+                        return true;
+                    }
+                }
+                return false;
+            case "<":
+                if (ea<eb){
+                    return true;
+                }
+                if (ea==eb){
+                    if (ma<mb){
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            case ">":
+                if (ea>eb){
+                    return true;
+                }
+                if (ea==eb){
+                    if (ma>mb){
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            case "!=":
+                if (ea!=eb |ma!=mb){
+                    return true;
+                }
+                return false;
+
+
+
+
+
+        }
+        return false;
     }
+
 }
