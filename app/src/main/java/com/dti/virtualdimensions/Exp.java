@@ -27,12 +27,14 @@ public class Exp {
         return a.mantissa + "e" + a.exponent;
     }
     public static String ex2lbst(Exp a){
+        a = Exp.normalize(a);
         float m = a.mantissa;
         float e = a.exponent;
-        if (e<6){
-            return m*(Math.pow(10, e))+"";
-        }
-        else{return ex2st(a);}
+//        if (e<6){
+//            return m*(Math.pow(10, e))+"";
+//        }
+//        else{return a.mantissa + "e" + a.exponent;}
+        return a.mantissa + "e" + a.exponent;
     }
     //    public static Exp db2ex(double db) {
 //        String sdb = Double.toString(db);
@@ -43,6 +45,11 @@ public class Exp {
 //        return new Exp(Float.parseFloat(tmp[0]), Long.parseLong(tmp[1]));
 //    }
     public static Exp sum(Exp a, Exp b) {
+        if (a.exponent!=b.exponent){
+            long dif = b.exponent-a.exponent;
+            a=Exp.shift(a, dif);
+        }
+        return Exp.normalize(new Exp(a.mantissa+b.mantissa, a.exponent));
 //        long dif = a.exponent - b.exponent;
 //        if (dif >7 | dif < -7){
 //            return a;
@@ -52,29 +59,33 @@ public class Exp {
 //
 //        }
 //        return null;
-        if (a.exponent != b.exponent) {
-            if (a.exponent > b.exponent) {
-                b = new Exp(b.mantissa * (float) Math.pow(10, a.exponent - b.exponent), a.exponent);
-            } else {
-                a.exponent = b.exponent;
-                a.mantissa = a.mantissa * (float) Math.pow(10, b.exponent - a.exponent);
-            }
-        }
+//        if (a.exponent != b.exponent) {
+//            if (a.exponent > b.exponent) {
+//                b = new Exp(b.mantissa * (float) Math.pow(10, a.exponent - b.exponent), a.exponent);
+//            } else {
+//                a.exponent = b.exponent;
+//                a.mantissa = a.mantissa * (float) Math.pow(10, b.exponent - a.exponent);
+//            }
+//        }
 
-        return Exp.normalize(new Exp(a.mantissa + b.mantissa, a.exponent));
+        //return Exp.normalize(new Exp(a.mantissa + b.mantissa, a.exponent));
     }
 
     public static Exp dif(Exp a, Exp b) {
-        if (a.exponent != b.exponent) {
-            if (a.exponent > b.exponent) {
-                b = new Exp(b.mantissa * (float) Math.pow(10, a.exponent - b.exponent), a.exponent);
-            } else {
-                a.exponent = b.exponent;
-                a.mantissa = a.mantissa * (float) Math.pow(10, b.exponent - a.exponent);
-            }
+//        if (a.exponent != b.exponent) {
+//            if (a.exponent > b.exponent) {
+//                b = new Exp(b.mantissa * (float) Math.pow(10, a.exponent - b.exponent), a.exponent);
+//            } else {
+//                a.exponent = b.exponent;
+//                a.mantissa = a.mantissa * (float) Math.pow(10, b.exponent - a.exponent);
+//            }
+//        }
+        if (a.exponent!=b.exponent){
+            long dif = b.exponent-a.exponent;
+            a=Exp.shift(a, dif);
         }
-
-        return Exp.normalize(new Exp(a.mantissa - b.mantissa, a.exponent));
+        return Exp.normalize(new Exp(a.mantissa+b.mantissa, a.exponent));
+//        return Exp.normalize(new Exp(a.mantissa - b.mantissa, a.exponent));
     }
     public static Exp mlt(Exp a, Exp b){
 //        float ma = a.mantissa;
@@ -281,5 +292,15 @@ public class Exp {
         }
         return false;
     }
-
+    public static Exp shift(Exp in, long sh){
+        if (sh < 0){
+            sh*=-1;
+            in.exponent-=sh;
+            in.mantissa*=Math.pow(10, sh);
+        } else if (sh>0) {
+            in.exponent+=sh;
+            in.mantissa/=Math.pow(10, sh);
+        }
+        return in;
+    }
 }

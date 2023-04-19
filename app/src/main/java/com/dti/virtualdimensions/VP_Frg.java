@@ -44,23 +44,23 @@ public class VP_Frg extends Fragment {
         VPDvnUp_Btn = view.findViewById(R.id.VP_dvnUpgrade);
         VPCPUp_Btn = view.findViewById(R.id.clickUpgrade);
 
-        VPClick_Btn.setOnClickListener(v -> vars.VP+=vars.VP_perClick); //vars.VP+=vars.VP_perClick
+        VPClick_Btn.setOnClickListener(v -> vars.VP = Exp.sum(vars.VP, vars.VP_perClick)); //vars.VP+=vars.VP_perClick
 
         VPDelayUpdate_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (vars.VCl >= vars.VP_delayUpd_cost){
+                if (Exp.cmp(vars.VCl, vars.VP_delayUpd_cost, ">=")){ //vars.VCl >= vars.VP_delayUpd_cost
                     vars.VP_delay++;
-                    vars.VCl-=vars.VP_delayUpd_cost;
-                    vars.VP_delayUpd_cost*=2;
+                    vars.VCl=Exp.dif(vars.VCl, vars.VP_delayUpd_cost); //vars.VCl-=vars.VP_delayUpd_cost
+                    vars.VP_delayUpd_cost = Exp.mlt(vars.VP_delayUpd_cost, Exp.lng2ex(2));
 //                    System.out.println("CLICK LISTENER");
                 }
             }
         });
-        VPDvnUp_Btn.setOnClickListener(v->{if (vars.VCl >= vars.VP_dvn_UpCost){
-            vars.VP_dvn--;
-            vars.VCl-=vars.VP_dvn_UpCost;
-            vars.VP_dvn_UpCost*=3;
+        VPDvnUp_Btn.setOnClickListener(v->{if (Exp.cmp(vars.VCl, vars.VP_dvn_UpCost, ">=")){
+            vars.VP_dvn=Exp.dif(vars.VP_dvn, Exp.lng2ex(1));
+            vars.VCl=Exp.dif(vars.VCl, vars.VP_dvn_UpCost);
+            vars.VP_dvn_UpCost= Exp.mlt(vars.VP_dvn_UpCost, Exp.lng2ex(3));
 //                    System.out.println("CLICK LISTENER");
         }});
         //🈷🈷🈷🈷🈷 добавь функциоал кнопки чилы клика!!!
@@ -98,24 +98,24 @@ public class VP_Frg extends Fragment {
 
     }
     public void Update_VP(){
-        VPCount_Txt.setText(Double.toString(vars.VP));
-        VCCount_Txt.setText(Double.toString(vars.VCl));
+        VPCount_Txt.setText(Exp.ex2lbst(vars.VP));
+        VCCount_Txt.setText(Exp.ex2lbst(vars.VCl));
         counter++;
         VPDelayUpdate_Btn.setText(
                 rsStr.get("Up_delay")
                 +"\n"
                 +rsStr.get("wrd_cost")
                 +": "
-                +Double.toString(vars.VP_delayUpd_cost)
+                +Exp.ex2lbst(vars.VP_delayUpd_cost)
         );
-        VPDvnUp_Btn.setText(rsStr.get("Up_dvn") + "\n" + rsStr.get("wrd_cost")+": " + Double.toString(vars.VP_dvn_UpCost));
+        VPDvnUp_Btn.setText(rsStr.get("Up_dvn") + "\n" + rsStr.get("wrd_cost")+": " + Exp.ex2lbst(vars.VP_dvn_UpCost));
 
 //        Log.d(TAG, "Update_VP: "+VPDelayUpdate_Btn.getText());
         if (counter>=vars.FPS){
 
         }
         if (counter>=vars.FPS*(vars.VP_delay+0.5) & !vars.isVPBroken){
-            vars.VP/=vars.VP_dvn;
+            vars.VP=Exp.div(vars.VP, vars.VP_dvn);
             counter=0;
         }
     }
