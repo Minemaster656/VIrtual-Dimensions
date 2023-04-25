@@ -1,7 +1,7 @@
 package com.dti.virtualdimensions;
 
 public class vars {
-    static double inf=Double.parseDouble("1.8E+308");
+    static double inf=1.79e308;
     static double VP = Double.parseDouble("1000"); //в.ч.
     static double VCl; //в.к.
     static double VCl_size = 10; static double VCl_size0 = 10; //стоимость кластера, стоимость по умолчанию
