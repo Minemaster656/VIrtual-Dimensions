@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">Virtual Dimensions</string>
-    <string name="VP_tabName">VP</string>
-    <string name="VP_clickToGen">Click to create particle</string>
-    <string name="VPUpgrade_delay">Increase particle lifetime</string>
-    <string name="word_cost">cost</string>
-    <string name="VPUpgrade_dvn">Decrease divider</string>
-    <string name="VPUpgrade_cp">Increase click power</string>
+    <string name="app_name" translatable="false">Virtual Dimensions</string>
+    <string name="VP_tabName" translatable="false">VP</string>
+    <string name="VP_clickToGen" translatable="false">Click to create particle</string>
+    <string name="VPUpgrade_delay" translatable="false">Increase particle lifetime</string>
+    <string name="word_cost" translatable="false">cost</string>
+    <string name="VPUpgrade_dvn" translatable="false">Decrease divider</string>
+    <string name="VPUpgrade_cp" translatable="false">Increase click power</string>
+    <string name="VP_div" translatable="false">Divider</string>
+    <string name="VP_cp" translatable="false">Click power</string>
+    <string name="VP_cd" translatable="false">Division delay</string>
 </resources>

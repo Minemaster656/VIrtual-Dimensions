@@ -2,7 +2,7 @@ package com.dti.virtualdimensions;
 
 public class vars {
     static double inf=1.79e308;
-    static double VP = Double.parseDouble("1000"); //в.ч.
+    static double VP = 1; //Double.parseDouble("1000"); //в.ч.
     static double VCl; //в.к.
     static double VCl_size = 10; static double VCl_size0 = 10; //стоимость кластера, стоимость по умолчанию
     static double VP_delay = 1; //задержка исчезновения (секунды)
