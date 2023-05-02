@@ -16,6 +16,12 @@ class CalcThr extends Thread {
 //        if (vars.VP >= vars.VCl_size){
         while (currentThread().isAlive()) {
             vars.VCl_size = vars.VCl_size0 * (Math.pow(1.1, vars.VCl));
+            vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier;
+            if (vars.VP_perCLick_mlt_total==0){
+                vars.VP_perCLick_mlt_total=1;
+            }
+            vars.VP_prestige0_multiplier_new=(vars.VCl/100)+1;
+
 //            if(vars.VP<=1000000){
 //            vars.VP = new Double(String.format("%.2f", vars.VP + ""));}
             if (vars.VP <= 0.1) {

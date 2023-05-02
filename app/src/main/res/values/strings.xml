@@ -9,4 +9,7 @@
     <string name="VP_div" translatable="false">Divider</string>
     <string name="VP_cp" translatable="false">Click power</string>
     <string name="VP_cd" translatable="false">Division delay</string>
+    <string name="word_multiplier">multiplier</string>
+    <string name="prestige0">RESET the progress for extra CP multiplier</string>
+    <string name="prestige0_desc">multiplier = (VC / 100) + 1</string>
 </resources>
