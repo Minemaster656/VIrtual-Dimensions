@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(v -> VP_openFrg());
         if (!Calcs.ct.isAlive()){
         Calcs.ct.start();}
+        if (!Calcs.fct.isAlive()){
+            Calcs.fct.start();
+        }
 //        Calcs.ut.start();
     }
     public void VP_openFrg(){

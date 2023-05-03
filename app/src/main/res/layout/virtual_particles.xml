@@ -132,11 +132,33 @@
                 android:layout_width="128dp"
                 android:layout_height="100dp"
                 android:backgroundTint="@color/dark_cyan0"
-                android:text="prestige 0 placeholder"
+                android:text="@string/prestige0"
                 android:textSize="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/centerView"
                 app:layout_constraintTop_toBottomOf="@id/VP_delayUpgrade"
+                />
+            <Button
+                android:id="@+id/prestige0_upMlt"
+                android:layout_width="128dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/dark_cyan0"
+                android:text="@string/prestige0_multiplier"
+                android:textSize="10dp"
+                app:layout_constraintLeft_toRightOf="@id/centerView"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/VP_delayUpgrade"
+                />
+            <Button
+                android:id="@+id/CPmultiplier"
+                android:layout_width="128dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/dark_cyan0"
+                android:text="CP multiplier"
+                android:textSize="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prestige0"
                 />
             <Button
                 android:id="@+id/VP_brakePhys"
@@ -147,7 +169,7 @@
                 android:textSize="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/prestige0"
+                app:layout_constraintTop_toBottomOf="@id/CPmultiplier"
                 android:layout_marginTop="16dp"/>
 
 

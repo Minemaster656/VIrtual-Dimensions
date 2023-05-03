@@ -2,6 +2,7 @@ package com.dti.virtualdimensions;
 
 public class vars {
     static double inf=1.79e308;
+    static double GAME_TICKSPEED=0.1;
     static double VP = 1; //Double.parseDouble("1000"); //в.ч.
     static double VCl; //в.к.
     static double VCl_size = 10; static double VCl_size0 = 10; static double VCl_size0_default = 10;//стоимость кластера, стоимость по умолчанию
@@ -16,10 +17,14 @@ public class vars {
     static double UP_perCLick_upMod=2;
     static double VCl_max = inf; //максимум кластеров в.ч.
     static boolean isVPBroken; //квантоваяФизика.сломать();
-    static int FPS = 50;
+    static int FPS = 40; //~~50~~
     static double VP_perCLick_mlt_total=1;
     static double VP_prestige0_multiplier=1;
     static double VP_prestige0_multiplier_new=1;
+    public static double VP_prestige0_mlt=1;
+    public static double VP_prestige0_mlt_cost=10;
+    public static double VP_extraCP_mlt=1;
+    public static double VP_extraCP_cost=4;
 
     public static void RESET_VP(){
         vars.VCl_size0=vars.VCl_size0_default;

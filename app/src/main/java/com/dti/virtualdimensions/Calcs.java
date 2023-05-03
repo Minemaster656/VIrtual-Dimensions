@@ -4,6 +4,7 @@ import java.lang.Thread;
 import java.math.BigDecimal;
 public class Calcs {
     static CalcThr ct = new CalcThr();
+    static FpsCalcThr fct = new FpsCalcThr();
 //    static UpdateInvoker ut = new UpdateInvoker();
 
 }
@@ -16,11 +17,11 @@ class CalcThr extends Thread {
 //        if (vars.VP >= vars.VCl_size){
         while (currentThread().isAlive()) {
             vars.VCl_size = vars.VCl_size0 * (Math.pow(1.1, vars.VCl));
-            vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier;
+        vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier*vars.VP_extraCP_mlt;
             if (vars.VP_perCLick_mlt_total==0){
                 vars.VP_perCLick_mlt_total=1;
             }
-            vars.VP_prestige0_multiplier_new=(vars.VCl/100)+1;
+            vars.VP_prestige0_multiplier_new=(vars.VCl/100)*vars.VP_prestige0_mlt+1;
 
 //            if(vars.VP<=1000000){
 //            vars.VP = new Double(String.format("%.2f", vars.VP + ""));}
@@ -36,6 +37,26 @@ class CalcThr extends Thread {
 
         }
     }
+}
+class FpsCalcThr extends Thread{
+    float counter;
+    @Override
+    public void run() {
+        while (true){
+            try {
+                sleep(1000/vars.FPS);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            counter++;
+            if (counter>=vars.FPS*(vars.VP_delay+0.5) & !vars.isVPBroken){
+                vars.VP/=vars.VP_dvn;
+                counter=0;
+
+            }
+        }
+    }
+
 }
 //class UpdateInvoker extends Thread{
 //    @Override
