@@ -16,8 +16,8 @@ class CalcThr extends Thread {
         //System.out.println("a");
 //        if (vars.VP >= vars.VCl_size){
         while (currentThread().isAlive()) {
-            vars.VCl_size = vars.VCl_size0 * (Math.pow(1.1, vars.VCl));
-        vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier*vars.VP_extraCP_mlt;
+            vars.VCl_size = vars.VCl_size0 * (Math.pow(vars.VCl_cost, vars.VCl));
+        vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier*vars.VP_extraCP_mlt;//*vars.GAME_TICKSPEED_MULTIPLIER;
             if (vars.VP_perCLick_mlt_total==0){
                 vars.VP_perCLick_mlt_total=1;
             }

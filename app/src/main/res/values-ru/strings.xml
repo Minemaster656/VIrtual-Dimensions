@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Virtual Dimensions</string>
+    <string name="VP_tabName">ВЧ</string>
+    <string name="VP_clickToGen">Нажмите для создания частицы</string>
+    <string name="VPUpgrade_delay">Увеличить время жизни частиц</string>
+    <string name="word_cost">стоимость</string>
+    <string name="VPUpgrade_dvn">Уменьшить делитель</string>
+    <string name="VPUpgrade_cp">Увеличить силу нажатия</string>
+    <string name="VP_div">Делитель</string>
+    <string name="VP_cp">Сила нажатия</string>
+    <string name="VP_cd">Задержка исчезновения</string>
+    <string name="word_multiplier">множитель</string>
+    <string name="prestige0">СБРОСИТЬ прогресс для дополнительного множителя СН</string>
+    <string name="prestige0_multiplier">Увеличить множитель престижа</string>
+    <string name="prestige0_desc">множитель = (ВЧ / 100) * множитель престижа + 1</string>
+    <string name="CpMlt">Увеличить дополнительную силу клика на 1.2</string>
+    <string name="IncreaseGameTickseedMlt">Увеличить скорость игры (влияет только на прогресс)</string>
+    <string name="BREAK_QPhys">СЛОМАТЬ КВАНТОВУЮ ФИЗИКУ! (стоимость: 200 ВК)</string>
+    <string name="decrease_VCl_cost">Уменьшить множитель стоимости ВК</string>
+    <string name="BREAK_QPHYS_toast">Вы сломали квантовую физику! Поздравляю! Теперь делитель ВЧ отключен. Этап кварков разблокирован.</string>
+    <string name="locked_qphys_broken">Заблокировано! Квантовая физика сломана!</string>
+</resources>

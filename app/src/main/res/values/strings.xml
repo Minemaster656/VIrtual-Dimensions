@@ -1,17 +1,22 @@
 <resources>
     <string name="app_name" translatable="false">Virtual Dimensions</string>
-    <string name="VP_tabName" translatable="false">VP</string>
-    <string name="VP_clickToGen" translatable="false">Click to create particle</string>
-    <string name="VPUpgrade_delay" translatable="false">Increase particle lifetime</string>
-    <string name="word_cost" translatable="false">cost</string>
-    <string name="VPUpgrade_dvn" translatable="false">Decrease divider</string>
-    <string name="VPUpgrade_cp" translatable="false">Increase click power</string>
-    <string name="VP_div" translatable="false">Divider</string>
-    <string name="VP_cp" translatable="false">Click power</string>
-    <string name="VP_cd" translatable="false">Division delay</string>
+    <string name="VP_tabName">VP</string>
+    <string name="VP_clickToGen">Click to create particle</string>
+    <string name="VPUpgrade_delay">Increase particle lifetime</string>
+    <string name="word_cost">cost</string>
+    <string name="VPUpgrade_dvn">Decrease divider</string>
+    <string name="VPUpgrade_cp">Increase click power</string>
+    <string name="VP_div">Divider</string>
+    <string name="VP_cp">Click power</string>
+    <string name="VP_cd">Division delay</string>
     <string name="word_multiplier">multiplier</string>
     <string name="prestige0">RESET the progress for extra CP multiplier</string>
     <string name="prestige0_multiplier">Increase prestige multiplier</string>
     <string name="prestige0_desc">multiplier = (VC / 100) * prestige multiplier + 1</string>
     <string name="CpMlt">Increase extra CP multiplier by 1.2</string>
+    <string name="IncreaseGameTickseedMlt">Increase game tickspeed (progression only)</string>
+    <string name="BREAK_QPhys">BREAK QUANTUM PHYSICS!\n(price: 200 VC)</string>
+    <string name="decrease_VCl_cost">Decrease VCl price multiplier</string>
+    <string name="BREAK_QPHYS_toast">You broke quantum physics! Congrats! Now VP division is disabled. Quark phase unlocked!</string>
+    <string name="locked_qphys_broken">Locked! Quantum physics is broken!</string>
 </resources>

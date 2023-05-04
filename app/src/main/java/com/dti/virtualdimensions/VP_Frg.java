@@ -35,7 +35,9 @@ public class VP_Frg extends Fragment {
     TextView VP_cd_display;
     Button prestige0_btn;
     Button prestige0_btn_mlt;
-    Button extraMlt;//переменные интерфейса
+    Button extraMlt;
+    Button VCl_costMlt_decrease;
+    Button BREAKQPHYS;//переменные интерфейса
     int counter = 0; //Delay counter
     Handler handler = new Handler() {
         @Override
@@ -60,12 +62,15 @@ public class VP_Frg extends Fragment {
         VP_cd_display = view.findViewById(R.id.VP_cd_display);
         prestige0_btn = view.findViewById(R.id.prestige0);
         prestige0_btn_mlt=view.findViewById(R.id.prestige0_upMlt);
-        extraMlt=view.findViewById(R.id.CPmultiplier);//поиск интерфейса
+        extraMlt=view.findViewById(R.id.CPmultiplier);
+        VCl_costMlt_decrease=view.findViewById(R.id.VCl_mlt_decrease);
+        BREAKQPHYS=view.findViewById(R.id.VP_brakePhys);//поиск интерфейса
 
         @SuppressLint("ClickableViewAccessibility")
         Runnable VP_press = () -> {
             while (true) {
                 while (VPClick_Btn.isPressed()) {
+                    //Log.d(TAG, "PRESSED!!!");
                     try {
                         Thread.sleep(Math.round((1000 / vars.FPS) * 4));
                         vars.VP += 1 * vars.VP_perCLick_mlt_total;//vars.VP_perClick*vars.VP_perCLick_mlt_total;
@@ -85,6 +90,22 @@ public class VP_Frg extends Fragment {
                     vars.VP_prestige0_mlt_cost*=10;
                 }
             }
+        });
+        BREAKQPHYS.setOnClickListener(v -> {
+            if(vars.VCl>=200&&vars.VP_dvn<=5&&!vars.isVPBroken){
+                vars.VCl-=200;
+                vars.VP_dvn=1;
+                vars.isVPBroken=true;
+                Toast.makeText(requireContext(), getStr(R.string.BREAK_QPHYS_toast), Toast.LENGTH_LONG).show();
+
+            }
+        });
+        VCl_costMlt_decrease.setOnClickListener(v->{if(vars.VCl>=vars.VCl_costUp_cost&vars.VCl_cost-0.01>=1){
+            vars.VCl_cost-=0.01;
+            vars.VCl-=vars.VCl_costUp_cost;
+            vars.VCl_costUp_cost*=10;
+        }
+
         });
         extraMlt.setOnClickListener(v->{
             if (vars.VCl>=vars.VP_extraCP_cost){
@@ -182,20 +203,33 @@ public class VP_Frg extends Fragment {
         VPCount_Txt.setText(Double.toString(vars.VP));
         VCCount_Txt.setText(Double.toString(vars.VCl));
         counter++;
-        VPDelayUpdate_Btn.setText(
-                rsStr.get("Up_delay")
-                        + "\n"
-                        + rsStr.get("wrd_cost")
-                        + ": "
-                        + Double.toString(vars.VP_delayUpd_cost)
-        );
+
         if (vars.VP_prestige0_multiplier > vars.VP_prestige0_multiplier_new) {
             prestige0_btn.setEnabled(false);
         } else {
             prestige0_btn.setEnabled(true);
         }
-        VPDvnUp_Btn.setText(rsStr.get("Up_dvn") + "\n" + rsStr.get("wrd_cost") + ": " + Double.toString(vars.VP_dvn_UpCost));
         VPCPUp_Btn.setText(rsStr.get("CP_up") + "\n" + rsStr.get("wrd_cost") + ": " + vars.VP_perClick_upCost);
+        if (!vars.isVPBroken){
+            VPDvnUp_Btn.setText(rsStr.get("Up_dvn") + "\n" + rsStr.get("wrd_cost") + ": " + Double.toString(vars.VP_dvn_UpCost));
+            VPDelayUpdate_Btn.setText(
+                    rsStr.get("Up_delay")
+                            + "\n"
+                            + rsStr.get("wrd_cost")
+                            + ": "
+                            + Double.toString(vars.VP_delayUpd_cost)
+            );
+        }
+        else{
+            VPDelayUpdate_Btn.setText(
+                    rsStr.get("Up_delay")
+                            + "\n"
+                            + rsStr.get("locked_qphys_broken")
+
+            );
+
+            VPDvnUp_Btn.setText(rsStr.get("Up_dvn") + "\n" + rsStr.get("locked_qphys_broken"));
+        }
         VP_cd_display.setText(rsStr.get("VP_cd") + ":\n" + vars.VP_delay);
         VP_cp_display.setText(rsStr.get("VP_cp") + ":\n" + vars.VP_perClick);
         VP_div_display.setText(rsStr.get("VP_div") + ":\n" + vars.VP_dvn);
@@ -203,8 +237,31 @@ public class VP_Frg extends Fragment {
         prestige0_btn.setText(rsStr.get("prs0_text") + "\n" + rsStr.get("word_multiplier") + ": " + vars.VP_prestige0_multiplier_new);
         prestige0_btn_mlt.setText(rsStr.get("prestige0_multiplier")+": \n"+vars.VP_prestige0_mlt+"\n"+rsStr.get("wrd_cost")+": "+vars.VP_prestige0_mlt_cost);
         extraMlt.setText(rsStr.get("CpMlt")+"\n"+rsStr.get("word_multiplier")+": "+vars.VP_extraCP_mlt+"\n"+rsStr.get("wrd_cost")+": "+vars.VP_extraCP_cost);
-        if (counter >= vars.FPS) {
+        VCl_costMlt_decrease.setText(rsStr.get("decrease_VCl_cost")+"\n"+rsStr.get("word_multiplier")+": "+vars.VCl_cost+"\n"+rsStr.get("wrd_cost")+": "+vars.VCl_costUp_cost);
+        if(vars.isVPBroken){
+            BREAKQPHYS.setVisibility(View.INVISIBLE);
+            BREAKQPHYS.setHeight(1);
+            VPDvnUp_Btn.setEnabled(false);
+            VPDelayUpdate_Btn.setEnabled(false);
+        }
+        if(vars.VCl>=200&&vars.VP_dvn<=5&&!vars.isVPBroken){
+            BREAKQPHYS.setEnabled(true);
+        }
+        else{
+            BREAKQPHYS.setEnabled(false);
+        }
+        //NORMALIZE ZONE
 
+        if (counter >= vars.FPS) {
+//            Utils.FitText(VPClick_Btn);
+//            Utils.FitText(VPDelayUpdate_Btn);
+//            Utils.FitText(VPDvnUp_Btn);
+//            Utils.FitText(VPCPUp_Btn);
+//            Utils.FitText(prestige0_btn);
+//            Utils.FitText(prestige0_btn_mlt);
+//            Utils.FitText(extraMlt);
+//            Utils.FitText(VCl_costMlt_decrease);
+            counter=0;
         }
 
     }
@@ -226,6 +283,10 @@ public class VP_Frg extends Fragment {
         m.put("prs0_text", getStr(R.string.prestige0));
         m.put("prestige0_multiplier", getStr(R.string.prestige0_multiplier));
         m.put("CpMlt", getStr(R.string.CpMlt));
+        m.put("IncreaseGameTickseedMlt", getStr(R.string.IncreaseGameTickseedMlt));
+        m.put("decrease_VCl_cost", getStr(R.string.decrease_VCl_cost));
+        m.put("locked_qphys_broken", getStr(R.string.locked_qphys_broken));
+
     }
 
 }

@@ -62,13 +62,14 @@
                 android:text="@string/VP_clickToGen"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/centerView"
-                app:layout_constraintTop_toBottomOf="@id/VP_cd_display" />
+                app:layout_constraintTop_toBottomOf="@id/VP_cd_display"
+                android:textSize="9dp"/>
 
             <Button
                 android:id="@+id/clickUpgrade"
                 android:layout_width="128dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/dark_cyan0"
+                android:backgroundTint="@color/teal_700"
                 android:text="@string/VPUpgrade_cp"
                 app:layout_constraintLeft_toRightOf="@id/centerView"
                 app:layout_constraintRight_toRightOf="parent"
@@ -80,7 +81,7 @@
                 android:layout_height="100dp"
                 android:backgroundTint="@color/dark_cyan0"
                 android:text="@string/VPUpgrade_delay"
-                android:textSize="10dp"
+                android:textSize="9dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/centerView"
                 app:layout_constraintTop_toBottomOf="@id/clickMe_vp" />
@@ -91,7 +92,7 @@
                 android:layout_height="100dp"
                 android:backgroundTint="@color/dark_cyan0"
                 android:text="@string/VPUpgrade_dvn"
-                android:textSize="10dp"
+                android:textSize="9dp"
                 app:layout_constraintLeft_toRightOf="@id/centerView"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/clickMe_vp" />
@@ -100,7 +101,7 @@
             <TextView
                 android:id="@+id/VP_cd_display"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:text="VP_cd_placeholder"
                 app:layout_constraintEnd_toStartOf="@id/VP_div_display"
                 app:layout_constraintHorizontal_weight="1"
@@ -110,7 +111,7 @@
             <TextView
                 android:id="@+id/VP_div_display"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:text="VP_div_placeholder"
                 app:layout_constraintEnd_toStartOf="@id/VP_cp_display"
                 app:layout_constraintHorizontal_weight="1"
@@ -120,7 +121,7 @@
             <TextView
                 android:id="@+id/VP_cp_display"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:text="VP_cp_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
@@ -129,11 +130,11 @@
 
             <Button
                 android:id="@+id/prestige0"
-                android:layout_width="128dp"
+                android:layout_width="140dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/dark_cyan0"
+                android:backgroundTint="@color/dark_red"
                 android:text="@string/prestige0"
-                android:textSize="10dp"
+                android:textSize="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/centerView"
                 app:layout_constraintTop_toBottomOf="@id/VP_delayUpgrade"
@@ -142,35 +143,61 @@
                 android:id="@+id/prestige0_upMlt"
                 android:layout_width="128dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/dark_cyan0"
+                android:backgroundTint="@color/green_dark_cyan0"
                 android:text="@string/prestige0_multiplier"
-                android:textSize="10dp"
+                android:textSize="8dp"
                 app:layout_constraintLeft_toRightOf="@id/centerView"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/VP_delayUpgrade"
                 />
+
             <Button
                 android:id="@+id/CPmultiplier"
                 android:layout_width="128dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/dark_cyan0"
+                android:backgroundTint="@color/green_dark_cyan1"
                 android:text="CP multiplier"
-                android:textSize="10dp"
+                android:textSize="9dp"
+                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/centerView"
+                app:layout_constraintTop_toBottomOf="@id/prestige0" />
+
+            <Button
+                android:id="@+id/VCl_mlt_decrease"
+                android:layout_width="128dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/green_dark_cyan1"
+                android:text="@string/decrease_VCl_cost"
+                android:textSize="8dp"
+                app:layout_constraintLeft_toRightOf="@id/centerView"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/prestige0"
                 />
+<!--            <Button-->
+<!--                android:id="@+id/TICKSPEED_mlt"-->
+<!--                android:layout_width="128dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:backgroundTint="@color/dark_cyan0"-->
+<!--                android:text="@string/IncreaseGameTickseedMlt"-->
+<!--                android:textSize="9dp"-->
+<!--                app:layout_constraintLeft_toRightOf="@id/centerView"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/prestige0"-->
+<!--                />-->
             <Button
                 android:id="@+id/VP_brakePhys"
-                android:layout_width="128dp"
+                android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/dark_cyan0"
-                android:text="BREAK PHYS PLACEHOLDER"
-                android:textSize="10dp"
+                android:backgroundTint="@color/dark_red"
+                android:text="@string/BREAK_QPhys"
+                android:textSize="9dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/CPmultiplier"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"/>
 
 
             <!--        app:layout_constraintBottom_toTopOf="@+id/dateTextView"-->

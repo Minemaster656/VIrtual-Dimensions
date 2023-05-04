@@ -1,5 +1,11 @@
 package com.dti.virtualdimensions;
 
+import android.graphics.Paint;
+import android.graphics.text.LineBreaker;
+import android.text.Layout;
+import android.util.TypedValue;
+import android.widget.Button;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
@@ -9,6 +15,44 @@ public class Utils {
         BigDecimal formattedValue = value.setScale(scale, RoundingMode.HALF_UP); // определение количества знаков после запятой
         return formattedValue.toString(); // конвертирование BigDecimal в строку с тремя знаками после запятой
     }
+    public static void FitText(Button button){
+        button.post(new Runnable() {
+            @Override
+            public void run() {
+                button.setMaxEms(button.getWidth()/2);
+                button.setBreakStrategy(LineBreaker.BREAK_STRATEGY_SIMPLE);
+
+                int maxWidth = button.getWidth();
+                float textSize = button.getTextSize();
+                Paint paint = new Paint();
+                paint.setTextSize(textSize);
+                float textWidth = paint.measureText(button.getText().toString());
+                while (textWidth > maxWidth) {
+                    textSize--;
+                    paint.setTextSize(textSize);
+                    textWidth = paint.measureText(button.getText().toString());
+                }
+                button.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+            }
+        });
+    }
+    //Button button = findViewById(R.id.button);
+//button.post(new Runnable() {
+//        @Override
+//        public void run() {
+//            int maxWidth = button.getWidth();
+//            float textSize = button.getTextSize();
+//            Paint paint = new Paint();
+//            paint.setTextSize(textSize);
+//            float textWidth = paint.measureText(button.getText().toString());
+//            while (textWidth > maxWidth) {
+//                textSize--;
+//                paint.setTextSize(textSize);
+//                textWidth = paint.measureText(button.getText().toString());
+//            }
+//            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+//        }
+//    });
 
 //    public static void main(String[] args) {
 //        Scanner in = new Scanner(System.in);
