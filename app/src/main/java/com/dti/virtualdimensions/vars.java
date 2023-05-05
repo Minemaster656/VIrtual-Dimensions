@@ -31,44 +31,52 @@ public class vars {
 
 
 
-    //QUARKS
-    public static BigDecimal quarks;
-    public static BigDecimal q_tickspeed;
+    //VP DIMENSIONS
+    public static boolean isVPPhaseDestroyed=false;
+    public static BigDecimal vBuyMlt=BigDecimal.valueOf(1);
+    public static BigDecimal v_VP;
+    public static BigDecimal v_tickspeed;
 
-    public static BigDecimal qDim1_count;
-    public static BigDecimal qDim1_price;
-    public static BigDecimal qDim1_mlt;
-    public static boolean qDim1_isUnlocked;
+    public static BigDecimal vDim1_count;
+    public static BigDecimal vDim1_price;
+    public static BigDecimal vDim1_mlt;
+    public static BigDecimal vDim1_priceUp=BigDecimal.valueOf(1.1);
+    public static boolean vDim1_isUnlocked=true;
 
-    public static BigDecimal qDim2_count;
-    public static BigDecimal qDim2_price;
-    public static BigDecimal qDim2_mlt;
-    public static boolean qDim2_isUnlocked;
+    public static BigDecimal vDim2_count;
+    public static BigDecimal vDim2_price;
+    public static BigDecimal vDim2_mlt;
+    public static BigDecimal vDim2_priceUp=BigDecimal.valueOf(1.2);
+    public static boolean vDim2_isUnlocked=true;
 
-    public static BigDecimal qDim3_count;
-    public static BigDecimal qDim3_price;
-    public static BigDecimal qDim3_mlt;
-    public static boolean qDim3_isUnlocked;
+    public static BigDecimal vDim3_count;
+    public static BigDecimal vDim3_price;
+    public static BigDecimal vDim3_mlt;
+    public static BigDecimal vDim3_priceUp=BigDecimal.valueOf(1.3);
+    public static boolean vDim3_isUnlocked=true;
 
-    public static BigDecimal qDim4_count;
-    public static BigDecimal qDim4_price;
-    public static BigDecimal qDim4_mlt;
-    public static boolean qDim4_isUnlocked;
+    public static BigDecimal vDim4_count;
+    public static BigDecimal vDim4_price;
+    public static BigDecimal vDim4_mlt;
+    public static BigDecimal vDim4_priceUp=BigDecimal.valueOf(1.4);
+    public static boolean vDim4_isUnlocked;
 
-    public static BigDecimal qDim5_count;
-    public static BigDecimal qDim5_price;
-    public static BigDecimal qDim5_mlt;
-    public static boolean qDim5_isUnlocked;
+    public static BigDecimal vDim5_count;
+    public static BigDecimal vDim5_price;
+    public static BigDecimal vDim5_mlt;
+    public static BigDecimal vDim5_priceUp=BigDecimal.valueOf(1.5);
+    public static boolean vDim5_isUnlocked;
 
-    public static BigDecimal qDim6_count;
-    public static BigDecimal qDim6_price;
-    public static BigDecimal qDim6_mlt;
-    public static boolean qDim6_isUnlocked;
+    public static BigDecimal vDim6_count;
+    public static BigDecimal vDim6_price;
+    public static BigDecimal vDim6_mlt;
+    public static BigDecimal vDim6_priceUp=BigDecimal.valueOf(1.6);
+    public static boolean vDim6_isUnlocked;
 
-    public static byte q_maxDim=4;
-    public static BigDecimal qCollapse_count;
-    public static BigDecimal qCollapse_mlt;
-    public static BigDecimal qCollapse_price;
+    public static byte v_maxDim=3;
+    public static BigDecimal vCollapse_count;
+    public static BigDecimal vCollapse_mlt;
+    public static BigDecimal vCollapse_price;
 
 
 

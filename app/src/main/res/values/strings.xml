@@ -19,4 +19,15 @@
     <string name="decrease_VCl_cost">Decrease VCl price multiplier</string>
     <string name="BREAK_QPHYS_toast">You broke quantum physics! Congrats! Now VP division is disabled. Quark phase unlocked!</string>
     <string name="locked_qphys_broken">Locked! Quantum physics is broken!</string>
+    <string name="VP_toPhase1Button">Break the law of conservation of energy NOW! (It will destroy this phase FOREVER)</string>
+    <string name="VD_tabName">VD</string>
+    <string name="dim1">1st Dim</string>
+    <string name="dim2">2nd Dim</string>
+    <string name="dim3">3rd Dim</string>
+    <string name="dim4">4th Dim</string>
+    <string name="dim5">5th Dim</string>
+    <string name="dim6">6th Dim</string>
+    <string name="word_buy">buy</string>
+    <string name="word_price">price</string>
+    <string name="word_count">count</string>
 </resources>

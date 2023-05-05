@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class Calcs {
     static CalcThr ct = new CalcThr();
     static FpsCalcThr fct = new FpsCalcThr();
+    static Production prt = new Production();
 //    static UpdateInvoker ut = new UpdateInvoker();
 
 }
@@ -57,6 +58,21 @@ class FpsCalcThr extends Thread{
         }
     }
 
+}
+class Production extends Thread{
+    @Override
+    public void run() {
+        while (true){
+        try {
+            sleep(250);
+
+
+
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }}
 }
 //class UpdateInvoker extends Thread{
 //    @Override

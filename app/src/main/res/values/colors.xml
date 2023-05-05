@@ -16,4 +16,10 @@
     <color name="green_dark_cyan0.1">#029875</color>
     <color name="green_dark_cyan1">#019857</color>
     <color name="dark_red">#8C0707</color>
+    <color name="abyss">#011629</color>
+    <color name="dim0">#89FF9D</color>
+    <color name="dim1">#6AFF83</color>
+    <color name="VP_textColor">#002506</color>
+    <color name="buttonBackground_VP">#292929</color>
+    <color name="buttonBorder_VP">#8BC34A</color>
 </resources>

@@ -37,7 +37,8 @@ public class VP_Frg extends Fragment {
     Button prestige0_btn_mlt;
     Button extraMlt;
     Button VCl_costMlt_decrease;
-    Button BREAKQPHYS;//переменные интерфейса
+    Button BREAKQPHYS;
+    Button DESTROY_VP;//переменные интерфейса
     int counter = 0; //Delay counter
     Handler handler = new Handler() {
         @Override
@@ -64,7 +65,8 @@ public class VP_Frg extends Fragment {
         prestige0_btn_mlt=view.findViewById(R.id.prestige0_upMlt);
         extraMlt=view.findViewById(R.id.CPmultiplier);
         VCl_costMlt_decrease=view.findViewById(R.id.VCl_mlt_decrease);
-        BREAKQPHYS=view.findViewById(R.id.VP_brakePhys);//поиск интерфейса
+        BREAKQPHYS=view.findViewById(R.id.VP_brakePhys);
+        DESTROY_VP=view.findViewById(R.id.toPhase1);//поиск интерфейса
 
         @SuppressLint("ClickableViewAccessibility")
         Runnable VP_press = () -> {
@@ -74,6 +76,7 @@ public class VP_Frg extends Fragment {
                     try {
                         Thread.sleep(Math.round((1000 / vars.FPS) * 4));
                         vars.VP += 1 * vars.VP_perCLick_mlt_total;//vars.VP_perClick*vars.VP_perCLick_mlt_total;
+                        if(vars.isVPPhaseDestroyed) break;
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -90,6 +93,9 @@ public class VP_Frg extends Fragment {
                     vars.VP_prestige0_mlt_cost*=10;
                 }
             }
+        });
+        DESTROY_VP.setOnClickListener(v->{
+            vars.isVPPhaseDestroyed=true;
         });
         BREAKQPHYS.setOnClickListener(v -> {
             if(vars.VCl>=200&&vars.VP_dvn<=5&&!vars.isVPBroken){
@@ -180,6 +186,7 @@ public class VP_Frg extends Fragment {
                     try {
                         Thread.sleep(1000 / vars.FPS);
                         handler.sendEmptyMessage(1);
+                        if(vars.isVPPhaseDestroyed) break;
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -203,7 +210,14 @@ public class VP_Frg extends Fragment {
         VPCount_Txt.setText(Double.toString(vars.VP));
         VCCount_Txt.setText(Double.toString(vars.VCl));
         counter++;
-
+        if (vars.isVPBroken){
+            DESTROY_VP.setVisibility(View.INVISIBLE);
+            DESTROY_VP.setEnabled(false);
+        }
+        else{
+            DESTROY_VP.setVisibility(View.VISIBLE);
+            DESTROY_VP.setEnabled(true);
+        }
         if (vars.VP_prestige0_multiplier > vars.VP_prestige0_multiplier_new) {
             prestige0_btn.setEnabled(false);
         } else {
@@ -286,6 +300,7 @@ public class VP_Frg extends Fragment {
         m.put("IncreaseGameTickseedMlt", getStr(R.string.IncreaseGameTickseedMlt));
         m.put("decrease_VCl_cost", getStr(R.string.decrease_VCl_cost));
         m.put("locked_qphys_broken", getStr(R.string.locked_qphys_broken));
+        m.put("VP_toPhase1Button", getStr(R.string.VP_toPhase1Button));
 
     }
 

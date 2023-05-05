@@ -198,6 +198,19 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"/>
+            <Button
+                android:id="@+id/toPhase1"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/red"
+                android:text="@string/VP_toPhase1Button"
+                android:textSize="9dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/VP_brakePhys"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"/>
 
 
             <!--        app:layout_constraintBottom_toTopOf="@+id/dateTextView"-->
