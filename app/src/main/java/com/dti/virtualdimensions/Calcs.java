@@ -1,11 +1,17 @@
 package com.dti.virtualdimensions;
 
 import java.lang.Thread;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+
 public class Calcs {
-    static CalcThr ct = new CalcThr();
-    static FpsCalcThr fct = new FpsCalcThr();
-    static Production prt = new Production();
+     CalcThr ct = new CalcThr();
+     FpsCalcThr fct = new FpsCalcThr();
+     Production prt = new Production();
+
+     VD_frg secondFragment = null;
+    public void setSecondFragment(VD_frg vd) {
+        this.secondFragment = vd;
+    }
 //    static UpdateInvoker ut = new UpdateInvoker();
 
 }
@@ -29,7 +35,7 @@ class CalcThr extends Thread {
             if (vars.VP <= 0.1) {
                 vars.VP = 0;
             }
-            while (vars.VP >= vars.VCl_size & vars.VCl <= vars.VCl_max) {
+            while (vars.VP >= vars.VCl_size) {
                 vars.VP -= vars.VCl_size;
                 vars.VCl++;
                 //vars.VCl_size*=1.1;
@@ -65,6 +71,7 @@ class Production extends Thread{
         while (true){
         try {
             sleep(250);
+
 
 
 

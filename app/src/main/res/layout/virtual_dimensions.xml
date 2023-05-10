@@ -7,7 +7,9 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="30dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,399 +32,400 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
+                android:id="@+id/v_VP_count"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:id="@+id/v_VP_count"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center_horizontal"
                 android:text="VP count"
                 android:textColor="@color/VP_textColor"
-                android:gravity="center_horizontal"
-                />
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <View
                 android:id="@+id/dimBackground1"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:background="@color/dim0"
-
-                app:layout_constraintTop_toBottomOf="@id/v_VP_count"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="16dp"
+
                 android:layout_marginRight="16dp"
 
+                android:background="@color/dim0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_VP_count"
+
                 />
+
             <Button
+                android:id="@+id/buyDim1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/dimBackground1"
-                app:layout_constraintTop_toTopOf="@id/dimBackground1"
-                app:layout_constraintBottom_toBottomOf="@id/dimBackground1"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
                 android:textSize="10dp"
-                android:id="@+id/buyDim1"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/dimBackground1"
+                app:layout_constraintEnd_toEndOf="@id/dimBackground1"
+                app:layout_constraintTop_toTopOf="@id/dimBackground1" />
+
             <TextView
+                android:id="@+id/dim1Name"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground1"
-                app:layout_constraintStart_toStartOf="@id/dimBackground1"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:text="@string/dim1"
-                android:id="@+id/dim1Name"
                 android:background="@color/dim1"
-                />
+                android:text="@string/dim1"
+                app:layout_constraintStart_toStartOf="@id/dimBackground1"
+                app:layout_constraintTop_toTopOf="@id/dimBackground1" />
+
             <TextView
+                android:id="@+id/dim1Mlt"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground1"
-                app:layout_constraintStart_toEndOf="@id/dim1Name"
-                app:layout_constraintEnd_toStartOf="@id/buyDim1"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim1 mlt"
-                android:id="@+id/dim1Mlt"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim1"
+                app:layout_constraintStart_toEndOf="@id/dim1Name"
+                app:layout_constraintTop_toTopOf="@id/dimBackground1" />
+
             <TextView
+                android:id="@+id/dim1Count"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:id="@+id/dim1Count"
-                app:layout_constraintTop_toBottomOf="@id/dim1Name"
-                app:layout_constraintStart_toStartOf="@id/dimBackground1"
-                app:layout_constraintEnd_toStartOf="@id/buyDim1"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="1 dim count"
-                />
-<!--            DIM BORDER-->
+                app:layout_constraintEnd_toStartOf="@id/buyDim1"
+                app:layout_constraintStart_toStartOf="@id/dimBackground1"
+                app:layout_constraintTop_toBottomOf="@id/dim1Name" />
+            <!--            DIM BORDER-->
             <View
                 android:id="@+id/dimBackground2"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:background="@color/dim1"
-
-                app:layout_constraintTop_toBottomOf="@id/dimBackground1"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+
                 android:layout_marginTop="10dp"
 
+                android:layout_marginRight="16dp"
+                android:background="@color/dim1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dimBackground1"
+
                 />
+
             <Button
+                android:id="@+id/buyDim2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/dimBackground2"
-                app:layout_constraintTop_toTopOf="@id/dimBackground2"
-                app:layout_constraintBottom_toBottomOf="@id/dimBackground2"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
                 android:textSize="10dp"
-                android:id="@+id/buyDim2"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/dimBackground2"
+                app:layout_constraintEnd_toEndOf="@id/dimBackground2"
+                app:layout_constraintTop_toTopOf="@id/dimBackground2" />
+
             <TextView
+                android:id="@+id/dim2Name"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground2"
-                app:layout_constraintStart_toStartOf="@id/dimBackground2"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:text="@string/dim2"
-                android:id="@+id/dim2Name"
                 android:background="@color/dim0"
-                />
+                android:text="@string/dim2"
+                app:layout_constraintStart_toStartOf="@id/dimBackground2"
+                app:layout_constraintTop_toTopOf="@id/dimBackground2" />
+
             <TextView
+                android:id="@+id/dim2Mlt"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground2"
-                app:layout_constraintStart_toEndOf="@id/dim2Name"
-                app:layout_constraintEnd_toStartOf="@id/buyDim2"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim2 mlt"
-                android:id="@+id/dim2Mlt"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim2"
+                app:layout_constraintStart_toEndOf="@id/dim2Name"
+                app:layout_constraintTop_toTopOf="@id/dimBackground2" />
+
             <TextView
+                android:id="@+id/dim2Count"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:id="@+id/dim2Count"
-                app:layout_constraintTop_toBottomOf="@id/dim2Name"
-                app:layout_constraintStart_toStartOf="@id/dimBackground2"
-                app:layout_constraintEnd_toStartOf="@id/buyDim2"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="2 dim count"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim2"
+                app:layout_constraintStart_toStartOf="@id/dimBackground2"
+                app:layout_constraintTop_toBottomOf="@id/dim2Name" />
             <!--            DIM BORDER-->
             <View
                 android:id="@+id/dimBackground3"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:background="@color/dim0"
-
-                app:layout_constraintTop_toBottomOf="@id/dimBackground2"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+
                 android:layout_marginTop="10dp"
 
+                android:layout_marginRight="16dp"
+                android:background="@color/dim0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dimBackground2"
+
                 />
+
             <Button
+                android:id="@+id/buyDim3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/dimBackground3"
-                app:layout_constraintTop_toTopOf="@id/dimBackground3"
-                app:layout_constraintBottom_toBottomOf="@id/dimBackground3"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
                 android:textSize="10dp"
-                android:id="@+id/buyDim3"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/dimBackground3"
+                app:layout_constraintEnd_toEndOf="@id/dimBackground3"
+                app:layout_constraintTop_toTopOf="@id/dimBackground3" />
+
             <TextView
+                android:id="@+id/dim3Name"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground3"
-                app:layout_constraintStart_toStartOf="@id/dimBackground3"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:text="@string/dim3"
-                android:id="@+id/dim3Name"
                 android:background="@color/dim1"
-                />
+                android:text="@string/dim3"
+                app:layout_constraintStart_toStartOf="@id/dimBackground3"
+                app:layout_constraintTop_toTopOf="@id/dimBackground3" />
+
             <TextView
+                android:id="@+id/dim3Mlt"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground3"
-                app:layout_constraintStart_toEndOf="@id/dim3Name"
-                app:layout_constraintEnd_toStartOf="@id/buyDim3"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim3 mlt"
-                android:id="@+id/dim3Mlt"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim3"
+                app:layout_constraintStart_toEndOf="@id/dim3Name"
+                app:layout_constraintTop_toTopOf="@id/dimBackground3" />
+
             <TextView
+                android:id="@+id/dim3Count"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:id="@+id/dim3Count"
-                app:layout_constraintTop_toBottomOf="@id/dim3Name"
-                app:layout_constraintStart_toStartOf="@id/dimBackground3"
-                app:layout_constraintEnd_toStartOf="@id/buyDim3"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="3 dim count"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim3"
+                app:layout_constraintStart_toStartOf="@id/dimBackground3"
+                app:layout_constraintTop_toBottomOf="@id/dim3Name" />
             <!--            DIM BORDER-->
             <View
                 android:id="@+id/dimBackground4"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:background="@color/dim1"
-
-                app:layout_constraintTop_toBottomOf="@id/dimBackground3"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+
                 android:layout_marginTop="10dp"
 
+                android:layout_marginRight="16dp"
+                android:background="@color/dim1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dimBackground3"
+
                 />
+
             <Button
+                android:id="@+id/buyDim4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/dimBackground4"
-                app:layout_constraintTop_toTopOf="@id/dimBackground4"
-                app:layout_constraintBottom_toBottomOf="@id/dimBackground4"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
                 android:textSize="10dp"
-                android:id="@+id/buyDim4"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/dimBackground4"
+                app:layout_constraintEnd_toEndOf="@id/dimBackground4"
+                app:layout_constraintTop_toTopOf="@id/dimBackground4" />
+
             <TextView
+                android:id="@+id/dim4Name"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground4"
-                app:layout_constraintStart_toStartOf="@id/dimBackground4"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:text="@string/dim4"
-                android:id="@+id/dim4Name"
                 android:background="@color/dim0"
-                />
+                android:text="@string/dim4"
+                app:layout_constraintStart_toStartOf="@id/dimBackground4"
+                app:layout_constraintTop_toTopOf="@id/dimBackground4" />
+
             <TextView
+                android:id="@+id/dim4Mlt"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground4"
-                app:layout_constraintStart_toEndOf="@id/dim4Name"
-                app:layout_constraintEnd_toStartOf="@id/buyDim4"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim4 mlt"
-                android:id="@+id/dim4Mlt"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim4"
+                app:layout_constraintStart_toEndOf="@id/dim4Name"
+                app:layout_constraintTop_toTopOf="@id/dimBackground4" />
+
             <TextView
+                android:id="@+id/dim4Count"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:id="@+id/dim4Count"
-                app:layout_constraintTop_toBottomOf="@id/dim4Name"
-                app:layout_constraintStart_toStartOf="@id/dimBackground4"
-                app:layout_constraintEnd_toStartOf="@id/buyDim4"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="4 dim count"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim4"
+                app:layout_constraintStart_toStartOf="@id/dimBackground4"
+                app:layout_constraintTop_toBottomOf="@id/dim4Name" />
             <!--            DIM BORDER-->
             <View
                 android:id="@+id/dimBackground5"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:background="@color/dim0"
-
-                app:layout_constraintTop_toBottomOf="@id/dimBackground4"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+
                 android:layout_marginTop="10dp"
 
+                android:layout_marginRight="16dp"
+                android:background="@color/dim0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dimBackground4"
+
                 />
+
             <Button
+                android:id="@+id/buyDim5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/dimBackground5"
-                app:layout_constraintTop_toTopOf="@id/dimBackground5"
-                app:layout_constraintBottom_toBottomOf="@id/dimBackground5"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
                 android:textSize="10dp"
-                android:id="@+id/buyDim5"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/dimBackground5"
+                app:layout_constraintEnd_toEndOf="@id/dimBackground5"
+                app:layout_constraintTop_toTopOf="@id/dimBackground5" />
+
             <TextView
+                android:id="@+id/dim5Name"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground5"
-                app:layout_constraintStart_toStartOf="@id/dimBackground5"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:text="@string/dim5"
-                android:id="@+id/dim5Name"
                 android:background="@color/dim1"
-                />
+                android:text="@string/dim5"
+                app:layout_constraintStart_toStartOf="@id/dimBackground5"
+                app:layout_constraintTop_toTopOf="@id/dimBackground5" />
+
             <TextView
+                android:id="@+id/dim5Mlt"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground5"
-                app:layout_constraintStart_toEndOf="@id/dim5Name"
-                app:layout_constraintEnd_toStartOf="@id/buyDim5"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim5 mlt"
-                android:id="@+id/dim5Mlt"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim5"
+                app:layout_constraintStart_toEndOf="@id/dim5Name"
+                app:layout_constraintTop_toTopOf="@id/dimBackground5" />
+
             <TextView
+                android:id="@+id/dim5Count"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:id="@+id/dim5Count"
-                app:layout_constraintTop_toBottomOf="@id/dim5Name"
-                app:layout_constraintStart_toStartOf="@id/dimBackground5"
-                app:layout_constraintEnd_toStartOf="@id/buyDim5"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="5 dim count"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim5"
+                app:layout_constraintStart_toStartOf="@id/dimBackground5"
+                app:layout_constraintTop_toBottomOf="@id/dim5Name" />
             <!--            DIM BORDER-->
             <View
                 android:id="@+id/dimBackground6"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:background="@color/dim1"
-
-                app:layout_constraintTop_toBottomOf="@id/dimBackground5"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+
                 android:layout_marginTop="10dp"
 
+                android:layout_marginRight="16dp"
+                android:background="@color/dim1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dimBackground5"
+
                 />
+
             <Button
+                android:id="@+id/buyDim6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/dimBackground6"
-                app:layout_constraintTop_toTopOf="@id/dimBackground6"
-                app:layout_constraintBottom_toBottomOf="@id/dimBackground6"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
                 android:textSize="10dp"
-                android:id="@+id/buyDim6"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/dimBackground6"
+                app:layout_constraintEnd_toEndOf="@id/dimBackground6"
+                app:layout_constraintTop_toTopOf="@id/dimBackground6" />
+
             <TextView
+                android:id="@+id/dim6Name"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground6"
-                app:layout_constraintStart_toStartOf="@id/dimBackground6"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:text="@string/dim6"
-                android:id="@+id/dim6Name"
                 android:background="@color/dim0"
-                />
+                android:text="@string/dim6"
+                app:layout_constraintStart_toStartOf="@id/dimBackground6"
+                app:layout_constraintTop_toTopOf="@id/dimBackground6" />
+
             <TextView
+                android:id="@+id/dim6Mlt"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                app:layout_constraintTop_toTopOf="@id/dimBackground6"
-                app:layout_constraintStart_toEndOf="@id/dim6Name"
-                app:layout_constraintEnd_toStartOf="@id/buyDim6"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim6 mlt"
-                android:id="@+id/dim6Mlt"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim6"
+                app:layout_constraintStart_toEndOf="@id/dim6Name"
+                app:layout_constraintTop_toTopOf="@id/dimBackground6" />
+
             <TextView
+                android:id="@+id/dim6Count"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:id="@+id/dim6Count"
-                app:layout_constraintTop_toBottomOf="@id/dim6Name"
-                app:layout_constraintStart_toStartOf="@id/dimBackground6"
-                app:layout_constraintEnd_toStartOf="@id/buyDim6"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="6 dim count"
-                />
+                app:layout_constraintEnd_toStartOf="@id/buyDim6"
+                app:layout_constraintStart_toStartOf="@id/dimBackground6"
+                app:layout_constraintTop_toBottomOf="@id/dim6Name" />
             <!--            DIM BORDER-->
 
 

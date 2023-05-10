@@ -11,10 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class VD_frg extends Fragment {
+
+    ArrayList<Dim> dims = new ArrayList<Dim>();
 
     Button[] dimBuyBtns;
     TextView[] dimCountTxts;
@@ -33,6 +36,12 @@ public class VD_frg extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initMap(rsStr);
+        dims.add(new Dim(1, 1.1f));
+        dims.add(new Dim(100, 1.2f));
+        dims.add(new Dim(10000, 1.3f));
+        dims.add(new Dim(1000000, 1.4f));
+        dims.add(new Dim(100000000, 1.5f));
+        dims.add(new Dim(10000000000L, 1.6f));
         dimBuyBtns[0] = view.findViewById(R.id.buyDim1);
         dimBuyBtns[1] = view.findViewById(R.id.buyDim2);
         dimBuyBtns[2] = view.findViewById(R.id.buyDim3);

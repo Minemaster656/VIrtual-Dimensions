@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Calcs calcs;
     Button VP_tab ;
     Button VD_tab;
     @SuppressLint("MissingInflatedId")
@@ -20,13 +21,14 @@ public class MainActivity extends AppCompatActivity {
         VD_tab.setOnClickListener(v->VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
         VD_tab.setEnabled(false);
-        if (!Calcs.ct.isAlive()){
-        Calcs.ct.start();}
-        if (!Calcs.fct.isAlive()){
-            Calcs.fct.start();
+        calcs = new Calcs();
+        if (!calcs.ct.isAlive()){
+        calcs.ct.start();}
+        if (!calcs.fct.isAlive()){
+            calcs.fct.start();
         }
-        if (!Calcs.prt.isAlive()){
-            Calcs.prt.run();
+        if (!calcs.prt.isAlive()){
+            calcs.prt.run();
         }
 //        Calcs.ut.start();
         Runnable Checks = () -> {
@@ -53,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new VP_Frg()).commit();
     }
     public void VD_openFrg(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new VD_frg()).commit();
+        VD_frg vd = new VD_frg();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, vd).commit();
+        calcs.setSecondFragment(vd);
     }
 
 }
