@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("CREATED");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         VP_tab = findViewById(R.id.vp_tab_open);
@@ -21,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
         VD_tab.setOnClickListener(v->VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
         VD_tab.setEnabled(false);
+        VD_frg vd = new VD_frg();
         calcs = new Calcs();
+        calcs.setVDFragment(vd);
+
+        calcs.initAll();
         if (!calcs.ct.isAlive()){
         calcs.ct.start();}
         if (!calcs.fct.isAlive()){
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (!calcs.prt.isAlive()){
             calcs.prt.run();
         }
+
 //        Calcs.ut.start();
         Runnable Checks = () -> {
             while (true) {
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public void VD_openFrg(){
         VD_frg vd = new VD_frg();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, vd).commit();
-        calcs.setSecondFragment(vd);
+
     }
 
 }

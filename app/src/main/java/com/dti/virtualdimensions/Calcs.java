@@ -1,86 +1,166 @@
 package com.dti.virtualdimensions;
 
+import static java.lang.Thread.currentThread;
+import static java.lang.Thread.sleep;
+
 import java.lang.Thread;
 import java.util.ArrayList;
 
 public class Calcs {
-     CalcThr ct = new CalcThr();
-     FpsCalcThr fct = new FpsCalcThr();
-     Production prt = new Production();
-
-     VD_frg secondFragment = null;
-    public void setSecondFragment(VD_frg vd) {
-        this.secondFragment = vd;
-    }
-//    static UpdateInvoker ut = new UpdateInvoker();
-
-}
-
-class CalcThr extends Thread {
-    @Override
-    public void run() {
-//        super.run();
-        //System.out.println("a");
-//        if (vars.VP >= vars.VCl_size){
-        while (currentThread().isAlive()) {
-            vars.VCl_size = vars.VCl_size0 * (Math.pow(vars.VCl_cost, vars.VCl));
-        vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier*vars.VP_extraCP_mlt;//*vars.GAME_TICKSPEED_MULTIPLIER;
-            if (vars.VP_perCLick_mlt_total==0){
-                vars.VP_perCLick_mlt_total=1;
-            }
-            vars.VP_prestige0_multiplier_new=(vars.VCl/100)*vars.VP_prestige0_mlt+1;
+    //     CalcThr ct = new CalcThr();
+//     FpsCalcThr fct = new FpsCalcThr();
+//     Production prt = new Production();
+    long frameDelay = 1000 / vars.FPS;
+    VD_frg VD_frg = null;
+    Runnable CalcThr = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                vars.VCl_size = vars.VCl_size0 * (Math.pow(vars.VCl_cost, vars.VCl));
+                vars.VP_perCLick_mlt_total = vars.VP_perClick * vars.VP_prestige0_multiplier * vars.VP_extraCP_mlt;//*vars.GAME_TICKSPEED_MULTIPLIER;
+                if (vars.VP_perCLick_mlt_total == 0) {
+                    vars.VP_perCLick_mlt_total = 1;
+                }
+                vars.VP_prestige0_multiplier_new = (vars.VCl / 100) * vars.VP_prestige0_mlt + 1;
 
 //            if(vars.VP<=1000000){
 //            vars.VP = new Double(String.format("%.2f", vars.VP + ""));}
-            if (vars.VP <= 0.1) {
-                vars.VP = 0;
-            }
-            while (vars.VP >= vars.VCl_size) {
-                vars.VP -= vars.VCl_size;
-                vars.VCl++;
-                //vars.VCl_size*=1.1;
-            }
+                if (vars.VP <= 0.1) {
+                    vars.VP = 0;
+                }
+                while (vars.VP >= vars.VCl_size) {
+                    vars.VP -= vars.VCl_size;
+                    vars.VCl++;
+                    //vars.VCl_size*=1.1;
+                }
 //        }
 
+            }
         }
-    }
-}
-class FpsCalcThr extends Thread{
+    };
+    Thread ct = new Thread(CalcThr);
     float counter;
-    @Override
-    public void run() {
-        while (true){
-            try {
-                sleep(1000/vars.FPS);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            counter++;
-            if (counter>=vars.FPS*(vars.VP_delay+0.5) & !vars.isVPBroken){
-                vars.VP/=vars.VP_dvn;
-                counter=0;
+    Runnable FpsCalcThr = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    sleep(1000 / vars.FPS);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                counter++;
+                if (counter >= vars.FPS * (vars.VP_delay + 0.5) & !vars.isVPBroken) {
+                    vars.VP /= vars.VP_dvn;
+                    counter = 0;
 
+                }
             }
         }
+    };
+    Thread fct = new Thread(FpsCalcThr);
+    Runnable Production = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    sleep(250);
+                    vars.v_VP=vars.v_VP.add(VD_frg.dims.get(0).count.multiply(VD_frg.dims.get(0).mlt).multiply(vars.v_tickspeed));
+                    VD_frg.dims.get(0).count = VD_frg.dims.get(0).count.add(VD_frg.dims.get(1).count.multiply(VD_frg.dims.get(1).mlt).multiply(vars.v_tickspeed));
+                    VD_frg.dims.get(1).count = VD_frg.dims.get(1).count.add(VD_frg.dims.get(2).count.multiply(VD_frg.dims.get(2).mlt).multiply(vars.v_tickspeed));
+                    VD_frg.dims.get(2).count = VD_frg.dims.get(2).count.add(VD_frg.dims.get(3).count.multiply(VD_frg.dims.get(3).mlt).multiply(vars.v_tickspeed));
+                    VD_frg.dims.get(3).count = VD_frg.dims.get(3).count.add(VD_frg.dims.get(4).count.multiply(VD_frg.dims.get(4).mlt).multiply(vars.v_tickspeed));
+                    VD_frg.dims.get(4).count = VD_frg.dims.get(4).count.add(VD_frg.dims.get(5).count.multiply(VD_frg.dims.get(5).mlt).multiply(vars.v_tickspeed));
+
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    };
+    Thread prt = new Thread(Production);
+
+
+    public void setVDFragment(VD_frg vd) {
+        this.VD_frg = vd;
     }
+//    static UpdateInvoker ut = new UpdateInvoker();
 
+    public void initAll(){
+        VD_frg.dims.add(new Dim(1, 1.1f));
+        VD_frg.dims.add(new Dim(100, 1.2f));
+        VD_frg.dims.add(new Dim(10000, 1.3f));
+        VD_frg.dims.add(new Dim(1000000, 1.4f));
+        VD_frg.dims.add(new Dim(100000000, 1.5f));
+        VD_frg.dims.add(new Dim(10000000000L, 1.6f));
+    }
 }
-class Production extends Thread{
-    @Override
-    public void run() {
-        while (true){
-        try {
-            sleep(250);
 
-
-
-
-
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }}
-}
+//class CalcThr extends Thread {
+//    @Override
+//    public void run() {
+////        super.run();
+//        //System.out.println("a");
+////        if (vars.VP >= vars.VCl_size){
+//        while (currentThread().isAlive()) {
+//            vars.VCl_size = vars.VCl_size0 * (Math.pow(vars.VCl_cost, vars.VCl));
+//        vars.VP_perCLick_mlt_total=vars.VP_perClick*vars.VP_prestige0_multiplier*vars.VP_extraCP_mlt;//*vars.GAME_TICKSPEED_MULTIPLIER;
+//            if (vars.VP_perCLick_mlt_total==0){
+//                vars.VP_perCLick_mlt_total=1;
+//            }
+//            vars.VP_prestige0_multiplier_new=(vars.VCl/100)*vars.VP_prestige0_mlt+1;
+//
+////            if(vars.VP<=1000000){
+////            vars.VP = new Double(String.format("%.2f", vars.VP + ""));}
+//            if (vars.VP <= 0.1) {
+//                vars.VP = 0;
+//            }
+//            while (vars.VP >= vars.VCl_size) {
+//                vars.VP -= vars.VCl_size;
+//                vars.VCl++;
+//                //vars.VCl_size*=1.1;
+//            }
+////        }
+//
+//        }
+//    }
+//}
+//class FpsCalcThr extends Thread{
+//    float counter;
+//    @Override
+//    public void run() {
+//        while (true){
+//            try {
+//                sleep(1000/vars.FPS);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            counter++;
+//            if (counter>=vars.FPS*(vars.VP_delay+0.5) & !vars.isVPBroken){
+//                vars.VP/=vars.VP_dvn;
+//                counter=0;
+//
+//            }
+//        }
+//    }
+//
+//}
+//class Production extends Thread{
+//    @Override
+//    public void run() {
+//        while (true){
+//        try {
+//            sleep(250);
+//
+//
+//
+//
+//
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }}
+//}
 //class UpdateInvoker extends Thread{
 //    @Override
 //    public void run() {

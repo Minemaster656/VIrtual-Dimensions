@@ -34,8 +34,8 @@ public class vars {
     //VP DIMENSIONS
     public static boolean isVPPhaseDestroyed=false;
     public static BigDecimal vBuyMlt=BigDecimal.valueOf(1);
-    public static BigDecimal v_VP;
-    public static BigDecimal v_tickspeed;
+    public static BigDecimal v_VP=BigDecimal.valueOf(0f);
+    public static BigDecimal v_tickspeed=BigDecimal.valueOf(1f);
 
 
 //    public static BigDecimal vDim1_count;
@@ -75,9 +75,9 @@ public class vars {
 //    public static boolean vDim6_isUnlocked;
 
     public static byte v_maxDim=3;
-    public static BigDecimal vCollapse_count;
-    public static BigDecimal vCollapse_mlt;
-    public static BigDecimal vCollapse_price;
+    public static BigDecimal vCollapse_count=BigDecimal.valueOf(0);
+    public static BigDecimal vCollapse_mlt=BigDecimal.valueOf(0);
+    public static BigDecimal vCollapse_price=BigDecimal.valueOf(0);
 
 
 
