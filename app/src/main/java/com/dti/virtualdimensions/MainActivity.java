@@ -1,5 +1,7 @@
 package com.dti.virtualdimensions;
 
+import static java.lang.Thread.currentThread;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -15,15 +17,17 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("CREATED");
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        System.out.println("CREATED!");
         VP_tab = findViewById(R.id.vp_tab_open);
         VD_tab = findViewById(R.id.tab_VD);
         VD_tab.setOnClickListener(v->VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
         VD_tab.setEnabled(false);
-        VD_frg vd = new VD_frg();
+        VDims vd = new VDims();
         calcs = new Calcs();
         calcs.setVDFragment(vd);
 
@@ -39,21 +43,21 @@ public class MainActivity extends AppCompatActivity {
 
 //        Calcs.ut.start();
         Runnable Checks = () -> {
-            while (true) {
-                while (true) {
+
+                while (Thread.currentThread().isAlive()) {
                     //Log.d(TAG, "PRESSED!!!");
                     try {
                         Thread.sleep(Math.round(1000 / vars.FPS));
                         if (vars.isVPPhaseDestroyed){
                             VP_tab.setEnabled(false);
-                            VP_tab.setBackgroundColor(getResources().getColor(R.color.abyss));
+//                            VP_tab.setBackgroundColor(getResources().getColor(R.color.abyss));
                             VD_tab.setEnabled(true);
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-            }
+
         };
         Checks.run();
     }
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new VP_Frg()).commit();
     }
     public void VD_openFrg(){
-        VD_frg vd = new VD_frg();
+        VDims vd = new VDims();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, vd).commit();
 
     }

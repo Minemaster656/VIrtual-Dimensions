@@ -11,11 +11,11 @@ public class Calcs {
 //     FpsCalcThr fct = new FpsCalcThr();
 //     Production prt = new Production();
     long frameDelay = 1000 / vars.FPS;
-    VD_frg VD_frg = null;
+    VDims VDims = null;
     Runnable CalcThr = new Runnable() {
         @Override
         public void run() {
-            while (true) {
+            while (Thread.currentThread().isAlive()) {
                 vars.VCl_size = vars.VCl_size0 * (Math.pow(vars.VCl_cost, vars.VCl));
                 vars.VP_perCLick_mlt_total = vars.VP_perClick * vars.VP_prestige0_multiplier * vars.VP_extraCP_mlt;//*vars.GAME_TICKSPEED_MULTIPLIER;
                 if (vars.VP_perCLick_mlt_total == 0) {
@@ -43,7 +43,7 @@ public class Calcs {
     Runnable FpsCalcThr = new Runnable() {
         @Override
         public void run() {
-            while (true) {
+            while (Thread.currentThread().isAlive()) {
                 try {
                     sleep(1000 / vars.FPS);
                 } catch (InterruptedException e) {
@@ -62,15 +62,15 @@ public class Calcs {
     Runnable Production = new Runnable() {
         @Override
         public void run() {
-            while (true) {
+            while (Thread.currentThread().isAlive()) {
                 try {
                     sleep(250);
-                    vars.v_VP=vars.v_VP.add(VD_frg.dims.get(0).count.multiply(VD_frg.dims.get(0).mlt).multiply(vars.v_tickspeed));
-                    VD_frg.dims.get(0).count = VD_frg.dims.get(0).count.add(VD_frg.dims.get(1).count.multiply(VD_frg.dims.get(1).mlt).multiply(vars.v_tickspeed));
-                    VD_frg.dims.get(1).count = VD_frg.dims.get(1).count.add(VD_frg.dims.get(2).count.multiply(VD_frg.dims.get(2).mlt).multiply(vars.v_tickspeed));
-                    VD_frg.dims.get(2).count = VD_frg.dims.get(2).count.add(VD_frg.dims.get(3).count.multiply(VD_frg.dims.get(3).mlt).multiply(vars.v_tickspeed));
-                    VD_frg.dims.get(3).count = VD_frg.dims.get(3).count.add(VD_frg.dims.get(4).count.multiply(VD_frg.dims.get(4).mlt).multiply(vars.v_tickspeed));
-                    VD_frg.dims.get(4).count = VD_frg.dims.get(4).count.add(VD_frg.dims.get(5).count.multiply(VD_frg.dims.get(5).mlt).multiply(vars.v_tickspeed));
+                    vars.v_VP=vars.v_VP.add(VDims.dims.get(0).count.multiply(VDims.dims.get(0).mlt).multiply(vars.v_tickspeed));
+                    VDims.dims.get(0).count = VDims.dims.get(0).count.add(VDims.dims.get(1).count.multiply(VDims.dims.get(1).mlt).multiply(vars.v_tickspeed));
+                    VDims.dims.get(1).count = VDims.dims.get(1).count.add(VDims.dims.get(2).count.multiply(VDims.dims.get(2).mlt).multiply(vars.v_tickspeed));
+                    VDims.dims.get(2).count = VDims.dims.get(2).count.add(VDims.dims.get(3).count.multiply(VDims.dims.get(3).mlt).multiply(vars.v_tickspeed));
+                    VDims.dims.get(3).count = VDims.dims.get(3).count.add(VDims.dims.get(4).count.multiply(VDims.dims.get(4).mlt).multiply(vars.v_tickspeed));
+                    VDims.dims.get(4).count = VDims.dims.get(4).count.add(VDims.dims.get(5).count.multiply(VDims.dims.get(5).mlt).multiply(vars.v_tickspeed));
 
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -81,18 +81,18 @@ public class Calcs {
     Thread prt = new Thread(Production);
 
 
-    public void setVDFragment(VD_frg vd) {
-        this.VD_frg = vd;
+    public void setVDFragment(VDims vd) {
+        this.VDims = vd;
     }
 //    static UpdateInvoker ut = new UpdateInvoker();
 
     public void initAll(){
-        VD_frg.dims.add(new Dim(1, 1.1f));
-        VD_frg.dims.add(new Dim(100, 1.2f));
-        VD_frg.dims.add(new Dim(10000, 1.3f));
-        VD_frg.dims.add(new Dim(1000000, 1.4f));
-        VD_frg.dims.add(new Dim(100000000, 1.5f));
-        VD_frg.dims.add(new Dim(10000000000L, 1.6f));
+        VDims.dims.add(new Dim(1, 1.1f));
+        VDims.dims.add(new Dim(100, 1.2f));
+        VDims.dims.add(new Dim(10000, 1.3f));
+        VDims.dims.add(new Dim(1000000, 1.4f));
+        VDims.dims.add(new Dim(100000000, 1.5f));
+        VDims.dims.add(new Dim(10000000000L, 1.6f));
     }
 }
 

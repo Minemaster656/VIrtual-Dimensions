@@ -70,7 +70,7 @@ public class VP_Frg extends Fragment {
 
         @SuppressLint("ClickableViewAccessibility")
         Runnable VP_press = () -> {
-            while (true) {
+            while (Thread.currentThread().isAlive()) {
                 while (VPClick_Btn.isPressed()) {
                     //Log.d(TAG, "PRESSED!!!");
                     try {
@@ -182,7 +182,7 @@ public class VP_Frg extends Fragment {
             @Override
             public void run() {
 
-                while (true) {
+                while (Thread.currentThread().isAlive()) {
                     try {
                         Thread.sleep(1000 / vars.FPS);
                         handler.sendEmptyMessage(1);
