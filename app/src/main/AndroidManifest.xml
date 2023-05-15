@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VIrtualDimensions"
-        tools:targetApi="31"
-        android:largeHeap="true"
-        android:isGame="true">
+        tools:targetApi="33">
+<!--        android:largeHeap="false"-->
+<!--        android:isGame="false">-->
         <activity
             android:name=".MainActivity"
             android:exported="true"

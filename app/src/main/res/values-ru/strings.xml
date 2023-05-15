@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Virtual Dimensions</string>
     <string name="VP_tabName">ВЧ</string>
     <string name="VP_clickToGen">Нажмите для создания частицы</string>
     <string name="VPUpgrade_delay">Увеличить время жизни частиц</string>
@@ -20,4 +19,16 @@
     <string name="decrease_VCl_cost">Уменьшить множитель стоимости ВК</string>
     <string name="BREAK_QPHYS_toast">Вы сломали квантовую физику! Поздравляю! Теперь делитель ВЧ отключен. Этап кварков разблокирован.</string>
     <string name="locked_qphys_broken">Заблокировано! Квантовая физика сломана!</string>
+    <string name="VP_toPhase1Button">Сломать закон сохранения энергии ПРЯМО СЕЙЧАС! (Это уничтожит текущую фазу НАВСЕГДА!)</string>
+    <string name="VD_tabName">ВИ</string>
+    <string name="dim1">1е Изм.</string>
+    <string name="dim2">2е Изм.</string>
+    <string name="dim3">3е Изм.</string>
+    <string name="dim4">4е Изм.</string>
+    <string name="dim5">5е Изм.</string>
+    <string name="dim6">6е Изм.</string>
+    <string name="word_buy">купить</string>
+    <string name="word_price">цена</string>
+    <string name="word_count">количество</string>
+    <string name="hello_blank_fragment">.-.</string>
 </resources>
