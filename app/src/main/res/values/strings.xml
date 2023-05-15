@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Virtual Dimensions</string>
     <string name="VP_tabName">VP</string>
-    <string name="VP_clickToGen">Click to create particle</string>
+    <string name="VP_clickToGen">Hold to create particle</string>
     <string name="VPUpgrade_delay">Increase particle lifetime</string>
     <string name="word_cost">cost</string>
     <string name="VPUpgrade_dvn">Decrease divider</string>
@@ -30,4 +30,6 @@
     <string name="word_buy">buy</string>
     <string name="word_price">price</string>
     <string name="word_count">count</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

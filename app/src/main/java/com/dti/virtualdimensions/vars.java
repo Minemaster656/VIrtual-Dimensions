@@ -1,6 +1,7 @@
 package com.dti.virtualdimensions;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class vars {
     static double inf=1.79e308;
@@ -32,10 +33,20 @@ public class vars {
 
 
     //VP DIMENSIONS
-    public static boolean isVPPhaseDestroyed=false;
+    public static boolean isVPPhaseDestroyed=true;
     public static BigDecimal vBuyMlt=BigDecimal.valueOf(1);
-    public static BigDecimal v_VP;
-    public static BigDecimal v_tickspeed;
+    public static BigDecimal v_VP=BigDecimal.valueOf(1);
+    public static BigDecimal v_tickspeed=BigDecimal.valueOf(1);
+    static ArrayList<Dim> dims = new ArrayList<Dim>();
+
+
+
+
+
+
+
+    public static final BigDecimal bd_1 = BigDecimal.valueOf(1);
+    public static final BigDecimal bd_0 = BigDecimal.valueOf(0);
 
 
 //    public static BigDecimal vDim1_count;
@@ -74,10 +85,10 @@ public class vars {
 //    public static BigDecimal vDim6_priceUp=BigDecimal.valueOf(1.6);
 //    public static boolean vDim6_isUnlocked;
 
-    public static byte v_maxDim=3;
-    public static BigDecimal vCollapse_count;
-    public static BigDecimal vCollapse_mlt;
-    public static BigDecimal vCollapse_price;
+//    public static byte v_maxDim=3;
+//    public static BigDecimal vCollapse_count;
+//    public static BigDecimal vCollapse_mlt;
+//    public static BigDecimal vCollapse_price;
 
 
 

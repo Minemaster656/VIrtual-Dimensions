@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -70,7 +68,7 @@ public class VP_Frg extends Fragment {
 
         @SuppressLint("ClickableViewAccessibility")
         Runnable VP_press = () -> {
-            while (true) {
+            while (Thread.currentThread().isAlive()) {
                 while (VPClick_Btn.isPressed()) {
                     //Log.d(TAG, "PRESSED!!!");
                     try {
@@ -106,10 +104,10 @@ public class VP_Frg extends Fragment {
 
             }
         });
-        VCl_costMlt_decrease.setOnClickListener(v->{if(vars.VCl>=vars.VCl_costUp_cost&vars.VCl_cost-0.01>=1){
-            vars.VCl_cost-=0.01;
+        VCl_costMlt_decrease.setOnClickListener(v->{if(vars.VCl>=vars.VCl_costUp_cost&vars.VCl_cost-0.02>=1){
+            vars.VCl_cost-=0.02;
             vars.VCl-=vars.VCl_costUp_cost;
-            vars.VCl_costUp_cost*=10;
+            vars.VCl_costUp_cost*=8;
         }
 
         });
@@ -182,7 +180,7 @@ public class VP_Frg extends Fragment {
             @Override
             public void run() {
 
-                while (true) {
+                while (Thread.currentThread().isAlive()) {
                     try {
                         Thread.sleep(1000 / vars.FPS);
                         handler.sendEmptyMessage(1);
@@ -210,13 +208,14 @@ public class VP_Frg extends Fragment {
         VPCount_Txt.setText(Double.toString(vars.VP));
         VCCount_Txt.setText(Double.toString(vars.VCl));
         counter++;
-        if (vars.isVPBroken){
+        if (!vars.isVPBroken){
             DESTROY_VP.setVisibility(View.INVISIBLE);
             DESTROY_VP.setEnabled(false);
         }
         else{
             DESTROY_VP.setVisibility(View.VISIBLE);
             DESTROY_VP.setEnabled(true);
+            BREAKQPHYS.setHeight(1);
         }
         if (vars.VP_prestige0_multiplier > vars.VP_prestige0_multiplier_new) {
             prestige0_btn.setEnabled(false);
@@ -260,9 +259,11 @@ public class VP_Frg extends Fragment {
         }
         if(vars.VCl>=200&&vars.VP_dvn<=5&&!vars.isVPBroken){
             BREAKQPHYS.setEnabled(true);
+            BREAKQPHYS.setVisibility(View.VISIBLE);
         }
         else{
             BREAKQPHYS.setEnabled(false);
+            BREAKQPHYS.setVisibility(View.INVISIBLE);
         }
         //NORMALIZE ZONE
 

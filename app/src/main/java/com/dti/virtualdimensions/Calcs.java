@@ -1,15 +1,15 @@
 package com.dti.virtualdimensions;
 
 import java.lang.Thread;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 
 public class Calcs {
      CalcThr ct = new CalcThr();
      FpsCalcThr fct = new FpsCalcThr();
      Production prt = new Production();
 
-     VD_frg secondFragment = null;
-    public void setSecondFragment(VD_frg vd) {
+     VD_frg_old secondFragment = null;
+    public void setSecondFragment(VD_frg_old vd) {
         this.secondFragment = vd;
     }
 //    static UpdateInvoker ut = new UpdateInvoker();
@@ -49,7 +49,7 @@ class FpsCalcThr extends Thread{
     float counter;
     @Override
     public void run() {
-        while (true){
+        while (Thread.currentThread().isAlive()){
             try {
                 sleep(1000/vars.FPS);
             } catch (InterruptedException e) {
@@ -68,10 +68,20 @@ class FpsCalcThr extends Thread{
 class Production extends Thread{
     @Override
     public void run() {
-        while (true){
+        while (Thread.currentThread().isAlive()){
         try {
-            sleep(250);
+            sleep(250/vars.FPS);
 
+
+            //dim_MLT
+            for (int i=0; i<6; i++){
+                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10)).add(vars.dims.get(i).realCount.pow(2).divide(BigDecimal.valueOf(vars.FPS)));
+            }
+            //dim_CALCS
+            for (int i=0; i<6; i++){
+                vars.dims.get(i).count=vars.dims.get(i).count.add((vars.dims.get(i+1).count).multiply(vars.dims.get(i+1).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS)));
+            }
+            vars.v_VP=vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS)));
 
 
 

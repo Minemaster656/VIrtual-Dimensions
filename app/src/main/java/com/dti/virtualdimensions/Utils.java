@@ -15,6 +15,20 @@ public class Utils {
         BigDecimal formattedValue = value.setScale(scale, RoundingMode.HALF_UP); // определение количества знаков после запятой
         return formattedValue.toString(); // конвертирование BigDecimal в строку с тремя знаками после запятой
     }
+    public static String bd2txt(BigDecimal value){
+        BigDecimal svalue=value;
+        String result;
+        svalue.setScale(2, RoundingMode.DOWN);
+        if (svalue.compareTo(BigDecimal.valueOf(1E10))>=0){
+            result = String.format("%e", svalue.toString());
+        }
+        else {
+            result = svalue.toString();
+        }
+        result=result.replace("+","");
+        result=result.replace("E","e");
+        return result;
+    }
     public static void FitText(Button button){
         button.post(new Runnable() {
             @Override
