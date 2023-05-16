@@ -16,11 +16,14 @@ public class Utils {
         return formattedValue.toString(); // конвертирование BigDecimal в строку с тремя знаками после запятой
     }
     public static String bd2txt(BigDecimal value){
-        BigDecimal svalue=value;
+        BigDecimal svalue=value.setScale(2, RoundingMode.DOWN);
+//        svalue=value;
         String result;
-        svalue.setScale(2, RoundingMode.DOWN);
+//        svalue.setScale(2, RoundingMode.DOWN);
+//        if (value.compareTo(BigDecimal.valueOf(1E-7))<0&value.compareTo(BigDecimal.valueOf(-1E-7))>0) return "0";
         if (svalue.compareTo(BigDecimal.valueOf(1E10))>=0){
-            result = String.format("%e", svalue.toString());
+//            result = String.format("%e", svalue.toString());
+            result = String.format("%e", svalue);
         }
         else {
             result = svalue.toString();

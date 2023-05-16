@@ -32,6 +32,9 @@ public class VDims extends Fragment {
     TextView[] dimMltsTxts=new TextView[6];
 
     Map<String, String> rsStr=new HashMap<String, String>();
+    Button max;
+    Button xam;
+    TextView VP_count;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -43,7 +46,9 @@ public class VDims extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initMap(rsStr);
-
+        max=view.findViewById(R.id.max);
+        xam=view.findViewById(R.id.xam);
+        VP_count=view.findViewById(R.id.v_VP_count);
         dimBuyBtns[0] = view.findViewById(R.id.buyDim1);
         dimBuyBtns[1] = view.findViewById(R.id.buyDim2);
         dimBuyBtns[2] = view.findViewById(R.id.buyDim3);
@@ -72,6 +77,16 @@ public class VDims extends Fragment {
                     if (dimBuyBtns[3].isPressed()) vars.dims.get(3).buy();
                     if (dimBuyBtns[4].isPressed()) vars.dims.get(4).buy();
                     if (dimBuyBtns[5].isPressed()) vars.dims.get(5).buy();
+                    if (max.isPressed()) {
+                        for (int i = 0; i < 6; i++) {
+                            vars.dims.get(i).buy();
+                        }
+                    }
+                    if (xam.isPressed()) {
+                        for (int i = 5; i >= 0; i--) {
+                            vars.dims.get(i).buy();
+                        }
+                    }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -103,6 +118,7 @@ public class VDims extends Fragment {
             dimCountTxts[i].setText(Utils.bd2txt(vars.dims.get(i).count));
             dimMltsTxts[i].setText(Utils.bd2txt(vars.dims.get(i).mlt));
         }
+        VP_count.setText(Utils.bd2txt(vars.v_VP));
     }
     private String getStr(int id) {
         return getResources().getString(id);

@@ -75,7 +75,7 @@ class Production extends Thread{
 
             //dim_MLT
             for (int i=0; i<6; i++){
-                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10)).add(vars.dims.get(i).realCount.pow(2).divide(BigDecimal.valueOf(vars.FPS)));
+                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10)).add(vars.dims.get(i).realCount.pow(2).divide(BigDecimal.valueOf(vars.FPS))).add(BigDecimal.valueOf(1));
             }
             //dim_CALCS
             for (int i=0; i<6; i++){

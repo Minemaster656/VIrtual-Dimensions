@@ -432,4 +432,32 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:layout_constraintEnd_toStartOf="@id/xam"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/max"
+                android:text="@string/max"
+                android:textSize="9.1sp"/>
+            <Button
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/xam"
+                android:text="@string/maxButInverted"
+                android:textSize="9.1sp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>
