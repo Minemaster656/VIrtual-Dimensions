@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         vars.dims.add(new Dim(1, 10f));
-        vars.dims.add(new Dim(100, 1.2f));
-        vars.dims.add(new Dim(10000, 1.3f));
-        vars.dims.add(new Dim(1000000, 1.4f));
-        vars.dims.add(new Dim(100000000, 1.5f));
-        vars.dims.add(new Dim(10000000000L, 1.6f));
+        vars.dims.add(new Dim(100, 50f));
+        vars.dims.add(new Dim(10000, 100f));
+        vars.dims.add(new Dim(1000000, 1E3));
+        vars.dims.add(new Dim(100000000, 1E7));
+        vars.dims.add(new Dim(10000000000L, 1E11));
         vars.dims.add(new Dim(-1L, 1E308));
         setContentView(R.layout.activity_main);
         VP_tab = findViewById(R.id.vp_tab_open);

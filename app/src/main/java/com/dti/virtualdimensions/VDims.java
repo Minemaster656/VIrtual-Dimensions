@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,15 +27,16 @@ import java.util.Map;
 public class VDims extends Fragment {
 
 
+    Button[] dimBuyBtns = new Button[6];
+    TextView[] dimCountTxts = new TextView[6];
+    TextView[] dimMltsTxts = new TextView[6];
 
-    Button[] dimBuyBtns=new Button[6];
-    TextView[] dimCountTxts=new TextView[6];
-    TextView[] dimMltsTxts=new TextView[6];
-
-    Map<String, String> rsStr=new HashMap<String, String>();
+    Map<String, String> rsStr = new HashMap<String, String>();
     Button max;
     Button xam;
     TextView VP_count;
+    TextView tickspeedDisplay;
+    Button buyTickspeed;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -46,9 +48,9 @@ public class VDims extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initMap(rsStr);
-        max=view.findViewById(R.id.max);
-        xam=view.findViewById(R.id.xam);
-        VP_count=view.findViewById(R.id.v_VP_count);
+        max = view.findViewById(R.id.max);
+        xam = view.findViewById(R.id.xam);
+        VP_count = view.findViewById(R.id.v_VP_count);
         dimBuyBtns[0] = view.findViewById(R.id.buyDim1);
         dimBuyBtns[1] = view.findViewById(R.id.buyDim2);
         dimBuyBtns[2] = view.findViewById(R.id.buyDim3);
@@ -67,22 +69,40 @@ public class VDims extends Fragment {
         dimMltsTxts[3] = view.findViewById(R.id.dim4Mlt);
         dimMltsTxts[4] = view.findViewById(R.id.dim5Mlt);
         dimMltsTxts[5] = view.findViewById(R.id.dim6Mlt);
-        Runnable holdChecker = () ->{
-            while (Thread.currentThread().isAlive()){
+        buyTickspeed = view.findViewById(R.id.buyTickspeed);
+        tickspeedDisplay = view.findViewById(R.id.tickspeed);
+        Runnable holdChecker = () -> {
+            while (Thread.currentThread().isAlive()) {
                 try {
-                    Thread.sleep(250);
+                    Thread.sleep(1000/vars.FPS);
                     if (dimBuyBtns[0].isPressed()) vars.dims.get(0).buy();
                     if (dimBuyBtns[1].isPressed()) vars.dims.get(1).buy();
                     if (dimBuyBtns[2].isPressed()) vars.dims.get(2).buy();
                     if (dimBuyBtns[3].isPressed()) vars.dims.get(3).buy();
                     if (dimBuyBtns[4].isPressed()) vars.dims.get(4).buy();
                     if (dimBuyBtns[5].isPressed()) vars.dims.get(5).buy();
+                    if (buyTickspeed.isPressed())
+                        if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
+                            vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
+                            vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));
+                            vars.v_tickspeedBought = vars.v_tickspeedBought.add(BigDecimal.valueOf(1));
+                        }
                     if (max.isPressed()) {
                         for (int i = 0; i < 6; i++) {
                             vars.dims.get(i).buy();
                         }
+                        if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
+                            vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
+                            vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));
+                            vars.v_tickspeedBought = vars.v_tickspeedBought.add(BigDecimal.valueOf(1));
+                        }
                     }
                     if (xam.isPressed()) {
+                        if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
+                            vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
+                            vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));
+                            vars.v_tickspeedBought = vars.v_tickspeedBought.add(BigDecimal.valueOf(1));
+                        }
                         for (int i = 5; i >= 0; i--) {
                             vars.dims.get(i).buy();
                         }
@@ -112,22 +132,29 @@ public class VDims extends Fragment {
         Thread thread = new Thread(runnable);
         thread.start();
     }
-    public void Update_UI(){
+
+    public void Update_UI() {
         for (int i = 0; i < 6; i++) {
-            dimBuyBtns[i].setText(rsStr.get("word_buy")+"\n"+rsStr.get("word_price")+": \n"+Utils.bd2txt(vars.dims.get(i).price));
+            dimBuyBtns[i].setText(rsStr.get("word_buy") + "\n" + rsStr.get("word_price") + ": \n" + Utils.bd2txt(vars.dims.get(i).price));
             dimCountTxts[i].setText(Utils.bd2txt(vars.dims.get(i).count));
             dimMltsTxts[i].setText(Utils.bd2txt(vars.dims.get(i).mlt));
         }
         VP_count.setText(Utils.bd2txt(vars.v_VP));
+        tickspeedDisplay.setText(""+rsStr.get("tickspeed")+": "+Utils.bd2txt(vars.v_tickspeed));
+        buyTickspeed.setText(rsStr.get("word_buy")+"! "+rsStr.get("word_price")+":\n"+Utils.bd2txt(vars.v_tickspeedPrice));
     }
+
     private String getStr(int id) {
         return getResources().getString(id);
     }
-    public void initMap(Map m){
+
+    public void initMap(Map m) {
         m.put("word_price", getStr(R.string.word_price));
         m.put("word_buy", getStr(R.string.word_buy));
+        m.put("tickspeed", getStr(R.string.tickspeed));
     }
-//    public VDims() {
+
+    //    public VDims() {
 //        super(R.layout.virtual_dimensions);
 //    }
     @Override
@@ -137,9 +164,6 @@ public class VDims extends Fragment {
         return inflater.inflate(R.layout.virtual_dimensions, container, false);
 
     }
-
-
-
 
 
 //    // TODO: Rename parameter arguments, choose names that match

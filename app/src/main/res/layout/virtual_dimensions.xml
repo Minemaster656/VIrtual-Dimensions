@@ -34,6 +34,7 @@
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <TextView
                 android:id="@+id/v_VP_count"
                 android:layout_width="match_parent"
@@ -50,6 +51,47 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:layout_width="match_parent"
+                android:id="@+id/tickspeedDisplay"
+                android:layout_height="43dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="10dp"
+
+                android:background="@color/tickspeedBG"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_VP_count"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintStart_toStartOf="@id/tickspeedDisplay"
+                app:layout_constraintEnd_toStartOf="@id/buyTickspeed"
+                app:layout_constraintBottom_toBottomOf="@id/tickspeedDisplay"
+                app:layout_constraintTop_toTopOf="@id/tickspeedDisplay"
+                android:gravity="center"
+                android:text="tickspeed"
+                android:id="@+id/tickspeed"
+                />
+            <Button
+                android:id="@+id/buyTickspeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/buttonBackground_VP"
+                android:text="BUY!"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tickspeedDisplay"
+                app:layout_constraintEnd_toEndOf="@id/tickspeedDisplay"
+                app:layout_constraintTop_toTopOf="@id/tickspeedDisplay" />
 
             <View
                 android:id="@+id/dimBackground1"
@@ -58,11 +100,11 @@
                 android:layout_marginLeft="16dp"
 
                 android:layout_marginRight="16dp"
-
+                android:layout_marginTop="10dp"
                 android:background="@color/dim0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_VP_count"
+                app:layout_constraintTop_toBottomOf="@id/tickspeedDisplay"
 
                 />
 
@@ -428,6 +470,19 @@
                 app:layout_constraintStart_toStartOf="@id/dimBackground6"
                 app:layout_constraintTop_toBottomOf="@id/dim6Name" />
             <!--            DIM BORDER-->
+<!--            <Button-->
+<!--                android:id="@+id/Collapse"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:backgroundTint="@color/buttonBackground_VP"-->
+<!--                android:text="BUY!"-->
+<!--                android:textSize="10dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/dimBackground6"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/dimBackground6"-->
+<!--                app:layout_constraintTop_toTopOf="@id/dimBackground6" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

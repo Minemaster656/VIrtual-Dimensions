@@ -72,10 +72,10 @@ class Production extends Thread{
         try {
             sleep(250/vars.FPS);
 
-
+            vars.v_tickspeed=vars.v_tickspeedBought.divide(BigDecimal.valueOf(10)).add(BigDecimal.valueOf(1));
             //dim_MLT
             for (int i=0; i<6; i++){
-                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10)).add(vars.dims.get(i).realCount.pow(2).divide(BigDecimal.valueOf(vars.FPS))).add(BigDecimal.valueOf(1));
+                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10)).add(vars.dims.get(i).realCount.pow(3).divide(BigDecimal.valueOf(vars.FPS))).add(BigDecimal.valueOf(1));
             }
             //dim_CALCS
             for (int i=0; i<6; i++){

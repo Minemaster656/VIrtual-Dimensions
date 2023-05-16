@@ -37,6 +37,10 @@ public class vars {
     public static BigDecimal vBuyMlt=BigDecimal.valueOf(1);
     public static BigDecimal v_VP=BigDecimal.valueOf(1);
     public static BigDecimal v_tickspeed=BigDecimal.valueOf(1);
+    public static BigDecimal v_tickspeedBought=BigDecimal.valueOf(0);
+    public static BigDecimal v_tickspeedPrice=BigDecimal.valueOf(1000);
+
+
     static ArrayList<Dim> dims = new ArrayList<Dim>();
 
 
