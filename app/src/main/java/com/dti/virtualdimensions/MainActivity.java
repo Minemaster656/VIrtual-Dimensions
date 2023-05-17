@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button VP_tab ;
     Button VD_tab;
     Button SAVE;
+    Button tutorial_tab;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         SAVE=findViewById(R.id.SAVE);
         VD_tab.setOnClickListener(v->VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
+        tutorial_tab=findViewById(R.id.tutorial_tab);
         VD_tab.setEnabled(false);
         calcs = new Calcs();
 //        saveData();
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             saveT.start();
             Toast.makeText(this, getResources().getText(R.string.gameSaved), Toast.LENGTH_LONG).show();
         });
+        tutorial_tab.setOnClickListener(v->getSupportFragmentManager().beginTransaction().replace(R.id.container, new tutorial()).commit());
 //        Calcs.ut.start();
         Runnable Checks = () -> {
 

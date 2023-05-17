@@ -23,4 +23,5 @@
     <color name="VP_textColor">#002506</color>
     <color name="buttonBackground_VP">#292929</color>
     <color name="buttonBorder_VP">#8BC34A</color>
+    <color name="tt_bg">#9FFF9800</color>
 </resources>

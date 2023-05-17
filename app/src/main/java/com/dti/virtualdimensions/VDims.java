@@ -37,6 +37,7 @@ public class VDims extends Fragment {
     TextView VP_count;
     TextView tickspeedDisplay;
     Button buyTickspeed;
+    Button collapse;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {

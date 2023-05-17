@@ -35,6 +35,8 @@
     <string name="tickspeed">tickspeed</string>
     <string name="gameSaved">Game saved!</string>
     <string name="SAVE">save</string>
+
+    <string name="tt_phase0">At the beginning of the game you have access to only 1 tab besides training - phase 0. You have the number of virtual particles (top left corner) and the number of virtual clusters (top right corner). Clusters are obtained from particles, and the next cluster has a markup of *1.1. \nYou have a big cyan button on the left. Clicking it will give you particles. The button on the right is an increase in force for clusters. Below the 2 buttons - increase the duration of the particles and the divider. When the time expires, the particles are divided by the divider. Even lower is the Prestige button (red button) and to the right of it is the prestige multiplier. Prestige restarts the game from the beginning, but gives a cluster-based bonus. Still below are 2 buttons, the Push Strength Multiplier (left) and the Cluster Markup Reduction (right). \nNext, after getting 200 clusters and reducing the divider to 5, you will unlock a new enhancement, Quantum Physics Breakdown. After buying it the particles will stop disappearing, and you will also get another button - to break the law of conservation of energy. It will block access to this stage of the game, but will give access to the rest.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
