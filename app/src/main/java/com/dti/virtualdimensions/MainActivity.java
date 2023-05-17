@@ -1,5 +1,7 @@
 package com.dti.virtualdimensions;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Runnable load=()->{
+
             loadData();
         };
         vars.dims.add(new Dim(1, 10f));
@@ -43,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         vars.dims.add(new Dim(100000000, 1E7));
         vars.dims.add(new Dim(10000000000L, 1E11));
         vars.dims.add(new Dim(-1L, 1E308));
+//        for (int i = 0; i < 7; i++) {
+//            vars.dims.get(i).update();
+//        }
         Thread loadT = new Thread(load);
         loadT.start();
         setContentView(R.layout.activity_main);
@@ -148,7 +155,11 @@ public class MainActivity extends AppCompatActivity {
 //            fos.write("\n".getBytes());
 //            fos.write("eee".getBytes());
             fos.write("SAVEFILE#".getBytes());
-            fos.write(String.valueOf(vars.isVPPhaseDestroyed).getBytes());
+            fos.write((String.valueOf(vars.isVPPhaseDestroyed)+"#").getBytes());
+            for (int i = 0; i < 7; i++) {
+//                vars.dims.get(i).update();
+                fos.write((vars.dims.get(i).toString()+"#").getBytes());
+            }
 //            Toast.makeText(this, getResources().getText(R.string.gameSaved), Toast.LENGTH_SHORT).show();
         }
         catch(IOException ex) {
@@ -176,11 +187,34 @@ public class MainActivity extends AppCompatActivity {
             String text = new String (bytes);
             //Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             String[] data = text.split("#");
-            vars.isVPPhaseDestroyed=Boolean.getBoolean(data[1]);
             for (int i = 0; i < data.length; i++) {
                 System.out.println(data[i]);
             }
-            System.out.println("vars.isVPPhaseDestroyed: "+vars.isVPPhaseDestroyed);
+            if (data[0].equals("SAVEFILE")) {
+                vars.isVPPhaseDestroyed = Boolean.parseBoolean(data[1]);
+                vars.dims.set(0, Dim.fromString(data[2]));
+                vars.dims.set(1, Dim.fromString(data[3]));
+                vars.dims.set(2, Dim.fromString(data[4]));
+                vars.dims.set(3, Dim.fromString(data[5]));
+                vars.dims.set(4, Dim.fromString(data[6]));
+                vars.dims.set(5, Dim.fromString(data[7]));
+                vars.dims.set(6, Dim.fromString(data[8]));
+//            for (int i = 2; i < 9; i++) {
+//                vars.dims.set(i-2, Dim.fromString(data[i]));
+////                vars.dims.get(i-2).update();
+//            }}
+
+            }
+            else{
+                saveData();
+                Log.w(TAG, "loadData: NO DATA!");
+                System.out.println("data[0]: "+data[0]);
+            }
+
+//            for (int i = 0; i < data.length; i++) {
+//                System.out.println(data[i]);
+//            }
+//            System.out.println("vars.isVPPhaseDestroyed: "+vars.isVPPhaseDestroyed);
 
         }
         catch(IOException ex) {
@@ -189,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (ArrayIndexOutOfBoundsException ae){
             saveData();
-            loadData();
+//            loadData();
         }
         finally{
 

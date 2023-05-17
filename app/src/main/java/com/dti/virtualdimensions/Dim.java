@@ -1,6 +1,9 @@
 package com.dti.virtualdimensions;
 
+import androidx.annotation.NonNull;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Dim {
@@ -15,6 +18,7 @@ public class Dim {
         this.mlt=mlt;
         this.priceUp=BigDecimal.valueOf(priceUp);
         this.realCount=BigDecimal.valueOf(0);
+
     }
     public Dim(BigDecimal count, BigDecimal realCount, BigDecimal price, BigDecimal mlt, BigDecimal priceUp){
         this.count=count;
@@ -38,7 +42,31 @@ public class Dim {
             this.realCount=this.realCount.add(vars.vBuyMlt);
         }
     }
+    public void update(){
+        this.count=this.count.setScale(10, RoundingMode.DOWN);
+        this.realCount=this.realCount.setScale(10, RoundingMode.DOWN);
+        this.price=this.price.setScale(10, RoundingMode.DOWN);
+        this.mlt=this.mlt.setScale(10, RoundingMode.DOWN);
+        this.priceUp=this.priceUp.setScale(10, RoundingMode.DOWN);
+        if (this.count.compareTo(BigDecimal.valueOf(0.0001))<0){
+            this.count=BigDecimal.valueOf(0);
+        }
+        if (this.realCount.compareTo(BigDecimal.valueOf(0.0001))<0){
+            this.realCount=BigDecimal.valueOf(0);
+        }
+        if (this.price.compareTo(BigDecimal.valueOf(0.0001))<0){
+            this.price=BigDecimal.valueOf(0);
+        }
+        if (this.priceUp.compareTo(BigDecimal.valueOf(0.0001))<0){
+            this.priceUp=BigDecimal.valueOf(0);
+        }
+        if (this.mlt.compareTo(BigDecimal.valueOf(0.0001))<0){
+            this.mlt=BigDecimal.valueOf(0);
+        }
+    }
+    @NonNull
     public String toString(){
+        this.update();
         return ":"+this.count.toString()+"_"+this.realCount.toString()+"_"+this.price.toString()+"_"+this.mlt.toString()+"_"+this.priceUp.toString()+":";
     }
     public static Dim fromString(String str){

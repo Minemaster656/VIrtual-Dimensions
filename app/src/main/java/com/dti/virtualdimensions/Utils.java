@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Utils {
@@ -31,6 +33,9 @@ public class Utils {
         result=result.replace("+","");
         result=result.replace("E","e");
         return result;
+//        NumberFormat formatter = new DecimalFormat("0.0E0");
+//        formatter.setMinimumFractionDigits(2);
+//        return formatter.format(value);
     }
     public static void FitText(Button button){
         button.post(new Runnable() {

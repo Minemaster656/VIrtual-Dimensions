@@ -33,7 +33,7 @@ public class vars {
 
 
     //VP DIMENSIONS
-    public static boolean isVPPhaseDestroyed=false;
+    public static volatile boolean isVPPhaseDestroyed=false;
     public static BigDecimal vBuyMlt=BigDecimal.valueOf(1);
     public static BigDecimal v_VP=BigDecimal.valueOf(1);
     public static BigDecimal v_tickspeed=BigDecimal.valueOf(1);
