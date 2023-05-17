@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -151,16 +152,16 @@ public class MainActivity extends AppCompatActivity {
 
 
             fos = openFileOutput(SAVEfNAME, MODE_PRIVATE);
-//            fos.write("aaa".getBytes());
-//            fos.write("\n".getBytes());
-//            fos.write("eee".getBytes());
             fos.write("SAVEFILE#".getBytes());
             fos.write((String.valueOf(vars.isVPPhaseDestroyed)+"#").getBytes());
             for (int i = 0; i < 7; i++) {
 //                vars.dims.get(i).update();
                 fos.write((vars.dims.get(i).toString()+"#").getBytes());
             }
-//            Toast.makeText(this, getResources().getText(R.string.gameSaved), Toast.LENGTH_SHORT).show();
+            fos.write((vars.v_VP.toString()+"#").getBytes());
+            fos.write((vars.v_tickspeed.toString()+"#").getBytes());
+            fos.write((vars.v_tickspeedBought.toString()+"#").getBytes());
+            fos.write((vars.v_tickspeedPrice.toString()+"#").getBytes());
         }
         catch(IOException ex) {
 
@@ -185,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
             byte[] bytes = new byte[fin.available()];
             fin.read(bytes);
             String text = new String (bytes);
-            //Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             String[] data = text.split("#");
             for (int i = 0; i < data.length; i++) {
                 System.out.println(data[i]);
@@ -199,27 +199,20 @@ public class MainActivity extends AppCompatActivity {
                 vars.dims.set(4, Dim.fromString(data[6]));
                 vars.dims.set(5, Dim.fromString(data[7]));
                 vars.dims.set(6, Dim.fromString(data[8]));
-//            for (int i = 2; i < 9; i++) {
-//                vars.dims.set(i-2, Dim.fromString(data[i]));
-////                vars.dims.get(i-2).update();
-//            }}
-
+                vars.v_VP= new BigDecimal(data[9]);
+                vars.v_tickspeed=new BigDecimal(data[10]);
+                vars.v_tickspeedBought=new BigDecimal(data[11]);
+                vars.v_tickspeedPrice=new BigDecimal(data[12]);
             }
             else{
                 saveData();
                 Log.w(TAG, "loadData: NO DATA!");
                 System.out.println("data[0]: "+data[0]);
             }
-
-//            for (int i = 0; i < data.length; i++) {
-//                System.out.println(data[i]);
-//            }
-//            System.out.println("vars.isVPPhaseDestroyed: "+vars.isVPPhaseDestroyed);
-
         }
         catch(IOException ex) {
-
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            saveData();
+//            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         catch (ArrayIndexOutOfBoundsException ae){
             saveData();
