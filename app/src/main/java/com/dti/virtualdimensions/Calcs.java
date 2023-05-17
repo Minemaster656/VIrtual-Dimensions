@@ -2,8 +2,11 @@ package com.dti.virtualdimensions;
 
 import java.lang.Thread;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class Calcs {
+    public MathContext mc = new MathContext(5, RoundingMode.DOWN);
      CalcThr ct = new CalcThr();
      FpsCalcThr fct = new FpsCalcThr();
      Production prt = new Production();
@@ -66,22 +69,23 @@ class FpsCalcThr extends Thread{
 
 }
 class Production extends Thread{
+    public MathContext mc = new MathContext(5, RoundingMode.DOWN);
     @Override
     public void run() {
         while (Thread.currentThread().isAlive()){
         try {
             sleep(250/vars.FPS);
 
-            vars.v_tickspeed=vars.v_tickspeedBought.divide(BigDecimal.valueOf(10)).add(BigDecimal.valueOf(1));
+            vars.v_tickspeed=vars.v_tickspeedBought.divide(BigDecimal.valueOf(10), mc).add(BigDecimal.valueOf(1));
             //dim_MLT
             for (int i=0; i<6; i++){
-                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10)).add(vars.dims.get(i).realCount.pow(3).divide(BigDecimal.valueOf(vars.FPS))).add(BigDecimal.valueOf(1));
+                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10), mc).add(vars.dims.get(i).realCount.pow(3).divide(BigDecimal.valueOf(vars.FPS), mc)).add(BigDecimal.valueOf(1));
             }
             //dim_CALCS
             for (int i=0; i<6; i++){
-                vars.dims.get(i).count=vars.dims.get(i).count.add((vars.dims.get(i+1).count).multiply(vars.dims.get(i+1).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS)));
+                vars.dims.get(i).count=vars.dims.get(i).count.add((vars.dims.get(i+1).count).multiply(vars.dims.get(i+1).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS), mc));
             }
-            vars.v_VP=vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS)));
+            vars.v_VP=vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS), mc));
 
 
 

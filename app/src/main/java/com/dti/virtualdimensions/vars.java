@@ -8,7 +8,7 @@ public class vars {
     static double GAME_TICKSPEED=0.1;
     public static double GAME_TICKSPEED_MULTIPLIER=1;
     static double VP = 1; //Double.parseDouble("1000"); //в.ч.
-    static double VCl; //в.к.
+    static double VCl=500; //в.к.
     static double VCl_size = 10; static double VCl_size0 = 10;  double VCl_size0_default = 10; static double VCl_cost=1.1;  static double VCl_costUp_cost=10;//стоимость кластера, стоимость по умолчанию
     static double VP_delay = 1;  double VP_delay_default = 1; //задержка исчезновения (секунды)
     static double VP_delayUpd_cost = 1;  double VP_delayUpd_cost_default = 1;//стоимость апгрейда ⬆
@@ -21,7 +21,7 @@ public class vars {
 //    static double UP_perCLick_upMod=2;
 //    static double VCl_max = inf; //максимум кластеров в.ч.
     static boolean isVPBroken; //квантоваяФизика.сломать();
-    static int FPS = 40; //~~50~~
+    static int FPS = 30; //~~50~~
     static double VP_perCLick_mlt_total=1;
     static double VP_prestige0_multiplier=1;
     static double VP_prestige0_multiplier_new=1;
@@ -33,7 +33,7 @@ public class vars {
 
 
     //VP DIMENSIONS
-    public static boolean isVPPhaseDestroyed=true;
+    public static boolean isVPPhaseDestroyed=false;
     public static BigDecimal vBuyMlt=BigDecimal.valueOf(1);
     public static BigDecimal v_VP=BigDecimal.valueOf(1);
     public static BigDecimal v_tickspeed=BigDecimal.valueOf(1);
