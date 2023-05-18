@@ -61,9 +61,19 @@
         android:textSize="10.5sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/tab_VD"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/settingsTab"
         android:text="📖"
         />
+
+    <Button
+        android:id="@+id/settingsTab"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="🔧"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tutorial_tab" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

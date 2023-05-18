@@ -26,14 +26,17 @@ public class MainActivity extends AppCompatActivity {
     Button VD_tab;
     Button SAVE;
     Button tutorial_tab;
+    Button settingsTab;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
             UpdateUI();
         }
     };
+
     int counter;
     public static final String SAVEfNAME = "save.txt";
+//    @SuppressLint("MissingInflatedId")
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         VP_tab = findViewById(R.id.vp_tab_open);
         VD_tab = findViewById(R.id.tab_VD);
+        settingsTab=findViewById(R.id.settingsTab);
         SAVE=findViewById(R.id.SAVE);
         VD_tab.setOnClickListener(v->VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
+
+        settingsTab.setOnClickListener(v->getSupportFragmentManager().beginTransaction().replace(R.id.container, new settings()).commit());
         tutorial_tab=findViewById(R.id.tutorial_tab);
         VD_tab.setEnabled(false);
         calcs = new Calcs();
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         Thread.sleep(Math.round(1000 / vars.FPS));
                         handler.sendEmptyMessage(1);
                         counter++;
-                        if (counter>=vars.FPS*30){
+                        if (counter>=vars.FPS*30&vars.doSave){
                             counter=0;
                             Runnable save=()->{
                                 saveData();
@@ -115,21 +121,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         super.onDestroy();
+        if (vars.doSave){
         Runnable save=()->{
             saveData();
         };
         Thread saveT = new Thread(save);
-        saveT.start();
+        saveT.start();}
     }
     @Override
     protected void onStop() {
 
         super.onStop();
+        if (vars.doSave){
         Runnable save=()->{
             saveData();
         };
         Thread saveT = new Thread(save);
-        saveT.start();
+        saveT.start();}
     }
     public void UpdateUI(){
         if (vars.isVPPhaseDestroyed){
@@ -165,10 +173,15 @@ public class MainActivity extends AppCompatActivity {
             fos.write((vars.v_tickspeed.toString()+"#").getBytes());
             fos.write((vars.v_tickspeedBought.toString()+"#").getBytes());
             fos.write((vars.v_tickspeedPrice.toString()+"#").getBytes());
+            fos.write((vars.vCollapse_count.toString()+"#").getBytes());
+            fos.write((vars.vCollapse_mlt.toString()+"#").getBytes());
+            fos.write((vars.vCollapse_price.toString()+"#").getBytes());
+            fos.write((vars.vCollapse_priceMlt.toString()+"#").getBytes());
+            fos.write((vars.vCollapse_priceMltMlt.toString()+"#").getBytes());
         }
         catch(IOException ex) {
 
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
         finally{
             try{
@@ -177,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
             catch(IOException ex){
 
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -206,6 +219,11 @@ public class MainActivity extends AppCompatActivity {
                 vars.v_tickspeed=new BigDecimal(data[10]);
                 vars.v_tickspeedBought=new BigDecimal(data[11]);
                 vars.v_tickspeedPrice=new BigDecimal(data[12]);
+                vars.vCollapse_count=new BigDecimal(data[13]);
+                vars.vCollapse_mlt=new BigDecimal(data[14]);
+                vars.vCollapse_price=new BigDecimal(data[15]);
+                vars.vCollapse_priceMlt=new BigDecimal(data[16]);
+                vars.vCollapse_priceMltMlt=new BigDecimal(data[17]);
             }
             else{
                 saveData();
@@ -233,5 +251,31 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+    public void DELETE_SAVE(){
+        FileOutputStream fos = null;
+
+        try {
+            fos = openFileOutput(SAVEfNAME, MODE_PRIVATE);
+            fos.write("SAVE FILE DELETED!#".getBytes());
+        }
+        catch(IOException ex) {
+
+            //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        finally{
+            try{
+                if(fos!=null)
+                    fos.close();
+            }
+            catch(IOException ex){
+
+                //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
 }

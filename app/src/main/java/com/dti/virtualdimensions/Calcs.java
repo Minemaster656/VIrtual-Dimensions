@@ -75,11 +75,17 @@ class Production extends Thread{
         while (Thread.currentThread().isAlive()){
         try {
             sleep(250/vars.FPS);
-
+            BigDecimal collapseMlt;
+            if (vars.vCollapse_count.compareTo(BigDecimal.valueOf(0))<=0){
+                collapseMlt=BigDecimal.valueOf(1);
+            }
+            else {
+                collapseMlt=vars.vCollapse_count.multiply(vars.vCollapse_mlt);
+            }
             vars.v_tickspeed=vars.v_tickspeedBought.divide(BigDecimal.valueOf(10), mc).add(BigDecimal.valueOf(1));
             //dim_MLT
             for (int i=0; i<6; i++){
-                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10), mc).add(vars.dims.get(i).realCount.pow(3).divide(BigDecimal.valueOf(vars.FPS), mc)).add(BigDecimal.valueOf(1));
+                vars.dims.get(i).mlt=vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10), mc).multiply(collapseMlt).add(vars.dims.get(i).realCount.pow(3).divide(BigDecimal.valueOf(vars.FPS), mc)).add(BigDecimal.valueOf(1));
             }
             //dim_CALCS
             for (int i=0; i<6; i++){

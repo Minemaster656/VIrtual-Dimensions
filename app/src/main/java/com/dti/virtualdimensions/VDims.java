@@ -72,10 +72,11 @@ public class VDims extends Fragment {
         dimMltsTxts[5] = view.findViewById(R.id.dim6Mlt);
         buyTickspeed = view.findViewById(R.id.buyTickspeed);
         tickspeedDisplay = view.findViewById(R.id.tickspeed);
+        collapse = view.findViewById(R.id.Collapse);
         Runnable holdChecker = () -> {
             while (Thread.currentThread().isAlive()) {
                 try {
-                    Thread.sleep(1000/vars.FPS);
+                    Thread.sleep(1000 / vars.FPS);
                     if (dimBuyBtns[0].isPressed()) vars.dims.get(0).buy();
                     if (dimBuyBtns[1].isPressed()) vars.dims.get(1).buy();
                     if (dimBuyBtns[2].isPressed()) vars.dims.get(2).buy();
@@ -106,6 +107,15 @@ public class VDims extends Fragment {
                         }
                         for (int i = 5; i >= 0; i--) {
                             vars.dims.get(i).buy();
+                        }
+                    }
+                    if (collapse.isPressed()){
+                        if (vars.vCollapse_price.compareTo(vars.v_VP)<=0){
+                            vars.v_VP=vars.v_VP.subtract(vars.vCollapse_price);
+                            vars.vCollapse_count=vars.vCollapse_count.add(BigDecimal.valueOf(1));
+                            vars.vCollapse_price=vars.vCollapse_price.multiply(vars.vCollapse_priceMlt);
+                            vars.vCollapse_priceMlt=vars.vCollapse_priceMlt.multiply(vars.vCollapse_priceMltMlt);
+                            vars.RESET_VDims();
                         }
                     }
                 } catch (InterruptedException e) {
@@ -141,8 +151,8 @@ public class VDims extends Fragment {
             dimMltsTxts[i].setText(Utils.bd2txt(vars.dims.get(i).mlt));
         }
         VP_count.setText(Utils.bd2txt(vars.v_VP));
-        tickspeedDisplay.setText(""+rsStr.get("tickspeed")+": "+Utils.bd2txt(vars.v_tickspeed));
-        buyTickspeed.setText(rsStr.get("word_buy")+"! "+rsStr.get("word_price")+":\n"+Utils.bd2txt(vars.v_tickspeedPrice));
+        tickspeedDisplay.setText("" + rsStr.get("tickspeed") + ": " + Utils.bd2txt(vars.v_tickspeed));
+        buyTickspeed.setText(rsStr.get("word_buy") + "! " + rsStr.get("word_price") + ":\n" + Utils.bd2txt(vars.v_tickspeedPrice));
     }
 
     private String getStr(int id) {
