@@ -38,6 +38,7 @@ public class VDims extends Fragment {
     TextView tickspeedDisplay;
     Button buyTickspeed;
     Button collapse;
+    Button Annihilate;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -73,6 +74,7 @@ public class VDims extends Fragment {
         buyTickspeed = view.findViewById(R.id.buyTickspeed);
         tickspeedDisplay = view.findViewById(R.id.tickspeed);
         collapse = view.findViewById(R.id.Collapse);
+        Annihilate=view.findViewById(R.id.Annihilate);
         Runnable holdChecker = () -> {
             while (Thread.currentThread().isAlive()) {
                 try {
@@ -118,6 +120,10 @@ public class VDims extends Fragment {
                             vars.RESET_VDims();
                         }
                     }
+                    if(Annihilate.isPressed()&vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(0))>0){
+                        vars.quarks=vars.quarks.add(vars.quarksOnAnnihilate);
+                        vars.RESET_ON_ANNIHILATE();
+                    }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -153,6 +159,15 @@ public class VDims extends Fragment {
         VP_count.setText(Utils.bd2txt(vars.v_VP));
         tickspeedDisplay.setText("" + rsStr.get("tickspeed") + ": " + Utils.bd2txt(vars.v_tickspeed));
         buyTickspeed.setText(rsStr.get("word_buy") + "! " + rsStr.get("word_price") + ":\n" + Utils.bd2txt(vars.v_tickspeedPrice));
+//        Annihilate.setText(rsStr.get("annihilate")+" \n"+rsStr.get("word_get")+": "+Utils.bd2txt(vars.quarksOnAnnihilate)+rsStr.get("quarks"));
+        if(vars.q_isUnlocked=false){
+            Annihilate.setEnabled(false);
+            Annihilate.setVisibility(View.GONE);
+        } else if (vars.q_isUnlocked=true&vars.v_VP.compareTo(BigDecimal.valueOf(1E308))>=0) {
+            Annihilate.setEnabled(true);
+            Annihilate.setVisibility(View.VISIBLE);
+        }
+//        collapse.setText();
     }
 
     private String getStr(int id) {
@@ -163,6 +178,12 @@ public class VDims extends Fragment {
         m.put("word_price", getStr(R.string.word_price));
         m.put("word_buy", getStr(R.string.word_buy));
         m.put("tickspeed", getStr(R.string.tickspeed));
+        m.put("word_gain",getStr(R.string.word_gain));
+        m.put("collapse",getStr(R.string.collapse));
+        m.put("collapse_full",getStr(R.string.collapse_full));
+        m.put("annihilate",getStr(R.string.annihilate));
+        m.put("word_get",R.string.word_get);
+        m.put("quarks", R.string.quarks);
     }
 
     //    public VDims() {

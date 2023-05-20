@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="4dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -36,13 +37,15 @@
         />
     <Button
         android:id="@+id/vp_tab_open"
-        android:layout_width="0dp"
+        android:layout_width="48dp"
         android:layout_height="40dp"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/SAVE"
         app:layout_constraintEnd_toStartOf="@id/tab_VD"
         android:text="@string/VP_tabName"
+
+
         />
     <Button
         android:id="@+id/tab_VD"
@@ -51,8 +54,18 @@
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/vp_tab_open"
-        app:layout_constraintEnd_toStartOf="@id/tutorial_tab"
+        app:layout_constraintEnd_toStartOf="@id/tab_quarks"
         android:text="@string/VD_tabName"
+        />
+    <Button
+        android:id="@+id/tab_quarks"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tab_VD"
+        app:layout_constraintEnd_toStartOf="@id/tutorial_tab"
+        android:text="@string/quarks_tab"
         />
     <Button
         android:id="@+id/tutorial_tab"
@@ -60,7 +73,7 @@
         android:layout_height="40dp"
         android:textSize="10.5sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tab_VD"
+        app:layout_constraintStart_toEndOf="@id/tab_quarks"
         app:layout_constraintEnd_toStartOf="@id/settingsTab"
         android:text="📖"
         />

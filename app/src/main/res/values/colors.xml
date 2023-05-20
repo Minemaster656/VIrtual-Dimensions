@@ -24,4 +24,7 @@
     <color name="buttonBackground_VP">#292929</color>
     <color name="buttonBorder_VP">#8BC34A</color>
     <color name="tt_bg">#9FFF9800</color>
+    <color name="quark_btn">#12104E</color>
+    <color name="quark_btn_locked">#1D1832</color>
+    <color name="quark_view_top">#1A123C</color>
 </resources>

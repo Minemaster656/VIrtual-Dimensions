@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".VDims">
 
     <androidx.core.widget.NestedScrollView
@@ -46,39 +46,43 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:gravity="center_horizontal"
                 android:text="VP count"
+                android:textAllCaps="false"
                 android:textColor="@color/VP_textColor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <View
-                android:layout_width="match_parent"
                 android:id="@+id/tickspeedDisplay"
+                android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="32dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="10dp"
 
                 android:background="@color/tickspeedBG"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_VP_count"/>
+                app:layout_constraintTop_toBottomOf="@id/v_VP_count" />
+
             <TextView
+                android:id="@+id/tickspeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintStart_toStartOf="@id/tickspeedDisplay"
-                app:layout_constraintEnd_toStartOf="@id/buyTickspeed"
-                app:layout_constraintBottom_toBottomOf="@id/tickspeedDisplay"
-                app:layout_constraintTop_toTopOf="@id/tickspeedDisplay"
                 android:gravity="center"
                 android:text="tickspeed"
-                android:id="@+id/tickspeed"
-                />
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@id/tickspeedDisplay"
+                app:layout_constraintEnd_toStartOf="@id/buyTickspeed"
+                app:layout_constraintStart_toStartOf="@id/tickspeedDisplay"
+                app:layout_constraintTop_toTopOf="@id/tickspeedDisplay" />
+
             <Button
                 android:id="@+id/buyTickspeed"
                 android:layout_width="wrap_content"
@@ -88,6 +92,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/tickspeedDisplay"
                 app:layout_constraintEnd_toEndOf="@id/tickspeedDisplay"
@@ -99,8 +104,8 @@
                 android:layout_height="43dp"
                 android:layout_marginLeft="16dp"
 
-                android:layout_marginRight="16dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
                 android:background="@color/dim0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +122,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/dimBackground1"
                 app:layout_constraintEnd_toEndOf="@id/dimBackground1"
@@ -130,6 +136,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/dim1"
                 android:text="@string/dim1"
+                android:textAllCaps="false"
                 app:layout_constraintStart_toStartOf="@id/dimBackground1"
                 app:layout_constraintTop_toTopOf="@id/dimBackground1" />
 
@@ -140,6 +147,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim1 mlt"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim1"
                 app:layout_constraintStart_toEndOf="@id/dim1Name"
                 app:layout_constraintTop_toTopOf="@id/dimBackground1" />
@@ -151,6 +159,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="1 dim count"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim1"
                 app:layout_constraintStart_toStartOf="@id/dimBackground1"
                 app:layout_constraintTop_toBottomOf="@id/dim1Name" />
@@ -180,6 +189,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/dimBackground2"
                 app:layout_constraintEnd_toEndOf="@id/dimBackground2"
@@ -193,6 +203,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/dim0"
                 android:text="@string/dim2"
+                android:textAllCaps="false"
                 app:layout_constraintStart_toStartOf="@id/dimBackground2"
                 app:layout_constraintTop_toTopOf="@id/dimBackground2" />
 
@@ -203,6 +214,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim2 mlt"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim2"
                 app:layout_constraintStart_toEndOf="@id/dim2Name"
                 app:layout_constraintTop_toTopOf="@id/dimBackground2" />
@@ -214,6 +226,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="2 dim count"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim2"
                 app:layout_constraintStart_toStartOf="@id/dimBackground2"
                 app:layout_constraintTop_toBottomOf="@id/dim2Name" />
@@ -243,6 +256,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/dimBackground3"
                 app:layout_constraintEnd_toEndOf="@id/dimBackground3"
@@ -256,6 +270,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/dim1"
                 android:text="@string/dim3"
+                android:textAllCaps="false"
                 app:layout_constraintStart_toStartOf="@id/dimBackground3"
                 app:layout_constraintTop_toTopOf="@id/dimBackground3" />
 
@@ -266,6 +281,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim3 mlt"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim3"
                 app:layout_constraintStart_toEndOf="@id/dim3Name"
                 app:layout_constraintTop_toTopOf="@id/dimBackground3" />
@@ -277,6 +293,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="3 dim count"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim3"
                 app:layout_constraintStart_toStartOf="@id/dimBackground3"
                 app:layout_constraintTop_toBottomOf="@id/dim3Name" />
@@ -306,6 +323,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/dimBackground4"
                 app:layout_constraintEnd_toEndOf="@id/dimBackground4"
@@ -319,6 +337,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/dim0"
                 android:text="@string/dim4"
+                android:textAllCaps="false"
                 app:layout_constraintStart_toStartOf="@id/dimBackground4"
                 app:layout_constraintTop_toTopOf="@id/dimBackground4" />
 
@@ -329,6 +348,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim4 mlt"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim4"
                 app:layout_constraintStart_toEndOf="@id/dim4Name"
                 app:layout_constraintTop_toTopOf="@id/dimBackground4" />
@@ -340,6 +360,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="4 dim count"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim4"
                 app:layout_constraintStart_toStartOf="@id/dimBackground4"
                 app:layout_constraintTop_toBottomOf="@id/dim4Name" />
@@ -369,6 +390,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/dimBackground5"
                 app:layout_constraintEnd_toEndOf="@id/dimBackground5"
@@ -382,6 +404,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/dim1"
                 android:text="@string/dim5"
+                android:textAllCaps="false"
                 app:layout_constraintStart_toStartOf="@id/dimBackground5"
                 app:layout_constraintTop_toTopOf="@id/dimBackground5" />
 
@@ -392,6 +415,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim5 mlt"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim5"
                 app:layout_constraintStart_toEndOf="@id/dim5Name"
                 app:layout_constraintTop_toTopOf="@id/dimBackground5" />
@@ -403,6 +427,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="5 dim count"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim5"
                 app:layout_constraintStart_toStartOf="@id/dimBackground5"
                 app:layout_constraintTop_toBottomOf="@id/dim5Name" />
@@ -432,6 +457,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="BUY!"
+                android:textAllCaps="false"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/dimBackground6"
                 app:layout_constraintEnd_toEndOf="@id/dimBackground6"
@@ -445,6 +471,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/dim0"
                 android:text="@string/dim6"
+                android:textAllCaps="false"
                 app:layout_constraintStart_toStartOf="@id/dimBackground6"
                 app:layout_constraintTop_toTopOf="@id/dimBackground6" />
 
@@ -455,6 +482,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="Dim6 mlt"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim6"
                 app:layout_constraintStart_toEndOf="@id/dim6Name"
                 app:layout_constraintTop_toTopOf="@id/dimBackground6" />
@@ -466,6 +494,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:text="6 dim count"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@id/buyDim6"
                 app:layout_constraintStart_toStartOf="@id/dimBackground6"
                 app:layout_constraintTop_toBottomOf="@id/dim6Name" />
@@ -474,43 +503,64 @@
                 android:id="@+id/Collapse"
                 android:layout_width="128dp"
                 android:layout_height="75dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/buttonBackground_VP"
                 android:text="COLLAPSE! (WORK IN PROGRESS)"
+                android:textAllCaps="false"
                 android:textSize="10dp"
-                app:layout_constraintTop_toBottomOf="@id/dimBackground6"
                 app:layout_constraintStart_toStartOf="parent"
-                 />
+                app:layout_constraintTop_toBottomOf="@id/dimBackground6" />
+
+            <Button
+                android:id="@+id/Annihilate"
+                android:layout_width="128dp"
+                android:layout_height="75dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/buttonBackground_VP"
+                android:text="Annihilate this! (WORK IN PROGRESS)"
+                android:textAllCaps="false"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Collapse" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:layout_gravity="bottom">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                app:layout_constraintEnd_toStartOf="@id/xam"
-                android:layout_marginEnd="5dp"
                 android:id="@+id/max"
-                android:text="@string/max"
-                android:textSize="9.1sp"/>
-            <Button
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="5dp"
+                android:text="@string/max"
+                android:textAllCaps="false"
+                android:textSize="9.1sp"
+                app:layout_constraintEnd_toStartOf="@id/xam" />
+
+            <Button
                 android:id="@+id/xam"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="5dp"
                 android:text="@string/maxButInverted"
-                android:textSize="9.1sp"/>
+                android:textAllCaps="false"
+                android:textSize="9.1sp"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

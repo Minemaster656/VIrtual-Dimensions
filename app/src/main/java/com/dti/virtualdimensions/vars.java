@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class vars {
+    public static boolean isDebugBuild=false;
     static double inf = 1.79e308;
     static double GAME_TICKSPEED = 0.1;
     public static double GAME_TICKSPEED_MULTIPLIER = 1;
     static double VP = 1; //Double.parseDouble("1000"); //в.ч.
-    static double VCl = 500; //в.к.
+    static double VCl = 0; //в.к.
     static double VCl_size = 10;
     static double VCl_size0 = 10;
     double VCl_size0_default = 10;
@@ -42,7 +43,7 @@ public class vars {
 
 
     //VP DIMENSIONS
-    public static volatile boolean isVPPhaseDestroyed = false;
+    public static volatile boolean isVPPhaseDestroyed = true;
     public static BigDecimal vBuyMlt = BigDecimal.valueOf(1);
     public static BigDecimal v_VP = BigDecimal.valueOf(1);
     public static BigDecimal v_tickspeed = BigDecimal.valueOf(1);
@@ -62,7 +63,12 @@ public class vars {
     public static BigDecimal vCollapse_price = BigDecimal.valueOf(1E50);
     public static BigDecimal vCollapse_priceMlt = BigDecimal.valueOf(1E50);
     public static BigDecimal vCollapse_priceMltMlt = BigDecimal.valueOf(1E5);
-    public static boolean doSave=true;
+    public static boolean doSave = true;
+    public static BigDecimal quarks = BigDecimal.valueOf(0);
+    public static boolean q_isVoidCleared=false;
+    public static boolean q_isUnlocked=false;
+    public static BigDecimal quarksOnAnnihilate=BigDecimal.valueOf(0);
+    public static boolean[] dimAutoUnlocks= new boolean[6];
 
 
 
@@ -78,6 +84,7 @@ public class vars {
         vars.VP = 0;
     }
 
+
     public static void RESET_VDims() {
         vars.v_VP = BigDecimal.valueOf(1);
         vars.v_tickspeed = BigDecimal.valueOf(1);
@@ -91,6 +98,15 @@ public class vars {
         vars.dims.set(5, new Dim(10000000000L, 1E11));
         vars.dims.set(6, new Dim(-1L, 1E308));
 
+    }
+
+    public static void RESET_ON_ANNIHILATE() {
+        RESET_VDims();
+        vars.vCollapse_count = BigDecimal.valueOf(0);
+        vars.vCollapse_mlt = BigDecimal.valueOf(1.5);
+        vars.vCollapse_price = BigDecimal.valueOf(1E50);
+        vars.vCollapse_priceMlt = BigDecimal.valueOf(1E50);
+        vars.vCollapse_priceMltMlt = BigDecimal.valueOf(1E5);
     }
 
 }
