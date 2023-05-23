@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button tutorial_tab;
     Button settingsTab;
     Button QU_tab;
+    Button extraTab;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -73,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
         QU_tab = findViewById(R.id.tab_quarks);
         settingsTab = findViewById(R.id.settingsTab);
         SAVE = findViewById(R.id.SAVE);
+        extraTab=findViewById(R.id.extra);
         VD_tab.setOnClickListener(v -> VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
-
+        extraTab.setOnClickListener(v->getSupportFragmentManager().beginTransaction().replace(R.id.container, new extraTabs()).commit());
         settingsTab.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.container, new settings()).commit());
         tutorial_tab = findViewById(R.id.tutorial_tab);
         VD_tab.setEnabled(false);
@@ -173,6 +175,11 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(vars.q_isUnlocked);
             }
         }
+        String data_extraTab = vars.findInvoke_FindSender_ReturnData("tab_extra", true);
+        if (data_extraTab!=null){
+        if (data_extraTab.equals("open fragment_auto")){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new Automatics()).commit();
+        }}
     }
 
     public void VP_openFrg() {

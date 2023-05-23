@@ -2,9 +2,11 @@ package com.dti.virtualdimensions;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class vars {
-    public static boolean isDebugBuild=false;
+    public static boolean isDebugBuild = false;
+    public static ArrayList<String> invokes = new ArrayList<String>();
     static double inf = 1.79e308;
     static double GAME_TICKSPEED = 0.1;
     public static double GAME_TICKSPEED_MULTIPLIER = 1;
@@ -65,11 +67,10 @@ public class vars {
     public static BigDecimal vCollapse_priceMltMlt = BigDecimal.valueOf(1E5);
     public static boolean doSave = true;
     public static BigDecimal quarks = BigDecimal.valueOf(0);
-    public static boolean q_isVoidCleared=false;
-    public static boolean q_isUnlocked=false;
-    public static BigDecimal quarksOnAnnihilate=BigDecimal.valueOf(0);
-    public static boolean[] dimAutoUnlocks= new boolean[6];
-
+    public static boolean q_isVoidCleared = false;
+    public static boolean q_isUnlocked = false;
+    public static BigDecimal quarksOnAnnihilate = BigDecimal.valueOf(0);
+    public static boolean[] dimAutoUnlocks = new boolean[6];
 
 
     public static void RESET_VP() {
@@ -109,4 +110,31 @@ public class vars {
         vars.vCollapse_priceMltMlt = BigDecimal.valueOf(1E5);
     }
 
+    public static void invoke(String sender, String recipient, String data) {
+        if (sender.equals("")) {
+            sender = "none";
+        }
+        if (recipient.equals("")) {
+            recipient = "none";
+        }
+        if (data.equals("")) {
+            data = "none";
+        }
+        vars.invokes.add(sender + ":" + recipient + ":" + data);
+    }
+
+    public static String findInvoke_FindSender_ReturnData(String sender, boolean clearInvoke) {
+
+        for (int i = 0; i < vars.invokes.size(); i++) {
+            String invoke = vars.invokes.get(i);
+            String[] invoke_data = invoke.split(":");
+            if (invoke_data[0].equals(sender)) {
+                if (clearInvoke) {
+                    vars.invokes.remove(i);
+                }
+                return invoke_data[2];
+            }
+        }
+        return null;
+    }
 }

@@ -28,4 +28,5 @@
     <color name="quark_btn_locked">#1D1832</color>
     <color name="quark_view_top">#1A123C</color>
     <color name="autoDim">#8FA6FF00</color>
+    <color name="autoSpec">#8FD9FF00</color>
 </resources>

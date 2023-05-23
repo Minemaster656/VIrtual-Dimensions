@@ -10,8 +10,8 @@ android {
         applicationId "com.dti.virtualdimensions"
         minSdk 26
         targetSdk 33
-        versionCode 19
-        versionName "0.3.0 DEV"
+        versionCode 21
+        versionName "0.3.1 DEV"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -46,6 +46,7 @@
     <string name="quarks_tab">Qu</string>
     <string name="annihilate">Annihilate</string>
     <string name="word_get">get</string>
+    <string name="tab_auto">Auto</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

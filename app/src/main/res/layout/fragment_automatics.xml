@@ -173,6 +173,58 @@
                 android:autoSizeTextType="uniform"
                 android:text="placeholder"
                 />
+            <View
+                android:id="@+id/autoTick"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginVertical="32dp"
+                app:layout_constraintTop_toBottomOf="@id/autoDim5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/autoCollapse"
+                android:background="@drawable/round_square"
+                android:backgroundTint="@color/autoSpec"
+                />
+            <TextView
+                android:id="@+id/autoTickb"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/autoTick"
+                app:layout_constraintBottom_toBottomOf="@id/autoTick"
+                app:layout_constraintStart_toStartOf="@id/autoTick"
+                app:layout_constraintEnd_toEndOf="@id/autoTick"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:autoSizeMinTextSize="5sp"
+                android:autoSizeTextType="uniform"
+                android:text="placeholder"
+                />
+            <View
+                android:id="@+id/autoCollapse"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginVertical="32dp"
+                app:layout_constraintTop_toBottomOf="@id/autoDim6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/autoTick"
+                android:background="@drawable/round_square"
+                android:backgroundTint="@color/autoSpec"
+                />
+            <TextView
+                android:id="@+id/autoCollapseb"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/autoCollapse"
+                app:layout_constraintBottom_toBottomOf="@id/autoCollapse"
+                app:layout_constraintStart_toStartOf="@id/autoCollapse"
+                app:layout_constraintEnd_toEndOf="@id/autoCollapse"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:autoSizeMinTextSize="5sp"
+                android:autoSizeTextType="uniform"
+                android:text="placeholder"
+                />
 
 
 
