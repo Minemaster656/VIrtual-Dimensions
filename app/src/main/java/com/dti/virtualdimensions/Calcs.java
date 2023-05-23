@@ -94,12 +94,12 @@ class Production extends Thread {
                     vars.v_tickspeed = vars.v_tickspeedBought.multiply(BigDecimal.valueOf(0.1)).add(BigDecimal.valueOf(1)).add(BigDecimal.valueOf(0.5).multiply(vars.v_tickspeedBought));
                 }
 
-                if (vars.v_VP.compareTo(BigDecimal.valueOf(1.7E+308d)) < 1) {
+                if (vars.v_VP.compareTo(BigDecimal.valueOf(1E100)) < 1) {
                     vars.quarksOnAnnihilate = BigDecimal.valueOf(0);
                 } else {
-                    vars.quarksOnAnnihilate = vars.v_VP.divide(BigDecimal.valueOf(1.7E+308d), mc);
+                    vars.quarksOnAnnihilate = vars.v_VP.divide(BigDecimal.valueOf(1E100), mc);
                 }
-                if (vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(1)) >= 1&vars.v_VP.compareTo(BigDecimal.valueOf(1.7E+308d))>=0) {
+                if (vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(1)) >= 1&vars.v_VP.compareTo(BigDecimal.valueOf(1E100))>=0) {
                     vars.q_isUnlocked = true;
                 }
                 //dim_MLT

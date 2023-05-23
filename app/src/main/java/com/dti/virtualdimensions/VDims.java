@@ -160,10 +160,10 @@ public class VDims extends Fragment {
         tickspeedDisplay.setText("" + rsStr.get("tickspeed") + ": " + Utils.bd2txt(vars.v_tickspeed));
         buyTickspeed.setText(rsStr.get("word_buy") + "! " + rsStr.get("word_price") + ":\n" + Utils.bd2txt(vars.v_tickspeedPrice));
 //        Annihilate.setText(rsStr.get("annihilate")+" \n"+rsStr.get("word_get")+": "+Utils.bd2txt(vars.quarksOnAnnihilate)+rsStr.get("quarks"));
-        if(vars.q_isUnlocked=false){
+        if(!vars.q_isUnlocked){
             Annihilate.setEnabled(false);
             Annihilate.setVisibility(View.GONE);
-        } else if (vars.q_isUnlocked=true&vars.v_VP.compareTo(BigDecimal.valueOf(1E308))>=0) {
+        } else {
             Annihilate.setEnabled(true);
             Annihilate.setVisibility(View.VISIBLE);
         }
