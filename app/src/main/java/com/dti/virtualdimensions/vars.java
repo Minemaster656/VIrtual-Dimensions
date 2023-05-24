@@ -34,7 +34,7 @@ public class vars {
 //    static double UP_perCLick_upMod=2;
 //    static double VCl_max = inf; //максимум кластеров в.ч.
     static boolean isVPBroken; //квантоваяФизика.сломать();
-    static int FPS = 30; //~~50~~
+    static int FPS = 15; //~~50~~
     static double VP_perCLick_mlt_total = 1;
     static double VP_prestige0_multiplier = 1;
     static double VP_prestige0_multiplier_new = 1;
@@ -71,6 +71,12 @@ public class vars {
     public static boolean q_isUnlocked = false;
     public static BigDecimal quarksOnAnnihilate = BigDecimal.valueOf(0);
     public static boolean[] dimAutoUnlocks = new boolean[6];
+    public static boolean[] dimAutoToggles = new boolean[6];
+    public static BigDecimal[] dimAutoPrices = new BigDecimal[6];
+    public static ArrayList<Boolean> extraAutoUnlocks = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> extraAutoToggles = new ArrayList<Boolean>();
+    public static ArrayList<BigDecimal> extraAutoPrices = new ArrayList<BigDecimal>();
+    public static final int extraAutoCount=2;
 
 
     public static void RESET_VP() {
@@ -99,6 +105,27 @@ public class vars {
         vars.dims.set(5, new Dim(10000000000L, 1E11));
         vars.dims.set(6, new Dim(-1L, 1E308));
 
+    }
+    public static void doCollapse(){
+        if (vars.vCollapse_price.compareTo(vars.v_VP)<=0){
+            vars.v_VP=vars.v_VP.subtract(vars.vCollapse_price);
+            vars.vCollapse_count=vars.vCollapse_count.add(BigDecimal.valueOf(1));
+            vars.vCollapse_price=vars.vCollapse_price.multiply(vars.vCollapse_priceMlt);
+            vars.vCollapse_priceMlt=vars.vCollapse_priceMlt.multiply(vars.vCollapse_priceMltMlt);
+            vars.RESET_VDims();
+        }
+    }
+    public static void doAnnihilate(){
+        if(vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(0))>0){
+        vars.quarks=vars.quarks.add(vars.quarksOnAnnihilate);
+        vars.RESET_ON_ANNIHILATE();}
+    }
+    public static void buyTickspeed_(){
+        if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
+            vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
+            vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));
+            vars.v_tickspeedBought = vars.v_tickspeedBought.add(BigDecimal.valueOf(1));
+        }
     }
 
     public static void RESET_ON_ANNIHILATE() {

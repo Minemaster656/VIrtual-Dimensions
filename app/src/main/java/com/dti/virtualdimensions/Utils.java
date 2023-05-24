@@ -7,41 +7,43 @@ import android.util.TypedValue;
 import android.widget.Button;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Utils {
-    public static String bd2s(BigDecimal value, int scale){
+    public static String bd2s(BigDecimal value, int scale) {
         BigDecimal formattedValue = value.setScale(scale, RoundingMode.HALF_UP); // определение количества знаков после запятой
         return formattedValue.toString(); // конвертирование BigDecimal в строку с тремя знаками после запятой
     }
-    public static String bd2txt(BigDecimal value){
-        BigDecimal svalue=value.setScale(2, RoundingMode.DOWN);
+
+    public static String bd2txt(BigDecimal value) {
+        BigDecimal svalue = value.setScale(2, RoundingMode.DOWN);
 //        svalue=value;
         String result;
 //        svalue.setScale(2, RoundingMode.DOWN);
 //        if (value.compareTo(BigDecimal.valueOf(1E-7))<0&value.compareTo(BigDecimal.valueOf(-1E-7))>0) return "0";
-        if (svalue.compareTo(BigDecimal.valueOf(1E10))>=0){
+        if (svalue.compareTo(BigDecimal.valueOf(1E10)) >= 0) {
 //            result = String.format("%e", svalue.toString());
             result = String.format("%e", svalue);
-        }
-        else {
+        } else {
             result = svalue.toString();
         }
-        result=result.replace("+","");
-        result=result.replace("E","e");
+        result = result.replace("+", "");
+        result = result.replace("E", "e");
         return result;
 //        NumberFormat formatter = new DecimalFormat("0.0E0");
 //        formatter.setMinimumFractionDigits(2);
 //        return formatter.format(value);
     }
-    public static void FitText(Button button){
+
+    public static void FitText(Button button) {
         button.post(new Runnable() {
             @Override
             public void run() {
-                button.setMaxEms(button.getWidth()/2);
+                button.setMaxEms(button.getWidth() / 2);
                 button.setBreakStrategy(LineBreaker.BREAK_STRATEGY_SIMPLE);
 
                 int maxWidth = button.getWidth();
@@ -58,6 +60,23 @@ public class Utils {
             }
         });
     }
+
+    public static BigDecimal loge(BigDecimal num) {
+        BigDecimal x = num; // число e
+        MathContext mc = new MathContext(50); // точность вычислений, заданная в 50 знаков после запятой
+
+        BigDecimal result = BigDecimal.ZERO;
+        BigDecimal term = BigDecimal.ONE; // первый член ряда Тейлора
+
+        for (int i = 1; i <= 1000; i++) { // ограничение на количество итераций
+            result = result.add(term, mc);
+            term = term.multiply(x.subtract(BigDecimal.ONE).divide(x, mc), mc).setScale(mc.getPrecision(), BigDecimal.ROUND_HALF_UP);
+        }
+
+//        System.out.println(result);
+        return result;
+    }
+}
     //Button button = findViewById(R.id.button);
 //button.post(new Runnable() {
 //        @Override
@@ -92,4 +111,4 @@ public class Utils {
 //
 //        }
 //    }
-}
+

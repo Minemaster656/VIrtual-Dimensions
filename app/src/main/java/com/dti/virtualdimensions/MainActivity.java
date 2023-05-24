@@ -57,11 +57,28 @@ public class MainActivity extends AppCompatActivity {
         vars.dims.add(new Dim(10000000000L, 1E11));
         vars.dims.add(new Dim(-1L, 1E308));
         for (int i = 0; i < 6; i++) {
+            vars.dimAutoUnlocks[i]=false;
+            vars.dimAutoToggles[i]=true;
+        }
+        vars.dimAutoPrices[0]=BigDecimal.valueOf(1E50);
+        vars.dimAutoPrices[1]=BigDecimal.valueOf(1E60);
+        vars.dimAutoPrices[2]=BigDecimal.valueOf(1E70);
+        vars.dimAutoPrices[3]=BigDecimal.valueOf(1E80);
+        vars.dimAutoPrices[4]=BigDecimal.valueOf(1E90);
+        vars.dimAutoPrices[5]=BigDecimal.valueOf(1E100);
+        vars.extraAutoPrices.add(BigDecimal.valueOf(1E75));
+        vars.extraAutoPrices.add(BigDecimal.valueOf(1E115));
+        for (int i = 0; i < vars.extraAutoCount; i++) {
+            vars.extraAutoUnlocks.add(false);//vars.extraAutoToggles.add(true);
+            vars.extraAutoToggles.add(true);
+        }
+        for (int i = 0; i < 6; i++) {
             vars.dimAutoUnlocks[i] = false;
             if (vars.isDebugBuild) {
                 vars.dimAutoUnlocks[i] = true;
             }
         }
+
 
 //        for (int i = 0; i < 7; i++) {
 //            vars.dims.get(i).update();
@@ -171,8 +188,8 @@ public class MainActivity extends AppCompatActivity {
             if (vars.q_isUnlocked | vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(1)) >= 0) {
                 QU_tab.setEnabled(true);
                 QU_tab.setVisibility(View.VISIBLE);
-                System.out.println(Utils.bd2txt(vars.quarksOnAnnihilate));
-                System.out.println(vars.q_isUnlocked);
+//                System.out.println(Utils.bd2txt(vars.quarksOnAnnihilate));
+//                System.out.println(vars.q_isUnlocked);
             }
         }
         String data_extraTab = vars.findInvoke_FindSender_ReturnData("tab_extra", true);
@@ -238,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
             String text = new String(bytes);
             String[] data = text.split("#");
             for (int i = 0; i < data.length; i++) {
-                System.out.println(data[i]);
+//                System.out.println(data[i]);
             }
             if (data[0].equals("SAVEFILE")) {
                 vars.isVPPhaseDestroyed = Boolean.parseBoolean(data[1]);

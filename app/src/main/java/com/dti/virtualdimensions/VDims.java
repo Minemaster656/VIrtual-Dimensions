@@ -95,34 +95,19 @@ public class VDims extends Fragment {
                         for (int i = 0; i < 6; i++) {
                             vars.dims.get(i).buy();
                         }
-                        if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
-                            vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
-                            vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));
-                            vars.v_tickspeedBought = vars.v_tickspeedBought.add(BigDecimal.valueOf(1));
-                        }
+                        vars.buyTickspeed_();
                     }
                     if (xam.isPressed()) {
-                        if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
-                            vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
-                            vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));
-                            vars.v_tickspeedBought = vars.v_tickspeedBought.add(BigDecimal.valueOf(1));
-                        }
+                        vars.buyTickspeed_();
                         for (int i = 5; i >= 0; i--) {
                             vars.dims.get(i).buy();
                         }
                     }
                     if (collapse.isPressed()){
-                        if (vars.vCollapse_price.compareTo(vars.v_VP)<=0){
-                            vars.v_VP=vars.v_VP.subtract(vars.vCollapse_price);
-                            vars.vCollapse_count=vars.vCollapse_count.add(BigDecimal.valueOf(1));
-                            vars.vCollapse_price=vars.vCollapse_price.multiply(vars.vCollapse_priceMlt);
-                            vars.vCollapse_priceMlt=vars.vCollapse_priceMlt.multiply(vars.vCollapse_priceMltMlt);
-                            vars.RESET_VDims();
-                        }
+                        vars.doCollapse();
                     }
-                    if(Annihilate.isPressed()&vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(0))>0){
-                        vars.quarks=vars.quarks.add(vars.quarksOnAnnihilate);
-                        vars.RESET_ON_ANNIHILATE();
+                    if(Annihilate.isPressed()){
+                        vars.doAnnihilate();
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
