@@ -76,7 +76,7 @@ public class vars {
     public static ArrayList<Boolean> extraAutoUnlocks = new ArrayList<Boolean>();
     public static ArrayList<Boolean> extraAutoToggles = new ArrayList<Boolean>();
     public static ArrayList<BigDecimal> extraAutoPrices = new ArrayList<BigDecimal>();
-    public static final int extraAutoCount=2;
+    public static final int extraAutoCount = 2;
 
 
     public static void RESET_VP() {
@@ -106,21 +106,25 @@ public class vars {
         vars.dims.set(6, new Dim(-1L, 1E308));
 
     }
-    public static void doCollapse(){
-        if (vars.vCollapse_price.compareTo(vars.v_VP)<=0){
-            vars.v_VP=vars.v_VP.subtract(vars.vCollapse_price);
-            vars.vCollapse_count=vars.vCollapse_count.add(BigDecimal.valueOf(1));
-            vars.vCollapse_price=vars.vCollapse_price.multiply(vars.vCollapse_priceMlt);
-            vars.vCollapse_priceMlt=vars.vCollapse_priceMlt.multiply(vars.vCollapse_priceMltMlt);
+
+    public static void doCollapse() {
+        if (vars.vCollapse_price.compareTo(vars.v_VP) <= 0) {
+            vars.v_VP = vars.v_VP.subtract(vars.vCollapse_price);
+            vars.vCollapse_count = vars.vCollapse_count.add(BigDecimal.valueOf(1));
+            vars.vCollapse_price = vars.vCollapse_price.multiply(vars.vCollapse_priceMlt);
+            vars.vCollapse_priceMlt = vars.vCollapse_priceMlt.multiply(vars.vCollapse_priceMltMlt);
             vars.RESET_VDims();
         }
     }
-    public static void doAnnihilate(){
-        if(vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(0))>0){
-        vars.quarks=vars.quarks.add(vars.quarksOnAnnihilate);
-        vars.RESET_ON_ANNIHILATE();}
+
+    public static void doAnnihilate() {
+        if (vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(0)) > 0) {
+            vars.quarks = vars.quarks.add(vars.quarksOnAnnihilate);
+            vars.RESET_ON_ANNIHILATE();
+        }
     }
-    public static void buyTickspeed_(){
+
+    public static void buyTickspeed_() {
         if (vars.v_VP.compareTo(vars.v_tickspeedPrice) >= 0) {
             vars.v_VP = vars.v_VP.subtract(vars.v_tickspeedPrice);
             vars.v_tickspeedPrice = vars.v_tickspeedPrice.multiply(BigDecimal.valueOf(10));

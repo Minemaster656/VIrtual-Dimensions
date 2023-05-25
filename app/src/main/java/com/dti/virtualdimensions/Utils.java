@@ -63,12 +63,12 @@ public class Utils {
 
     public static BigDecimal loge(BigDecimal num) {
         BigDecimal x = num; // число e
-        MathContext mc = new MathContext(50); // точность вычислений, заданная в 50 знаков после запятой
+        MathContext mc = new MathContext(10); // точность вычислений, заданная в 50 знаков после запятой
 
         BigDecimal result = BigDecimal.ZERO;
         BigDecimal term = BigDecimal.ONE; // первый член ряда Тейлора
 
-        for (int i = 1; i <= 1000; i++) { // ограничение на количество итераций
+        for (int i = 1; i <= 100; i++) { // ограничение на количество итераций
             result = result.add(term, mc);
             term = term.multiply(x.subtract(BigDecimal.ONE).divide(x, mc), mc).setScale(mc.getPrecision(), BigDecimal.ROUND_HALF_UP);
         }
