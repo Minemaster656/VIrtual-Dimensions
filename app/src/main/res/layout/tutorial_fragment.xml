@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0.1dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             android:id="@+id/tt_phase0"
@@ -25,6 +25,57 @@
             android:text="@string/tt_phase0"
             android:background="@color/tt_bg"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tt_dims"
+            app:layout_constraintTop_toBottomOf="@id/tt_phase0"
+            android:text="@string/tt_dims"
+            android:background="@color/dim0"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tt_tickspeed"
+            app:layout_constraintTop_toBottomOf="@id/tt_dims"
+            android:text="@string/tt_dims"
+            android:background="@color/tickspeedBG"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tt_e"
+            app:layout_constraintTop_toBottomOf="@id/tt_tickspeed"
+            android:text="@string/tt_e"
+            android:background="@color/bg_cyan"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tt_collapse"
+            app:layout_constraintTop_toBottomOf="@id/tt_e"
+            android:text="@string/tt_collapse"
+            android:background="@color/autoDisabled"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tt_quarks"
+            app:layout_constraintTop_toBottomOf="@id/tt_collapse"
+            android:text="@string/tt_quarks"
+            android:background="@color/quark_bg"
+            />
+
 
 
 

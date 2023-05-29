@@ -1,7 +1,16 @@
 package com.dti.virtualdimensions;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.Thread;
 import java.math.BigDecimal;
@@ -67,7 +76,7 @@ public class Calcs {
             while (currentThread().isAlive()) {
                 try {
                     sleep(250 / vars.FPS);
-                    calc(true);
+                    Calcs.calc(true, 1);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -81,21 +90,28 @@ public class Calcs {
     public void setSecondFragment(VD_frg_old vd) {
         this.secondFragment = vd;
     }
-//    static UpdateInvoker ut = new UpdateInvoker();
-    public void doAuto(){
+
+    //    static UpdateInvoker ut = new UpdateInvoker();
+    public static void doAuto() {
         for (int i = 0; i < 6; i++) {
-            if (vars.dimAutoUnlocks[i]&vars.dimAutoToggles[i]){
-                vars.dims.get(i).buy();
+            if (vars.dimAutoUnlocks[i] & vars.dimAutoToggles[i]) {
+                while (vars.dims.get(i).price.compareTo(vars.v_VP) <= 0) {
+                    vars.dims.get(i).buy();
+                }
             }
         }
-        if (vars.extraAutoUnlocks.get(0)&vars.extraAutoToggles.get(0)){
-            vars.buyTickspeed_();
+        if (vars.extraAutoUnlocks.get(0) & vars.extraAutoToggles.get(0)) {
+            while (vars.v_tickspeedPrice.compareTo(vars.v_VP) <= 0) {
+                vars.buyTickspeed_();
+            }
         }
-        if (vars.extraAutoUnlocks.get(0)&vars.extraAutoToggles.get(0)) vars.doCollapse();
+        if (vars.extraAutoUnlocks.get(0) & vars.extraAutoToggles.get(0)) vars.doCollapse();
 
     }
-    public void calc(boolean useFPS){
+
+    public static void calc(boolean useFPS, int ticks) {
         BigDecimal collapseMlt;
+        MathContext mc = new MathContext(5, RoundingMode.DOWN);
         if (vars.vCollapse_count.compareTo(BigDecimal.valueOf(0)) <= 0) {
             collapseMlt = BigDecimal.valueOf(1);
         } else {
@@ -109,15 +125,16 @@ public class Calcs {
             vars.v_tickspeed = vars.v_tickspeedBought.multiply(BigDecimal.valueOf(0.1)).add(BigDecimal.valueOf(1)).add(BigDecimal.valueOf(0.5).multiply(vars.v_tickspeedBought));
         }
 
-        if (vars.v_VP.compareTo(BigDecimal.valueOf(1E100)) < 1) {
+        if (vars.v_VP.compareTo(BigDecimal.valueOf(1E100)) < 0) {
             vars.quarksOnAnnihilate = BigDecimal.valueOf(0);
         } else {
-            vars.quarksOnAnnihilate = Utils.loge(vars.v_VP).divide(BigDecimal.valueOf(1E100),mc);//vars.v_VP.divide(BigDecimal.valueOf(1E100), mc);
-            if (vars.quarksOnAnnihilate.compareTo(BigDecimal.ONE)<0) vars.quarksOnAnnihilate=BigDecimal.ONE;
+            vars.quarksOnAnnihilate = Utils.loge(vars.v_VP).divide(BigDecimal.valueOf(100), mc);//vars.v_VP.divide(BigDecimal.valueOf(1E100), mc);
+            if (vars.quarksOnAnnihilate.compareTo(BigDecimal.ONE) < 0)
+                vars.quarksOnAnnihilate = BigDecimal.ONE;
 
         }
 
-        if (vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(1)) >= 1&vars.v_VP.compareTo(BigDecimal.valueOf(1E100))>=0) {
+        if (vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(1)) >= 1 & vars.v_VP.compareTo(BigDecimal.valueOf(1E100)) >= 0) {
             vars.q_isUnlocked = true;
         }
         //dim_MLT
@@ -130,18 +147,77 @@ public class Calcs {
                 vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS), mc));
             }
             vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).divide(BigDecimal.valueOf(vars.FPS), mc));
-        }
-        else {
+        } else {
             for (int i = 0; i < 6; i++) {
-                vars.dims.get(i).mlt = vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10), mc).multiply(collapseMlt).add(vars.dims.get(i).realCount.pow(3)).add(BigDecimal.valueOf(1));
+                vars.dims.get(i).mlt = vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10), mc).multiply(collapseMlt).add(vars.dims.get(i).realCount.pow(3)).multiply(BigDecimal.valueOf(ticks)).add(BigDecimal.valueOf(1));
             }
             //dim_CALCS
             for (int i = 0; i < 6; i++) {
-                vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed));
+                vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed).multiply(BigDecimal.valueOf(ticks)));
             }
-            vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed));
+            vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).multiply(BigDecimal.valueOf(ticks)));
         }
-        doAuto();
+        Calcs.doAuto();
+    }
+
+    public static void calcOffline(Context context) {
+
+
+        Runnable rb = new Runnable() {
+            @Override
+            public void run() {
+                Handler handler = new Handler(Looper.getMainLooper());
+//                Looper.prepare();
+                BigDecimal start_vp = vars.v_VP;
+                BigDecimal start_1dim_count = vars.dims.get(0).count;
+                BigDecimal start_6dim_count = vars.dims.get(5).count;
+                BigDecimal start_TS_bought = vars.v_tickspeedBought;
+                BigDecimal start_collapseCount = vars.vCollapse_count;
+                BigDecimal start_quarks = vars.quarks;
+                Log.d(TAG, "started offline calc");
+                //расчёт
+                long ticks = (vars.offTime / 1000); //*4;
+                int ticksPerCalc = ticks > 1000 ? (int) (ticks / 1000) : 0;
+                Log.d(TAG, ticks + " ticks. " + ticksPerCalc +" tpc.");
+                if (ticksPerCalc == 0) {
+                    Log.d(TAG, "Calc 1 sec.");
+                        Calcs.calc(false, (int) ticks);
+
+                } else {
+                    Log.d(TAG, "Calc ??? secs.");
+                    for (int i = 0; i < 1000; i++) {
+                        Calcs.calc(false, ticksPerCalc);
+                    }
+                }
+                Log.d(TAG, "completed offline calc");
+                //диалог
+                vars.invoke("CALC_offline_ddata", "MAIN", Utils.bd2txt(start_vp)+"#"+Utils.bd2txt(start_1dim_count)+"#"+Utils.bd2txt(start_6dim_count)+"#"+Utils.bd2txt(start_TS_bought)+"#"+Utils.bd2txt(start_collapseCount)+"#"+Utils.bd2txt(start_quarks));
+//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle(context.getResources().getString(R.string.offline));
+//                builder.setMessage(
+//                        getStr(R.string.VP_tabName) + ": " + Utils.bd2txt(start_vp) + "→" + Utils.bd2txt(vars.v_VP) + "\n" +
+//                                getStr(R.string.dim1) + " " + getStr(R.string.word_count) + ": " + Utils.bd2txt(start_1dim_count) + "→" + Utils.bd2txt(vars.dims.get(0).count) + "\n" +
+//                                getStr(R.string.dim6) + " " + getStr(R.string.word_count) + ": " + Utils.bd2txt(start_6dim_count) + "→" + Utils.bd2txt(vars.dims.get(5).count) + "\n" +
+//                                getStr(R.string.Tickspeed_bought) + ": " + Utils.bd2txt(start_TS_bought) + "→" + Utils.bd2txt(vars.v_tickspeedBought) + "\n" +
+//                                getStr(R.string.collapse)+getStr(R.string.word_count) + ": " + Utils.bd2txt(start_collapseCount) + "→" + Utils.bd2txt(vars.vCollapse_count) + "\n" +
+//                                getStr(R.string.quarks)+getStr(R.string.word_count) + ": " + Utils.bd2txt(start_quarks) + "→" + Utils.bd2txt(vars.quarks) + "\n"
+//                );
+//                builder.setPositiveButton("Кнопка", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//                Log.d(TAG, "dialog shown");
+            }
+
+            public String getStr(int id) {
+                return context.getResources().getString(id);
+            }
+        };
+        Thread offct = new Thread(rb);
+        offct.start();
     }
 
 }

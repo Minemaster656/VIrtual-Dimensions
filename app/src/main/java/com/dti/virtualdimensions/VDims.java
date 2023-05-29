@@ -145,13 +145,18 @@ public class VDims extends Fragment {
         tickspeedDisplay.setText("" + rsStr.get("tickspeed") + ": " + Utils.bd2txt(vars.v_tickspeed));
         buyTickspeed.setText(rsStr.get("word_buy") + "! " + rsStr.get("word_price") + ":\n" + Utils.bd2txt(vars.v_tickspeedPrice));
 //        Annihilate.setText(rsStr.get("annihilate")+" \n"+rsStr.get("word_get")+": "+Utils.bd2txt(vars.quarksOnAnnihilate)+rsStr.get("quarks"));
-        if(!vars.q_isUnlocked){
-            Annihilate.setEnabled(false);
-            Annihilate.setVisibility(View.GONE);
-        } else {
+        if(vars.q_isUnlocked||(vars.v_VP.compareTo(BigDecimal.valueOf(1E100))>=0)){
             Annihilate.setEnabled(true);
             Annihilate.setVisibility(View.VISIBLE);
+        } else {
+            Annihilate.setEnabled(false);
+            Annihilate.setVisibility(View.INVISIBLE);
         }
+        collapse.setText(rsStr.get("collapse")+"("+Utils.bd2txt(vars.vCollapse_mlt)+" "+rsStr.get("dim")+" "+rsStr.get("word_mult")+")\n"+rsStr.get("word_price")+": " +Utils.bd2txt(vars.vCollapse_price));
+        collapse.setEnabled(vars.vCollapse_price.compareTo(vars.v_VP) >= 0);
+        Annihilate.setText(rsStr.get("annihilateVPfor")+" "+Utils.bd2txt(vars.quarksOnAnnihilate)+rsStr.get("quarks_tab"));
+        Annihilate.setEnabled(vars.quarksOnAnnihilate.compareTo(BigDecimal.ZERO) > 0);
+
 //        collapse.setText();
     }
 
@@ -169,6 +174,10 @@ public class VDims extends Fragment {
         m.put("annihilate",getStr(R.string.annihilate));
         m.put("word_get",R.string.word_get);
         m.put("quarks", R.string.quarks);
+        m.put("annihilateVPfor", getStr(R.string.annihilateVPfor));
+        m.put("dim",getStr(R.string.dim));
+        m.put("word_mult", getStr(R.string.word_mult));
+        m.put("quarks_tab",getStr(R.string.quarks_tab));
     }
 
     //    public VDims() {

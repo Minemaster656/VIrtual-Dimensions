@@ -3,9 +3,11 @@ package com.dti.virtualdimensions;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +21,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Button settingsTab;
     Button QU_tab;
     Button extraTab;
+    Date dt = new Date();
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println(Utils.bd2txt(Utils.loge(new BigDecimal("1e308"))));
         Runnable load = () -> {
 
             loadData();
@@ -56,18 +62,20 @@ public class MainActivity extends AppCompatActivity {
         vars.dims.add(new Dim(100000000, 1E7));
         vars.dims.add(new Dim(10000000000L, 1E11));
         vars.dims.add(new Dim(-1L, 1E308));
+
         for (int i = 0; i < 6; i++) {
-            vars.dimAutoUnlocks[i]=false;
-            vars.dimAutoToggles[i]=true;
+            vars.dimAutoUnlocks[i] = false;
+            vars.dimAutoToggles[i] = true;
         }
-        vars.dimAutoPrices[0]=BigDecimal.valueOf(1E50);
-        vars.dimAutoPrices[1]=BigDecimal.valueOf(1E60);
-        vars.dimAutoPrices[2]=BigDecimal.valueOf(1E70);
-        vars.dimAutoPrices[3]=BigDecimal.valueOf(1E80);
-        vars.dimAutoPrices[4]=BigDecimal.valueOf(1E90);
-        vars.dimAutoPrices[5]=BigDecimal.valueOf(1E100);
+        vars.dimAutoPrices[0] = BigDecimal.valueOf(1E50);
+        vars.dimAutoPrices[1] = BigDecimal.valueOf(1E60);
+        vars.dimAutoPrices[2] = BigDecimal.valueOf(1E70);
+        vars.dimAutoPrices[3] = BigDecimal.valueOf(1E80);
+        vars.dimAutoPrices[4] = BigDecimal.valueOf(1E90);
+        vars.dimAutoPrices[5] = BigDecimal.valueOf(1E100);
         vars.extraAutoPrices.add(BigDecimal.valueOf(1E75));
         vars.extraAutoPrices.add(BigDecimal.valueOf(1E115));
+
         for (int i = 0; i < vars.extraAutoCount; i++) {
             vars.extraAutoUnlocks.add(false);//vars.extraAutoToggles.add(true);
             vars.extraAutoToggles.add(true);
@@ -91,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
         QU_tab = findViewById(R.id.tab_quarks);
         settingsTab = findViewById(R.id.settingsTab);
         SAVE = findViewById(R.id.SAVE);
-        extraTab=findViewById(R.id.extra);
+        extraTab = findViewById(R.id.extra);
         VD_tab.setOnClickListener(v -> VD_openFrg());
         VP_tab.setOnClickListener(v -> VP_openFrg());
-        extraTab.setOnClickListener(v->getSupportFragmentManager().beginTransaction().replace(R.id.container, new extraTabs()).commit());
+        extraTab.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.container, new extraTabs()).commit());
         settingsTab.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.container, new settings()).commit());
         tutorial_tab = findViewById(R.id.tutorial_tab);
         VD_tab.setEnabled(false);
@@ -193,10 +201,46 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         String data_extraTab = vars.findInvoke_FindSender_ReturnData("tab_extra", true);
-        if (data_extraTab!=null){
-        if (data_extraTab.equals("open fragment_auto")){
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new Automatics()).commit();
-        }}
+        if (data_extraTab != null) {
+            if (data_extraTab.equals("open fragment_auto")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new Automatics()).commit();
+            }
+        }
+        String data_loader = vars.findInvoke_FindSender_ReturnData("DATA_LOADER", true);
+        if (data_loader!=null){
+            if (data_loader.equals("calc offline")){
+                //if (vars.offTime>=1000){
+                    Calcs.calcOffline(this);
+                    Log.d(TAG, "Called off calc!");
+                //}
+            }
+        }
+        String data_calc_off = vars.findInvoke_FindSender_ReturnData("CALC_offline_ddata", true);
+        if (data_calc_off!=null){
+            String[] sdata = data_calc_off.split("#");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(this.getResources().getString(R.string.offline));
+            builder.setMessage(
+                    getStr(R.string.off_time)+ " "+Utils.millsToTime(vars.offTime)+"\n"+
+                    getStr(R.string.VP_tabName) + ": " + sdata[0] + "→" + Utils.bd2txt(vars.v_VP) + "\n" +
+                            getStr(R.string.dim1) + " " + getStr(R.string.word_count) + ": " + sdata[1] + "→" + Utils.bd2txt(vars.dims.get(0).count) + "\n" +
+                            getStr(R.string.dim6) + " " + getStr(R.string.word_count) + ": " + sdata[2] + "→" + Utils.bd2txt(vars.dims.get(5).count) + "\n" +
+                            getStr(R.string.Tickspeed_bought) + ": " + sdata[3] + "→" + Utils.bd2txt(vars.v_tickspeedBought) + "\n" +
+                            getStr(R.string.collapse)+" " +getStr(R.string.word_count) + ": " + sdata[4] + "→" + Utils.bd2txt(vars.vCollapse_count) + "\n" +
+                            getStr(R.string.quarks)+" " +getStr(R.string.word_count) + ": " + sdata[5] + "→" + Utils.bd2txt(vars.quarks) + "\n"
+            );
+            builder.setPositiveButton(getStr(R.string.word_close), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            Log.d(TAG, "dialog shown");
+        }
+    }
+    public String getStr(int id) {
+        return getResources().getString(id);
     }
 
     public void VP_openFrg() {
@@ -209,12 +253,13 @@ public class MainActivity extends AppCompatActivity {
         //calcs.setSecondFragment(vd);
     }
 
+
     public void saveData() {
 
         FileOutputStream fos = null;
         try {
 
-
+            Date dt = new Date();
             fos = openFileOutput(SAVEfNAME, MODE_PRIVATE);
             fos.write("SAVEFILE#".getBytes());
             fos.write((String.valueOf(vars.isVPPhaseDestroyed) + "#").getBytes());
@@ -222,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
 //                vars.dims.get(i).update();
                 fos.write((vars.dims.get(i).toString() + "#").getBytes());
             }
-            fos.write((vars.v_VP.toString() + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.v_VP) + "#").getBytes());
             fos.write((vars.v_tickspeed.toString() + "#").getBytes());
             fos.write((vars.v_tickspeedBought.toString() + "#").getBytes());
             fos.write((vars.v_tickspeedPrice.toString() + "#").getBytes());
@@ -231,6 +276,23 @@ public class MainActivity extends AppCompatActivity {
             fos.write((vars.vCollapse_price.toString() + "#").getBytes());
             fos.write((vars.vCollapse_priceMlt.toString() + "#").getBytes());
             fos.write((vars.vCollapse_priceMltMlt.toString() + "#").getBytes());
+            for (int i = 0; i < 6; i++) {
+                fos.write((vars.dimAutoUnlocks[i] + "#").getBytes());
+            }
+            for (int i = 0; i < 6; i++) {
+                fos.write((vars.dimAutoToggles[i] + "#").getBytes());
+            }
+            fos.write((vars.extraAutoUnlocks.get(0)+"#").getBytes());
+            fos.write((vars.extraAutoUnlocks.get(1)+"#").getBytes());
+            fos.write((vars.extraAutoToggles.get(0)+"#").getBytes());
+            fos.write((vars.extraAutoToggles.get(1)+"#").getBytes());
+
+            fos.write((Utils.bd2txt(vars.quarks)+"#").getBytes());
+
+            fos.write((vars.q_isVoidCleared +"#").getBytes());
+            fos.write((vars.q_isUnlocked +"#").getBytes());
+            fos.write((dt.getTime()+"#").getBytes());
+
         } catch (IOException ex) {
 
             //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -247,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadData() {
         FileInputStream fin = null;
-
+        Date dt = new Date();
         try {
             fin = openFileInput(SAVEfNAME);
             byte[] bytes = new byte[fin.available()];
@@ -275,9 +337,41 @@ public class MainActivity extends AppCompatActivity {
                 vars.vCollapse_price = new BigDecimal(data[15]);
                 vars.vCollapse_priceMlt = new BigDecimal(data[16]);
                 vars.vCollapse_priceMltMlt = new BigDecimal(data[17]);
+
+                vars.dimAutoUnlocks[0] = Boolean.parseBoolean(data[18]);
+                vars.dimAutoUnlocks[1] = Boolean.parseBoolean(data[19]);
+                vars.dimAutoUnlocks[2] = Boolean.parseBoolean(data[20]);
+                vars.dimAutoUnlocks[3] = Boolean.parseBoolean(data[21]);
+                vars.dimAutoUnlocks[4] = Boolean.parseBoolean(data[22]);
+                vars.dimAutoUnlocks[5] = Boolean.parseBoolean(data[23]);
+
+                vars.dimAutoToggles[0] = Boolean.parseBoolean(data[24]);
+                vars.dimAutoToggles[1] = Boolean.parseBoolean(data[25]);
+                vars.dimAutoToggles[2] = Boolean.parseBoolean(data[26]);
+                vars.dimAutoToggles[3] = Boolean.parseBoolean(data[27]);
+                vars.dimAutoToggles[4] = Boolean.parseBoolean(data[28]);
+                vars.dimAutoToggles[5] = Boolean.parseBoolean(data[29]);
+
+                vars.extraAutoUnlocks.set(0, Boolean.parseBoolean(data[30]));
+                vars.extraAutoUnlocks.set(1, Boolean.parseBoolean(data[31]));
+                vars.extraAutoToggles.set(0, Boolean.parseBoolean(data[32]));
+                vars.extraAutoToggles.set(1, Boolean.parseBoolean(data[33]));
+
+                vars.quarks=new BigDecimal(data[34]);
+
+                vars.q_isVoidCleared=Boolean.parseBoolean(data[35]);
+                vars.q_isUnlocked=Boolean.parseBoolean(data[36]);
+
+                vars.offTime=dt.getTime()-Long.parseLong(data[37]);
+                Log.d(TAG, "off time: "+vars.offTime);
+                vars.invoke("DATA_LOADER", "MAIN", "calc offline");
+
+
+
+
             } else {
                 saveData();
-                Log.w(TAG, "loadData: NO DATA!");
+                Log.e(TAG, "loadData: NO DATA!");
                 System.out.println("data[0]: " + data[0]);
             }
         } catch (IOException ex) {

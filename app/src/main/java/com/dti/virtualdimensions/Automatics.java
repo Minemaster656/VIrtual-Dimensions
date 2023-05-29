@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -33,10 +34,12 @@ public class Automatics extends Fragment {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
-            Update_UI();
+            if (isAdded()) {
+                Update_UI();
+            }
         }
     };
-//    ArrayList<TextView> auto = new ArrayList<TextView>();
+    //    ArrayList<TextView> auto = new ArrayList<TextView>();
 //    ArrayList<View> auto_bg = new ArrayList<View>();
     Button ad1;
     Button ad2;
@@ -51,16 +54,96 @@ public class Automatics extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initMap(rsStr);
-        ad1=view.findViewById(R.id.AbuyDim1);
-        ad2=view.findViewById(R.id.AbuyDim2);
-        ad3=view.findViewById(R.id.AbuyDim3);
-        ad4=view.findViewById(R.id.AbuyDim4);
-        ad5=view.findViewById(R.id.AbuyDim5);
-        ad6=view.findViewById(R.id.AbuyDim6);
-        aTick=view.findViewById(R.id.AbuyTickspeed);
-        aCollapse=view.findViewById(R.id.AbuyCollapse);
+        ad1 = view.findViewById(R.id.AbuyDim1);
+        ad2 = view.findViewById(R.id.AbuyDim2);
+        ad3 = view.findViewById(R.id.AbuyDim3);
+        ad4 = view.findViewById(R.id.AbuyDim4);
+        ad5 = view.findViewById(R.id.AbuyDim5);
+        ad6 = view.findViewById(R.id.AbuyDim6);
+        aTick = view.findViewById(R.id.AbuyTickspeed);
+        aCollapse = view.findViewById(R.id.AbuyCollapse);
 
+        ad1.setOnClickListener(v -> {
+            if (vars.dimAutoUnlocks[0]) {
+                vars.dimAutoToggles[0] = !vars.dimAutoToggles[0];
+            } else {
+                if (vars.v_VP.compareTo(vars.dimAutoPrices[0]) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.dimAutoPrices[0]);
+                    vars.dimAutoUnlocks[0] = true;
+                }
+            }
+        });
+        ad2.setOnClickListener(v -> {
+            if (vars.dimAutoUnlocks[1]) {
+                vars.dimAutoToggles[1] = !vars.dimAutoToggles[1];
+            } else {
+                if (vars.v_VP.compareTo(vars.dimAutoPrices[1]) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.dimAutoPrices[1]);
+                    vars.dimAutoUnlocks[1] = true;
+                }
+            }
+        });
+        ad3.setOnClickListener(v -> {
+            if (vars.dimAutoUnlocks[2]) {
+                vars.dimAutoToggles[2] = !vars.dimAutoToggles[2];
+            } else {
+                if (vars.v_VP.compareTo(vars.dimAutoPrices[2]) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.dimAutoPrices[2]);
+                    vars.dimAutoUnlocks[2] = true;
+                }
+            }
+        });
+        ad4.setOnClickListener(v -> {
+            if (vars.dimAutoUnlocks[3]) {
+                vars.dimAutoToggles[3] = !vars.dimAutoToggles[3];
+            } else {
+                if (vars.v_VP.compareTo(vars.dimAutoPrices[3]) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.dimAutoPrices[3]);
+                    vars.dimAutoUnlocks[3] = true;
+                }
+            }
+        });
+        ad5.setOnClickListener(v -> {
+            if (vars.dimAutoUnlocks[4]) {
+                vars.dimAutoToggles[4] = !vars.dimAutoToggles[4];
+            } else {
+                if (vars.v_VP.compareTo(vars.dimAutoPrices[4]) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.dimAutoPrices[4]);
+                    vars.dimAutoUnlocks[4] = true;
+                }
+            }
+        });
+        ad6.setOnClickListener(v -> {
+            if (vars.dimAutoUnlocks[5]) {
+                vars.dimAutoToggles[5] = !vars.dimAutoToggles[5];
+            } else {
+                if (vars.v_VP.compareTo(vars.dimAutoPrices[5]) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.dimAutoPrices[5]);
+                    vars.dimAutoUnlocks[5] = true;
+                }
+            }
+        });
+        aTick.setOnClickListener(v -> {
+            if (vars.extraAutoUnlocks.get(0)) {
+                vars.extraAutoToggles.set(0, !vars.extraAutoToggles.get(0));
+            } else {
+                if (vars.v_VP.compareTo(vars.extraAutoPrices.get(0)) >= 0) {
+                    vars.v_VP = vars.v_VP.subtract(vars.extraAutoPrices.get(0));
+                    vars.extraAutoUnlocks.set(0, true);
+                }
+            }
+        });
+        aCollapse.setOnClickListener(v -> {
+            if (vars.extraAutoUnlocks.get(1)) {
+                vars.extraAutoToggles.set(1, !vars.extraAutoToggles.get(1));
+            } else {
+                if (vars.v_VP.compareTo(vars.extraAutoPrices.get(1)) >= 1) {
+                    vars.v_VP = vars.v_VP.subtract(vars.extraAutoPrices.get(1));
+                    vars.extraAutoUnlocks.set(1, true);
 
+                }
+            }
+        });
 
 //        auto.add(view.findViewById(R.id.autoDim1b));
 //        auto.add(view.findViewById(R.id.autoDim2b));
@@ -245,34 +328,115 @@ public class Automatics extends Fragment {
     }
 
     private void Update_UI() {
-        for (int i = 0; i < 6; i++) {
-            String dimnum = "dim" + (i + 1);
-            if (vars.dimAutoUnlocks[i]) {
+        if (vars.dimAutoUnlocks[0]) {
+            ad1.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim1"));
+        } else {
+            ad1.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim1") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[0]));
+        }
+        if (vars.dimAutoToggles[0] & vars.dimAutoUnlocks[0])
+            ad1.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDim));
+        else
+            ad1.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
 
-                auto.get(i).setText(rsStr.get("autobyer") + ": " + rsStr.get(dimnum));
-            } else {
-                auto.get(i).setText(rsStr.get("autobyer") + ": " + rsStr.get(dimnum) + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[i]));
-            }
-//            if (vars.dimAutoUnlocks[i] & vars.dimAutoToggles[i])
-//                auto.get(i).setTextColor(getResources().getColor(R.color.black));
-//            else auto.get(i).setTextColor(getResources().getColor(R.color.autoDisabled));
-        }
-        if (vars.extraAutoToggles.get(0)) {
-            auto.get(6).setText(rsStr.get("autobyer") + ": " + rsStr.get("tickspeed"));
+        if (vars.dimAutoUnlocks[1]) {
+            ad2.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim2"));
         } else {
-            auto.get(6).setText(rsStr.get("autobyer") + ": " + rsStr.get("tickspeed") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(0)));
+            ad2.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim2") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[1]));
         }
-//        if (vars.extraAutoUnlocks.get(0) & vars.extraAutoToggles.get(0))
-//            auto.get(6).setTextColor(getResources().getColor(R.color.black));
-//        else auto.get(6).setTextColor(getResources().getColor(R.color.autoDisabled));
-        if (vars.extraAutoToggles.get(1)) {
-            auto.get(7).setText(rsStr.get("autobyer") + ": " + rsStr.get("collapse"));
+        if (vars.dimAutoToggles[1] & vars.dimAutoUnlocks[1])
+            ad2.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDim));
+        else
+            ad2.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+        if (vars.dimAutoUnlocks[2]) {
+            ad3.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim3"));
         } else {
-            auto.get(7).setText(rsStr.get("autobyer") + ": " + rsStr.get("collapse") + "\n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(1)));
+            ad3.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim3") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[2]));
         }
-//        if (vars.extraAutoUnlocks.get(1) & vars.extraAutoToggles.get(1))
-//            auto.get(7).setTextColor(getResources().getColor(R.color.black));
-//        else auto.get(7).setTextColor(getResources().getColor(R.color.autoDisabled));
+        if (vars.dimAutoToggles[2] & vars.dimAutoUnlocks[2])
+            ad3.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDim));
+        else
+            ad3.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+        if (vars.dimAutoUnlocks[3]) {
+            ad4.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim4"));
+        } else {
+            ad4.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim4") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[3]));
+        }
+        if (vars.dimAutoToggles[3] & vars.dimAutoUnlocks[3])
+            ad4.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDim));
+        else
+            ad4.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+        if (vars.dimAutoUnlocks[4]) {
+            ad5.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim5"));
+        } else {
+            ad5.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim5") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[4]));
+        }
+        if (vars.dimAutoToggles[4] & vars.dimAutoUnlocks[4])
+            ad5.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDim));
+        else
+            ad5.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+        if (vars.dimAutoUnlocks[5]) {
+            ad6.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim6"));
+        } else {
+            ad6.setText(rsStr.get("autobyer") + ": " + rsStr.get("dim6") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[5]));
+        }
+        if (vars.dimAutoToggles[5] & vars.dimAutoUnlocks[5])
+            ad6.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDim));
+        else
+            ad6.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+        if (vars.extraAutoUnlocks.get(0)) {
+            aTick.setText(rsStr.get("autobyer") + ": " + rsStr.get("tickspeed"));
+        } else {
+            aTick.setText(rsStr.get("autobyer") + ": " + rsStr.get("tickspeed") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(0)));
+        }
+        if (vars.extraAutoToggles.get(0) & vars.extraAutoUnlocks.get(0))
+            aTick.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoSpec));
+        else
+            aTick.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+        if (vars.extraAutoUnlocks.get(1)) {
+            aCollapse.setText(rsStr.get("autobyer") + ": " + rsStr.get("collapse"));
+        } else {
+            aCollapse.setText(rsStr.get("autobyer") + ": " + rsStr.get("collapse") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(1)));
+        }
+        if (vars.extraAutoToggles.get(1) & vars.extraAutoUnlocks.get(1))
+            aCollapse.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoSpec));
+        else
+            aCollapse.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
+
+
+        //        for (int i = 0; i < 6; i++) {
+//            String dimnum = "dim" + (i + 1);
+//            if (vars.dimAutoUnlocks[i]) {
+//
+//                auto.get(i).setText(rsStr.get("autobyer") + ": " + rsStr.get(dimnum));
+//            } else {
+//                auto.get(i).setText(rsStr.get("autobyer") + ": " + rsStr.get(dimnum) + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.dimAutoPrices[i]));
+//            }
+////            if (vars.dimAutoUnlocks[i] & vars.dimAutoToggles[i])
+////                auto.get(i).setTextColor(getResources().getColor(R.color.black));
+////            else auto.get(i).setTextColor(getResources().getColor(R.color.autoDisabled));
+//        }
+//        if (vars.extraAutoToggles.get(0)) {
+//            auto.get(6).setText(rsStr.get("autobyer") + ": " + rsStr.get("tickspeed"));
+//        } else {
+//            auto.get(6).setText(rsStr.get("autobyer") + ": " + rsStr.get("tickspeed") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(0)));
+//        }
+////        if (vars.extraAutoUnlocks.get(0) & vars.extraAutoToggles.get(0))
+////            auto.get(6).setTextColor(getResources().getColor(R.color.black));
+////        else auto.get(6).setTextColor(getResources().getColor(R.color.autoDisabled));
+//        if (vars.extraAutoToggles.get(1)) {
+//            auto.get(7).setText(rsStr.get("autobyer") + ": " + rsStr.get("collapse"));
+//        } else {
+//            auto.get(7).setText(rsStr.get("autobyer") + ": " + rsStr.get("collapse") + "\n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(1)));
+//        }
+////        if (vars.extraAutoUnlocks.get(1) & vars.extraAutoToggles.get(1))
+////            auto.get(7).setTextColor(getResources().getColor(R.color.black));
+////        else auto.get(7).setTextColor(getResources().getColor(R.color.autoDisabled));
     }
 
     public void initMap(Map m) {

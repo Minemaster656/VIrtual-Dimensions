@@ -61,7 +61,7 @@ public class vars {
 
 
     public static BigDecimal vCollapse_count = BigDecimal.valueOf(0);
-    public static BigDecimal vCollapse_mlt = BigDecimal.valueOf(1.5);
+    public static BigDecimal vCollapse_mlt = BigDecimal.valueOf(2);
     public static BigDecimal vCollapse_price = BigDecimal.valueOf(1E50);
     public static BigDecimal vCollapse_priceMlt = BigDecimal.valueOf(1E50);
     public static BigDecimal vCollapse_priceMltMlt = BigDecimal.valueOf(1E5);
@@ -74,9 +74,11 @@ public class vars {
     public static boolean[] dimAutoToggles = new boolean[6];
     public static BigDecimal[] dimAutoPrices = new BigDecimal[6];
     public static ArrayList<Boolean> extraAutoUnlocks = new ArrayList<Boolean>();
+    //tick, collapse
     public static ArrayList<Boolean> extraAutoToggles = new ArrayList<Boolean>();
     public static ArrayList<BigDecimal> extraAutoPrices = new ArrayList<BigDecimal>();
     public static final int extraAutoCount = 2;
+    public static long offTime=0;
 
 
     public static void RESET_VP() {

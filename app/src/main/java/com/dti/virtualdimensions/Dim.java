@@ -67,7 +67,9 @@ public class Dim {
     @NonNull
     public String toString(){
         this.update();
-        return ":"+this.count.toString()+"_"+this.realCount.toString()+"_"+this.price.toString()+"_"+this.mlt.toString()+"_"+this.priceUp.toString()+":";
+        return ":"+Utils.bd2txt(this.count)+"_"+Utils.bd2txt(this.realCount)+"_"+Utils.bd2txt(this.price)+"_"+Utils.bd2txt(this.mlt)+"_"+Utils.bd2txt(this.priceUp)+":";
+
+//        return ":"+this.count.toEngineeringString()+"_"+this.realCount.toEngineeringString()+"_"+this.price.toEngineeringString()+"_"+this.mlt.toEngineeringString()+"_"+this.priceUp.toEngineeringString()+":";
     }
     public static Dim fromString(String str){
         str=str.replace(":", "");
