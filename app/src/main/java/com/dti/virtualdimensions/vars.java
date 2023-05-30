@@ -79,6 +79,10 @@ public class vars {
     public static ArrayList<BigDecimal> extraAutoPrices = new ArrayList<BigDecimal>();
     public static final int extraAutoCount = 2;
     public static long offTime=0;
+    public static BigDecimal quarkMlt=BigDecimal.ONE;
+    public static BigDecimal quarkMltPrice = BigDecimal.valueOf(100);
+    public static BigDecimal clearTheVoidBought=BigDecimal.ONE;
+    public static BigDecimal clearTheVoidPrice=BigDecimal.ONE;
 
 
     public static void RESET_VP() {
@@ -169,5 +173,20 @@ public class vars {
             }
         }
         return null;
+    }
+    public static void BuyQuarkMlt(){
+        if (vars.quarks.compareTo(vars.quarkMltPrice)>=0){
+            vars.quarks=vars.quarks.subtract(vars.quarkMltPrice);
+            vars.quarkMltPrice=vars.quarkMltPrice.multiply(BigDecimal.TEN);
+            vars.quarkMlt=vars.quarkMlt.multiply(BigDecimal.valueOf(2));
+        }
+    }
+    public static void ClearTheVoid(){
+        if (vars.quarks.compareTo(BigDecimal.valueOf(1)) >= 0) {
+            vars.q_isVoidCleared = true;
+            vars.quarks = vars.quarks.subtract(vars.clearTheVoidPrice);
+            vars.clearTheVoidPrice=vars.clearTheVoidPrice.multiply(BigDecimal.valueOf(50));
+            vars.clearTheVoidBought=vars.clearTheVoidBought.add(BigDecimal.ONE);
+        }
     }
 }

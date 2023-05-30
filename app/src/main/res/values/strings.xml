@@ -43,7 +43,7 @@
     <string name="collapse">collapse</string>
     <string name="word_gain">gain</string>
     <string name="collapse_full">collapse and get x</string>
-    <string name="clearTheVoid">Clear the void for 1 quark. +0.5 tickspeed/buy.</string>
+    <string name="clearTheVoid">Clear the void for</string>
     <string name="quarks">quarks</string>
     <string name="quarks_tab">Qu</string>
     <string name="annihilate">Annihilate</string>
@@ -51,7 +51,7 @@
     <string name="word_get">get</string>
     <string name="tab_auto">Auto</string>
     <string name="autobyer">autobyer</string>
-    <string name="offline">While you were offline...</string>
+    <string name="offline">While you were offline…</string>
     <string name="Tickspeed_bought">Tickspeed bought</string>
     <string name="word_bought">bought</string>
     <string name="word_close">close</string>
@@ -61,6 +61,8 @@
     <string name="tt_e">Scientific Notation.\nYou may have noticed that all numbers greater than 10,000,000 are written with an "e". This is scientific notation. The number before e is the mantissa. The number after e is the exponent. If you translate it into normal notation, you get mantissa*(10^exponent). It follows that the exponent is the number of zeros in the number.</string>
     <string name="tt_collapse">Collapse.\nCollapse is a way of obtaining an additional multiplier to the dimensions. When you collapse you lose everything, but you gain a *2 multiplier for the collapse. The multipliers add up. Also, the collapse price is multiplied by 1e50 for each purchase. also, the markup itself is multiplied by 1e5 per purchase.</string>
     <string name="tt_quarks">Quarks.\nIf you have reached 1e100 VP, you can reset your progress to obtain quarks. Number of quarks in annihilation = exponent of virtual particles / 100 (log(VP)/100). Quarks are needed for powerful upgrade.</string>
+    <string name="quark_x2mlt">Multiply quarks gain by 2</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

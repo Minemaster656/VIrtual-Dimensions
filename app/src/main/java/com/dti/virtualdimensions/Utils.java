@@ -33,6 +33,7 @@ public class Utils {
             result = result.replace("+", "");
             result = result.replace("E", "e");
             String[] temp0 = result.split("e");
+            temp0[0]=temp0[0].replace(",", ".");
             float mant = Float.valueOf(temp0[0]);
             BigDecimal bd = new BigDecimal(Float.toString(mant));
             bd = bd.setScale(2, BigDecimal.ROUND_DOWN);

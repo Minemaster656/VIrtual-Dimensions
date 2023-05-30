@@ -207,27 +207,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         String data_loader = vars.findInvoke_FindSender_ReturnData("DATA_LOADER", true);
-        if (data_loader!=null){
-            if (data_loader.equals("calc offline")){
+        if (data_loader != null) {
+            if (data_loader.equals("calc offline")) {
                 //if (vars.offTime>=1000){
-                    Calcs.calcOffline(this);
-                    Log.d(TAG, "Called off calc!");
+                Calcs.calcOffline(this);
+                Log.d(TAG, "Called off calc!");
                 //}
             }
         }
         String data_calc_off = vars.findInvoke_FindSender_ReturnData("CALC_offline_ddata", true);
-        if (data_calc_off!=null){
+        if (data_calc_off != null) {
             String[] sdata = data_calc_off.split("#");
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(this.getResources().getString(R.string.offline));
             builder.setMessage(
-                    getStr(R.string.off_time)+ " "+Utils.millsToTime(vars.offTime)+"\n"+
-                    getStr(R.string.VP_tabName) + ": " + sdata[0] + "→" + Utils.bd2txt(vars.v_VP) + "\n" +
+                    getStr(R.string.off_time) + " " + Utils.millsToTime(vars.offTime) + "\n" +
+                            getStr(R.string.VP_tabName) + ": " + sdata[0] + "→" + Utils.bd2txt(vars.v_VP) + "\n" +
                             getStr(R.string.dim1) + " " + getStr(R.string.word_count) + ": " + sdata[1] + "→" + Utils.bd2txt(vars.dims.get(0).count) + "\n" +
                             getStr(R.string.dim6) + " " + getStr(R.string.word_count) + ": " + sdata[2] + "→" + Utils.bd2txt(vars.dims.get(5).count) + "\n" +
                             getStr(R.string.Tickspeed_bought) + ": " + sdata[3] + "→" + Utils.bd2txt(vars.v_tickspeedBought) + "\n" +
-                            getStr(R.string.collapse)+" " +getStr(R.string.word_count) + ": " + sdata[4] + "→" + Utils.bd2txt(vars.vCollapse_count) + "\n" +
-                            getStr(R.string.quarks)+" " +getStr(R.string.word_count) + ": " + sdata[5] + "→" + Utils.bd2txt(vars.quarks) + "\n"
+                            getStr(R.string.collapse) + " " + getStr(R.string.word_count) + ": " + sdata[4] + "→" + Utils.bd2txt(vars.vCollapse_count) + "\n" +
+                            getStr(R.string.quarks) + " " + getStr(R.string.word_count) + ": " + sdata[5] + "→" + Utils.bd2txt(vars.quarks) + "\n"
             );
             builder.setPositiveButton(getStr(R.string.word_close), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "dialog shown");
         }
     }
+
     public String getStr(int id) {
         return getResources().getString(id);
     }
@@ -282,16 +283,20 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < 6; i++) {
                 fos.write((vars.dimAutoToggles[i] + "#").getBytes());
             }
-            fos.write((vars.extraAutoUnlocks.get(0)+"#").getBytes());
-            fos.write((vars.extraAutoUnlocks.get(1)+"#").getBytes());
-            fos.write((vars.extraAutoToggles.get(0)+"#").getBytes());
-            fos.write((vars.extraAutoToggles.get(1)+"#").getBytes());
+            fos.write((vars.extraAutoUnlocks.get(0) + "#").getBytes());
+            fos.write((vars.extraAutoUnlocks.get(1) + "#").getBytes());
+            fos.write((vars.extraAutoToggles.get(0) + "#").getBytes());
+            fos.write((vars.extraAutoToggles.get(1) + "#").getBytes());
 
-            fos.write((Utils.bd2txt(vars.quarks)+"#").getBytes());
+            fos.write((Utils.bd2txt(vars.quarks) + "#").getBytes());
 
-            fos.write((vars.q_isVoidCleared +"#").getBytes());
-            fos.write((vars.q_isUnlocked +"#").getBytes());
-            fos.write((dt.getTime()+"#").getBytes());
+            fos.write((vars.q_isVoidCleared + "#").getBytes());
+            fos.write((vars.q_isUnlocked + "#").getBytes());
+            fos.write((dt.getTime() + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.quarkMlt)+"#").getBytes());
+            fos.write((Utils.bd2txt(vars.quarkMltPrice)+"#").getBytes());
+            fos.write((Utils.bd2txt(vars.clearTheVoidBought)+"#").getBytes());
+            fos.write((Utils.bd2txt(vars.clearTheVoidPrice)+"#").getBytes());
 
         } catch (IOException ex) {
 
@@ -357,16 +362,18 @@ public class MainActivity extends AppCompatActivity {
                 vars.extraAutoToggles.set(0, Boolean.parseBoolean(data[32]));
                 vars.extraAutoToggles.set(1, Boolean.parseBoolean(data[33]));
 
-                vars.quarks=new BigDecimal(data[34]);
+                vars.quarks = new BigDecimal(data[34]);
 
-                vars.q_isVoidCleared=Boolean.parseBoolean(data[35]);
-                vars.q_isUnlocked=Boolean.parseBoolean(data[36]);
+                vars.q_isVoidCleared = Boolean.parseBoolean(data[35]);
+                vars.q_isUnlocked = Boolean.parseBoolean(data[36]);
 
-                vars.offTime=dt.getTime()-Long.parseLong(data[37]);
-                Log.d(TAG, "off time: "+vars.offTime);
+                vars.offTime = dt.getTime() - Long.parseLong(data[37]);
+                Log.d(TAG, "off time: " + vars.offTime);
                 vars.invoke("DATA_LOADER", "MAIN", "calc offline");
-
-
+                vars.quarkMlt = new BigDecimal(data[38]);
+                vars.quarkMltPrice = new BigDecimal(data[39]);
+                vars.clearTheVoidBought = new BigDecimal(data[40]);
+                vars.clearTheVoidPrice = new BigDecimal(data[41]);
 
 
             } else {

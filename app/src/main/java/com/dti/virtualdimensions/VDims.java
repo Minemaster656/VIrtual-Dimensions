@@ -74,7 +74,7 @@ public class VDims extends Fragment {
         buyTickspeed = view.findViewById(R.id.buyTickspeed);
         tickspeedDisplay = view.findViewById(R.id.tickspeed);
         collapse = view.findViewById(R.id.Collapse);
-        Annihilate=view.findViewById(R.id.Annihilate);
+        Annihilate = view.findViewById(R.id.Annihilate);
         Runnable holdChecker = () -> {
             while (Thread.currentThread().isAlive()) {
                 try {
@@ -103,10 +103,10 @@ public class VDims extends Fragment {
                             vars.dims.get(i).buy();
                         }
                     }
-                    if (collapse.isPressed()){
+                    if (collapse.isPressed()) {
                         vars.doCollapse();
                     }
-                    if(Annihilate.isPressed()){
+                    if (Annihilate.isPressed()) {
                         vars.doAnnihilate();
                     }
                 } catch (InterruptedException e) {
@@ -145,17 +145,22 @@ public class VDims extends Fragment {
         tickspeedDisplay.setText("" + rsStr.get("tickspeed") + ": " + Utils.bd2txt(vars.v_tickspeed));
         buyTickspeed.setText(rsStr.get("word_buy") + "! " + rsStr.get("word_price") + ":\n" + Utils.bd2txt(vars.v_tickspeedPrice));
 //        Annihilate.setText(rsStr.get("annihilate")+" \n"+rsStr.get("word_get")+": "+Utils.bd2txt(vars.quarksOnAnnihilate)+rsStr.get("quarks"));
-        if(vars.q_isUnlocked||(vars.v_VP.compareTo(BigDecimal.valueOf(1E100))>=0)){
+        if (vars.q_isUnlocked || (vars.v_VP.compareTo(BigDecimal.valueOf(1E100)) >= 0)) {
             Annihilate.setEnabled(true);
             Annihilate.setVisibility(View.VISIBLE);
         } else {
             Annihilate.setEnabled(false);
             Annihilate.setVisibility(View.INVISIBLE);
         }
-        collapse.setText(rsStr.get("collapse")+"("+Utils.bd2txt(vars.vCollapse_mlt)+" "+rsStr.get("dim")+" "+rsStr.get("word_mult")+")\n"+rsStr.get("word_price")+": " +Utils.bd2txt(vars.vCollapse_price));
+        collapse.setText(rsStr.get("collapse") + "(" + Utils.bd2txt(vars.vCollapse_mlt) + " " + rsStr.get("dim") + " " + rsStr.get("word_mult") + ")\n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.vCollapse_price));
         collapse.setEnabled(vars.vCollapse_price.compareTo(vars.v_VP) >= 0);
-        Annihilate.setText(rsStr.get("annihilateVPfor")+" "+Utils.bd2txt(vars.quarksOnAnnihilate)+rsStr.get("quarks_tab"));
+        Annihilate.setText(rsStr.get("annihilateVPfor") + " " + Utils.bd2txt(vars.quarksOnAnnihilate) + rsStr.get("quarks_tab"));
         Annihilate.setEnabled(vars.quarksOnAnnihilate.compareTo(BigDecimal.ZERO) > 0);
+        for (int i = 0; i < 6; i++) {
+            dimBuyBtns[i].setEnabled(vars.v_VP.compareTo(vars.dims.get(i).price)>=0);
+        }
+        collapse.setEnabled(vars.v_VP.compareTo(vars.vCollapse_price)>=0);
+        buyTickspeed.setEnabled(vars.v_VP.compareTo(vars.vCollapse_price)>=0);
 
 //        collapse.setText();
     }
@@ -168,16 +173,16 @@ public class VDims extends Fragment {
         m.put("word_price", getStr(R.string.word_price));
         m.put("word_buy", getStr(R.string.word_buy));
         m.put("tickspeed", getStr(R.string.tickspeed));
-        m.put("word_gain",getStr(R.string.word_gain));
-        m.put("collapse",getStr(R.string.collapse));
-        m.put("collapse_full",getStr(R.string.collapse_full));
-        m.put("annihilate",getStr(R.string.annihilate));
-        m.put("word_get",R.string.word_get);
+        m.put("word_gain", getStr(R.string.word_gain));
+        m.put("collapse", getStr(R.string.collapse));
+        m.put("collapse_full", getStr(R.string.collapse_full));
+        m.put("annihilate", getStr(R.string.annihilate));
+        m.put("word_get", R.string.word_get);
         m.put("quarks", R.string.quarks);
         m.put("annihilateVPfor", getStr(R.string.annihilateVPfor));
-        m.put("dim",getStr(R.string.dim));
+        m.put("dim", getStr(R.string.dim));
         m.put("word_mult", getStr(R.string.word_mult));
-        m.put("quarks_tab",getStr(R.string.quarks_tab));
+        m.put("quarks_tab", getStr(R.string.quarks_tab));
     }
 
     //    public VDims() {
@@ -190,47 +195,6 @@ public class VDims extends Fragment {
         return inflater.inflate(R.layout.virtual_dimensions, container, false);
 
     }
-
-
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    public VDims() {
-//        // Required empty public constructor
-//    }
-//
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment VDims.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static VDims newInstance(String param1, String param2) {
-//        VDims fragment = new VDims();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-
-
 }
+
+
