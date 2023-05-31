@@ -19,9 +19,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +51,9 @@ public class Automatics extends Fragment {
     Button ad6;
     Button aTick;
     Button aCollapse;
+    Button aAnnihilate;
+    EditText aAnnihilateData;
+    Button submitAAD;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -62,7 +67,11 @@ public class Automatics extends Fragment {
         ad6 = view.findViewById(R.id.AbuyDim6);
         aTick = view.findViewById(R.id.AbuyTickspeed);
         aCollapse = view.findViewById(R.id.AbuyCollapse);
-
+        aAnnihilate = view.findViewById(R.id.AbuyAnnihilate);
+        aAnnihilateData = view.findViewById(R.id.AbuyAnnihilateDATA);
+        submitAAD=view.findViewById(R.id.submitAADATA);
+        submitAAD.setText(Utils.bd2txt(vars.numExtraAutoData.get(2)));
+        Log.i(TAG, "onViewCreated: sAAD text: "+Utils.bd2txt(vars.numExtraAutoData.get(2)));
         ad1.setOnClickListener(v -> {
             if (vars.dimAutoUnlocks[0]) {
                 vars.dimAutoToggles[0] = !vars.dimAutoToggles[0];
@@ -137,11 +146,31 @@ public class Automatics extends Fragment {
             if (vars.extraAutoUnlocks.get(1)) {
                 vars.extraAutoToggles.set(1, !vars.extraAutoToggles.get(1));
             } else {
-                if (vars.v_VP.compareTo(vars.extraAutoPrices.get(1)) >= 1) {
+                if (vars.v_VP.compareTo(vars.extraAutoPrices.get(1)) >= 0) {
                     vars.v_VP = vars.v_VP.subtract(vars.extraAutoPrices.get(1));
                     vars.extraAutoUnlocks.set(1, true);
 
                 }
+            }
+        });
+        aAnnihilate.setOnClickListener(v -> {
+            if (vars.extraAutoUnlocks.get(2)) {
+                vars.extraAutoToggles.set(2, !vars.extraAutoToggles.get(2));
+            } else {
+                if (vars.quarks.compareTo(vars.extraAutoPrices.get(2)) >= 0) {
+                    vars.quarks = vars.quarks.subtract(vars.extraAutoPrices.get(2));
+                    vars.extraAutoUnlocks.set(2, true);
+
+                }
+            }
+        });
+        submitAAD.setOnClickListener(v->{
+            try {
+                //if (!(aAnnihilateData.getText().toString().compareTo("") > 0)){
+                    vars.numExtraAutoData.set(2, new BigDecimal(aAnnihilateData.getText().toString()));//}
+                Log.i(TAG, "onViewCreated: "+aAnnihilateData.getText().toString());
+            }catch (NumberFormatException e){
+                Log.e(TAG, "onViewCreated: " + e.toString() + "   "+aAnnihilateData.getText().toString());
             }
         });
         Runnable holdChecker = () -> {
@@ -261,6 +290,17 @@ public class Automatics extends Fragment {
             aCollapse.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
 
 
+        if (vars.extraAutoUnlocks.get(2)) {
+            aAnnihilate.setText(rsStr.get("autoAnnihilator") + "\n" + rsStr.get("annihilateOn")+" "+Utils.bd2txt(vars.numExtraAutoData.get(2))+ " "+rsStr.get("quarks_tab"));
+        } else {
+            aAnnihilate.setText(rsStr.get("autoAnnihilator") + " \n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.extraAutoPrices.get(2))+" "+rsStr.get("quarks_tab"));
+        }
+        if (vars.extraAutoToggles.get(2) & vars.extraAutoUnlocks.get(2)) {
+            aAnnihilate.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.quark_bg));
+
+        }
+        else
+            aAnnihilate.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.autoDisabled));
     }
 
     public void initMap(Map m) {
@@ -275,6 +315,9 @@ public class Automatics extends Fragment {
         m.put("autobyer", getStr(R.string.autobyer));
         m.put("tickspeed", getStr(R.string.tickspeed));
         m.put("word_price", getStr(R.string.word_price));
+        m.put("autoAnnihilator", getStr(R.string.autoAnnihilator));
+        m.put("annihilateOn", getStr(R.string.annihilateOn));
+        m.put("quarks_tab", getStr(R.string.quarks_tab));
     }
 
 

@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -75,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
         vars.dimAutoPrices[5] = BigDecimal.valueOf(1E100);
         vars.extraAutoPrices.add(BigDecimal.valueOf(1E75));
         vars.extraAutoPrices.add(BigDecimal.valueOf(1E115));
-
+        vars.extraAutoPrices.add(BigDecimal.valueOf(10));
         for (int i = 0; i < vars.extraAutoCount; i++) {
             vars.extraAutoUnlocks.add(false);//vars.extraAutoToggles.add(true);
             vars.extraAutoToggles.add(true);
+            vars.numExtraAutoData.add(BigDecimal.ZERO);
         }
         for (int i = 0; i < 6; i++) {
             vars.dimAutoUnlocks[i] = false;
@@ -259,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
         FileOutputStream fos = null;
         try {
-
+            Looper.prepare();
             Date dt = new Date();
             fos = openFileOutput(SAVEfNAME, MODE_PRIVATE);
             fos.write("SAVEFILE#".getBytes());
@@ -293,10 +295,18 @@ public class MainActivity extends AppCompatActivity {
             fos.write((vars.q_isVoidCleared + "#").getBytes());
             fos.write((vars.q_isUnlocked + "#").getBytes());
             fos.write((dt.getTime() + "#").getBytes());
-            fos.write((Utils.bd2txt(vars.quarkMlt)+"#").getBytes());
-            fos.write((Utils.bd2txt(vars.quarkMltPrice)+"#").getBytes());
-            fos.write((Utils.bd2txt(vars.clearTheVoidBought)+"#").getBytes());
-            fos.write((Utils.bd2txt(vars.clearTheVoidPrice)+"#").getBytes());
+            fos.write((Utils.bd2txt(vars.quarkMlt) + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.quarkMltPrice) + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.clearTheVoidBought) + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.clearTheVoidPrice) + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.dimMltPerQuark) + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.dimMltPerQuarkPrice) + "#").getBytes());
+
+            fos.write((vars.extraAutoUnlocks.get(2) + "#").getBytes());
+            fos.write((vars.extraAutoToggles.get(2) + "#").getBytes());
+            fos.write((Utils.bd2txt(vars.numExtraAutoData.get(2)) + "#").getBytes());
+
+            Toast.makeText(this, getResources().getString(R.string.gameSaved), Toast.LENGTH_SHORT).show();
 
         } catch (IOException ex) {
 
@@ -374,6 +384,12 @@ public class MainActivity extends AppCompatActivity {
                 vars.quarkMltPrice = new BigDecimal(data[39]);
                 vars.clearTheVoidBought = new BigDecimal(data[40]);
                 vars.clearTheVoidPrice = new BigDecimal(data[41]);
+                vars.dimMltPerQuark = new BigDecimal(data[42]);
+                vars.dimMltPerQuarkPrice = new BigDecimal(data[43]);
+
+                vars.extraAutoUnlocks.set(2, Boolean.parseBoolean(data[44]));
+                vars.extraAutoToggles.set(2, Boolean.parseBoolean(data[45]));
+                vars.numExtraAutoData.set(2, new BigDecimal(data[46]));
 
 
             } else {

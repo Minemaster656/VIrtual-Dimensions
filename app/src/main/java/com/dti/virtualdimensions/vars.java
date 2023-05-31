@@ -77,13 +77,17 @@ public class vars {
     //tick, collapse
     public static ArrayList<Boolean> extraAutoToggles = new ArrayList<Boolean>();
     public static ArrayList<BigDecimal> extraAutoPrices = new ArrayList<BigDecimal>();
-    public static final int extraAutoCount = 2;
-    public static long offTime=0;
-    public static BigDecimal quarkMlt=BigDecimal.ONE;
+    public static final int extraAutoCount = 3;
+    public static long offTime = 0;
+    public static BigDecimal quarkMlt = BigDecimal.ONE;
     public static BigDecimal quarkMltPrice = BigDecimal.valueOf(100);
-    public static BigDecimal clearTheVoidBought=BigDecimal.ONE;
-    public static BigDecimal clearTheVoidPrice=BigDecimal.ONE;
+    public static BigDecimal clearTheVoidBought = BigDecimal.ONE;
+    public static BigDecimal clearTheVoidPrice = BigDecimal.ONE;
 
+    public static BigDecimal dimMltPerQuark = BigDecimal.ZERO;
+    public static BigDecimal dimMltPerQuarkPrice = BigDecimal.ONE;
+    public static ArrayList<BigDecimal> numExtraAutoData = new ArrayList<BigDecimal>();
+    //SAVE: extraAuto (3rd) (2nd in arrayList), eA3 data.
 
     public static void RESET_VP() {
         vars.VCl_size0 = 10;
@@ -174,19 +178,31 @@ public class vars {
         }
         return null;
     }
-    public static void BuyQuarkMlt(){
-        if (vars.quarks.compareTo(vars.quarkMltPrice)>=0){
-            vars.quarks=vars.quarks.subtract(vars.quarkMltPrice);
-            vars.quarkMltPrice=vars.quarkMltPrice.multiply(BigDecimal.TEN);
-            vars.quarkMlt=vars.quarkMlt.multiply(BigDecimal.valueOf(2));
+
+    public static void BuyQuarkMlt() {
+        if (vars.quarks.compareTo(vars.quarkMltPrice) >= 0) {
+            vars.quarks = vars.quarks.subtract(vars.quarkMltPrice);
+            vars.quarkMltPrice = vars.quarkMltPrice.multiply(BigDecimal.TEN);
+            vars.quarkMlt = vars.quarkMlt.multiply(BigDecimal.valueOf(2));
+            vars.numExtraAutoData.set(2, vars.numExtraAutoData.get(2).multiply(BigDecimal.valueOf(2)));
         }
     }
-    public static void ClearTheVoid(){
-        if (vars.quarks.compareTo(BigDecimal.valueOf(1)) >= 0) {
+
+    public static void ClearTheVoid() {
+        if (vars.quarks.compareTo(vars.clearTheVoidPrice) >= 0) {
             vars.q_isVoidCleared = true;
             vars.quarks = vars.quarks.subtract(vars.clearTheVoidPrice);
-            vars.clearTheVoidPrice=vars.clearTheVoidPrice.multiply(BigDecimal.valueOf(50));
-            vars.clearTheVoidBought=vars.clearTheVoidBought.add(BigDecimal.ONE);
+            vars.clearTheVoidPrice = vars.clearTheVoidPrice.multiply(BigDecimal.valueOf(50));
+            vars.clearTheVoidBought = vars.clearTheVoidBought.add(BigDecimal.ONE);
+        }
+    }
+
+    public static void BuyDimMltPerQuarks() {
+        if (vars.quarks.compareTo(vars.dimMltPerQuarkPrice) >= 0) {
+            vars.quarks = vars.quarks.subtract(vars.dimMltPerQuarkPrice);
+            vars.dimMltPerQuarkPrice = vars.dimMltPerQuarkPrice.multiply(BigDecimal.valueOf(15));
+            vars.dimMltPerQuark = vars.dimMltPerQuark.add(BigDecimal.ONE);
+
         }
     }
 }

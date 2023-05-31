@@ -62,7 +62,10 @@
     <string name="tt_collapse">Collapse.\nCollapse is a way of obtaining an additional multiplier to the dimensions. When you collapse you lose everything, but you gain a *2 multiplier for the collapse. The multipliers add up. Also, the collapse price is multiplied by 1e50 for each purchase. also, the markup itself is multiplied by 1e5 per purchase.</string>
     <string name="tt_quarks">Quarks.\nIf you have reached 1e100 VP, you can reset your progress to obtain quarks. Number of quarks in annihilation = exponent of virtual particles / 100 (log(VP)/100). Quarks are needed for powerful upgrade.</string>
     <string name="quark_x2mlt">Multiply quarks gain by 2</string>
-
+    <string name="quarksToDimMulti">multiplier for all dimensions based on quarks.</string>
+    <string name="ABuyAnnihilateDATA">Qu to annihilate:</string>
+    <string name="autoAnnihilator">Autobyer: annihilation</string>
+    <string name="annihilateOn">Annihilate on</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

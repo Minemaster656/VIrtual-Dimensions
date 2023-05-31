@@ -28,6 +28,7 @@ public class Quarks extends Fragment {
     Button clearTheVoid;
     TextView quarks;
     Button quarksMlt;
+    Button quarksToDimMulti;
     Map<String, String> rsStr = new HashMap<String, String>();
     Handler handler = new Handler() {
         @Override
@@ -44,12 +45,14 @@ public class Quarks extends Fragment {
         clearTheVoid = view.findViewById(R.id.clearTheVoid);
         quarks = view.findViewById(R.id.quark_count);
         quarksMlt=view.findViewById(R.id.quarkMulti);
+        quarksToDimMulti = view.findViewById(R.id.quarks_to_dimMulti);
         Runnable holdChecker = () -> {
             while (Thread.currentThread().isAlive()) {
                 try {
                     Thread.sleep(1000 / vars.FPS);
                     if (quarksMlt.isPressed()) vars.BuyQuarkMlt();
                     if (clearTheVoid.isPressed()) vars.ClearTheVoid();
+                    if (quarksToDimMulti.isPressed()) vars.BuyDimMltPerQuarks();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -88,14 +91,15 @@ public class Quarks extends Fragment {
 
     private void Update_UI() {
         quarks.setText(rsStr.get("quarks") + ": " + Utils.bd2txt(vars.quarks));
-        if (vars.q_isVoidCleared) {
-            clearTheVoid.setEnabled(false);
-//            clearTheVoid.setVisibility(View.GONE);
-        }
+//        if (vars.q_isVoidCleared) {
+//            clearTheVoid.setEnabled(false);
+////            clearTheVoid.setVisibility(View.GONE);
+//        }
         quarksMlt.setText(rsStr.get("quark_x2mlt") + "\n" + rsStr.get("word_price") + ": " + Utils.bd2txt(vars.quarkMltPrice) + "\n" + rsStr.get("word_gain") + ": " + Utils.bd2txt(vars.quarkMlt));
         clearTheVoid.setText(rsStr.get("clearTheVoid") + " " + Utils.bd2txt(vars.clearTheVoidPrice) + "\n" + rsStr.get("word_mult") + ": " + Utils.bd2txt(vars.clearTheVoidBought.multiply(BigDecimal.valueOf(0.5))));
-        quarksMlt.setEnabled(vars.quarkMlt.compareTo(vars.quarkMltPrice)>=0);
-        clearTheVoid.setEnabled(vars.quarks.compareTo(vars.clearTheVoidPrice)>=0);
+        quarksToDimMulti.setText("+"+Utils.bd2txt(vars.dimMltPerQuark)+" "+rsStr.get("quarksToDimMulti")+"\n"+rsStr.get("word_price")+": "+Utils.bd2txt(vars.dimMltPerQuarkPrice));
+//        quarksMlt.setBackgroundTintList(vars.quarkMlt.compareTo(vars.quarkMltPrice)>=0 ? );
+//        clearTheVoid.setBackgroundTintList(vars.quarks.compareTo(vars.clearTheVoidPrice)>=0? );
     }
 
     public void initMap(Map m) {
@@ -105,6 +109,7 @@ public class Quarks extends Fragment {
         m.put("word_gain", getStr(R.string.word_gain));
         m.put("clearTheVoid", getStr(R.string.clearTheVoid));
         m.put("word_mult", getStr(R.string.word_mult));
+        m.put("quarksToDimMulti", getStr(R.string.quarksToDimMulti));
     }
     //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -130,14 +130,59 @@
                 android:backgroundTint="@color/autoSpec"
                 android:text="@string/autobyer"
                 android:textColor="@color/black"/>
-            
-            
-            
-            
-            
-            
-            
-            
+            <Button
+                android:id="@+id/AbuyAnnihilate"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/AbuyCollapse"
+                app:layout_constraintTop_toBottomOf="@id/AbuyTickspeed"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/quark_bg"
+                android:text="@string/autobyer"
+                android:textColor="@color/black"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:background="@drawable/sharp_gradient_square"
+                android:backgroundTint="@color/quark_bg"
+                app:layout_constraintTop_toBottomOf="@id/AbuyAnnihilate"
+                app:layout_constraintStart_toStartOf="@id/AbuyAnnihilate"
+                app:layout_constraintEnd_toStartOf="@id/submitAADATA"
+                android:id="@+id/AbuyAnnihilateDATA"
+                android:layout_marginTop="-5dp"
+                android:textSize="10.5dp"
+
+
+                />
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="-8dp"
+                android:id="@+id/submitAADATA"
+                android:text="✔"
+                app:layout_constraintTop_toTopOf="@id/AbuyAnnihilateDATA"
+                app:layout_constraintStart_toEndOf="@id/AbuyAnnihilateDATA"
+                app:layout_constraintEnd_toEndOf="@id/AbuyAnnihilate"
+                android:backgroundTint="@color/autoDim"
+                android:textSize="16sp"
+                />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                app:layout_constraintTop_toBottomOf="@id/AbuyAnnihilateDATA"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+
+
+
+
+
 <!--            <View-->
 <!--                android:id="@+id/autoDim1"-->
 <!--                android:layout_width="0dp"-->
