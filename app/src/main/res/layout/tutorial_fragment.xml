@@ -43,7 +43,7 @@
             android:layout_marginVertical="10dp"
             android:id="@+id/tt_tickspeed"
             app:layout_constraintTop_toBottomOf="@id/tt_dims"
-            android:text="@string/tt_dims"
+            android:text="@string/tt_tickspeed"
             android:background="@color/tickspeedBG"
             />
         <TextView

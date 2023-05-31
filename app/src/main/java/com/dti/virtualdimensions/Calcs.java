@@ -73,6 +73,7 @@ public class Calcs {
     Runnable prb = new Runnable() {
         @Override
         public void run() {
+            Log.w(TAG, "CALC STARTED");
             while (currentThread().isAlive()) {
                 try {
                     sleep(250 / vars.FPS);
@@ -112,6 +113,7 @@ public class Calcs {
     }
 
     public static void calc(boolean useFPS, int ticks) {
+//        System.out.println("CALC");
         BigDecimal collapseMlt;
         MathContext mc = new MathContext(5, RoundingMode.DOWN);
         if (vars.vCollapse_count.compareTo(BigDecimal.valueOf(0)) <= 0) {
@@ -139,6 +141,7 @@ public class Calcs {
         if (vars.quarksOnAnnihilate.compareTo(BigDecimal.valueOf(1)) >= 1 & vars.v_VP.compareTo(BigDecimal.valueOf(1E100)) >= 0) {
             vars.q_isUnlocked = true;
         }
+        BigDecimal quMult = vars.dimMltPerQuark.compareTo(BigDecimal.ONE) >= 0? (vars.quarks.multiply(vars.dimMltPerQuark)) : BigDecimal.ONE;
         //dim_MLT
         if (useFPS) {
             for (int i = 0; i < 6; i++) {
@@ -146,18 +149,18 @@ public class Calcs {
             }
             //dim_CALCS
             for (int i = 0; i < 6; i++) {
-                vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed).multiply(vars.quarks.multiply(vars.dimMltPerQuark)).divide(BigDecimal.valueOf(vars.FPS), mc));
+                vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed).multiply(quMult).divide(BigDecimal.valueOf(vars.FPS), mc));
             }
-            vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).multiply(vars.quarks.multiply(vars.dimMltPerQuark)).divide(BigDecimal.valueOf(vars.FPS), mc));
+            vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).multiply(quMult).divide(BigDecimal.valueOf(vars.FPS), mc));
         } else {
             for (int i = 0; i < 6; i++) {
                 vars.dims.get(i).mlt = vars.dims.get(i).count.divide(BigDecimal.valueOf(1E10), mc).multiply(collapseMlt).add(vars.dims.get(i).realCount.pow(3)).multiply(BigDecimal.valueOf(ticks)).add(BigDecimal.valueOf(1));
             }
             //dim_CALCS
             for (int i = 0; i < 6; i++) {
-                vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed).multiply(BigDecimal.valueOf(ticks)).multiply(vars.quarks.multiply(vars.dimMltPerQuark)));
+                vars.dims.get(i).count = vars.dims.get(i).count.add((vars.dims.get(i + 1).count).multiply(vars.dims.get(i + 1).mlt).multiply(vars.v_tickspeed).multiply(BigDecimal.valueOf(ticks)).multiply(quMult));
             }
-            vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).multiply(BigDecimal.valueOf(ticks)).multiply(vars.quarks.multiply(vars.dimMltPerQuark)));
+            vars.v_VP = vars.v_VP.add((vars.dims.get(0).count).multiply(vars.dims.get(0).mlt).multiply(vars.v_tickspeed).multiply(BigDecimal.valueOf(ticks)).multiply(quMult));
         }
         Calcs.doAuto();
     }
